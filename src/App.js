@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import SignUp from './Components/SignUp';
+import SignUp from './Components/SignUp/SignUp';
 function App() {
   return (
     <div className="App">
