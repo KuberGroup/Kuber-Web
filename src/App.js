@@ -1,11 +1,14 @@
 import React from 'react';
-import { auth, db } from './firebase';
+import { Container } from 'react-bootstrap';
+import SignUp from './Components/SignUp';
 function App() {
-  console.log(auth)
-  console.log(db)
   return (
     <div className="App">
-      Hola!
+      <Container className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: '100vh' }}>
+        <div className='w-100' style={{ maxWidth: '400px' }}>
+          <SignUp /></div>
+      </Container>
     </div>
   );
 }
