@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
+import { useAuth } from "../../Context/AuthContext";
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -7,6 +8,7 @@ const SignUp = () => {
   const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { signup } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ const SignUp = () => {
     try {
       setError("");
       setLoading(true);
-      console.log("signup");
+      await signup(emailRef.current.value, passwordRef.current.value);
     } catch {
       setError("Failed to create an account");
     }
