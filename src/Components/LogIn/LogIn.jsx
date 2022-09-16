@@ -1,21 +1,26 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 const LogIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       setError("");
       setLoading(true);
-      console.log("login");
-    } catch {
-      setError("Failed to create an account");
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
+    } catch (e) {
+      setError(`Failed to Log In ${e.code}`);
     }
     setLoading(false);
   };
