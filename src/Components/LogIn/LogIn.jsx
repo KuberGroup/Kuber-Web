@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const LogIn = () => {
   const emailRef = useRef();
@@ -40,6 +41,10 @@ const LogIn = () => {
           </Form>
         </Card.Body>
       </Card>
+
+      <div className="w-100 text-center mt-2">
+        Don't have an account? <Link to="/signup">Sign Up</Link>
+      </div>
     </>
   );
 };

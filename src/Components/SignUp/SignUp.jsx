@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../Context/AuthContext";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -50,6 +51,9 @@ const SignUp = () => {
           </Form>
         </Card.Body>
       </Card>
+      <div className="w-100 text-center mt-2">
+        Already have an account? <Link to="/login">Log In</Link>
+      </div>
     </>
   );
 };
