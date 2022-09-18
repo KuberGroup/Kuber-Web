@@ -5,6 +5,7 @@ import SignUp from './Components/SignUp/SignUp';
 import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './Components/Home/Home';
+import RequireAuth from './Components/RequireAuth/RequireAuth';
 function App() {
   return (
     <div className="App">
@@ -17,7 +18,7 @@ function App() {
 
                 {/* Routes which require Login */}
 
-                <Route exact path='/' element={<Home />} />
+                <Route exact path='/' element={<RequireAuth><Home /></RequireAuth>} />
 
                 {/* Routes which require Login */}
 
