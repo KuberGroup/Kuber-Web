@@ -6,6 +6,7 @@ import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './Components/Home/Home';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
+import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,7 @@ function App() {
 
                 <Route path='/signup' element={<SignUp />} />
                 <Route path='/login' element={<LogIn />} />
+                <Route path='/forgot-password' element={<ForgotPassword />} />
               </Routes>
             </AuthProvider>
           </Router>
