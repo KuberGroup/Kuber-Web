@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { SIGNUP, MINI_DESCRIPTION, TITLE } from "../../Data/Constants";
+import { useTitle } from "../../Hooks/useTitle";
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -11,6 +13,8 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const { signup } = useAuth();
   const navigate = useNavigate();
+
+  useTitle(`${SIGNUP} - ${TITLE} | ${MINI_DESCRIPTION}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import { LOGIN, MINI_DESCRIPTION, TITLE } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
 
 const LogIn = () => {
@@ -12,7 +13,7 @@ const LogIn = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  useTitle("Login - Kuber | Online Messaging Provider");
+  useTitle(`${LOGIN} - ${TITLE} | ${MINI_DESCRIPTION}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

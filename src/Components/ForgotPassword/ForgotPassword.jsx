@@ -2,6 +2,12 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import {
+  MINI_DESCRIPTION,
+  TITLE,
+  PASSWORD_RECOVERY,
+} from "../../Data/Constants";
+import { useTitle } from "../../Hooks/useTitle";
 
 const ForgotPassword = () => {
   const emailRef = useRef();
@@ -9,6 +15,8 @@ const ForgotPassword = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useTitle(`${PASSWORD_RECOVERY} - ${TITLE} | ${MINI_DESCRIPTION}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
