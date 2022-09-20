@@ -33,7 +33,7 @@ const LogIn = () => {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Log In</h2>
+          <h2 className="text-center mb-4">{LOGIN}</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" id="email">
@@ -45,7 +45,7 @@ const LogIn = () => {
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              Log In
+              {LOGIN}
             </Button>
           </Form>
 

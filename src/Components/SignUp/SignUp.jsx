@@ -37,7 +37,7 @@ const SignUp = () => {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">{SIGNUP}</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" id="email">
@@ -53,7 +53,7 @@ const SignUp = () => {
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              Sign Up
+              {SIGNUP}
             </Button>
           </Form>
         </Card.Body>
