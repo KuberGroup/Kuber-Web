@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { SIGNUP, MINI_DESCRIPTION, TITLE } from "../../Data/Constants";
+import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
 
 const SignUp = () => {
@@ -14,12 +14,12 @@ const SignUp = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
 
-  useTitle(`${SIGNUP} - ${TITLE} | ${MINI_DESCRIPTION}`);
+  useTitle(`${FORM.signup.title} - ${TITLE} | ${MINI_DESCRIPTION}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value)
-      return setError("Passwords do not match");
+      return setError(`${FORM.error.passwordNotMatch}`);
 
     try {
       setError("");
@@ -28,7 +28,7 @@ const SignUp = () => {
 
       navigate("/");
     } catch {
-      setError("Failed to create an account");
+      setError(`${FORM.error.signup}`);
     }
     setLoading(false);
   };
@@ -37,29 +37,45 @@ const SignUp = () => {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">{SIGNUP}</h2>
+          <h2 className="text-center mb-4">{FORM.signup.title}</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Label>{FORM.label.email.title}</Form.Label>
+              <Form.Control
+                type="email"
+                ref={emailRef}
+                placeholder={FORM.label.email.placeholder}
+                required
+              />
             </Form.Group>
             <Form.Group className="mb-3" id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Label>{FORM.label.password.title}</Form.Label>
+              <Form.Control
+                type="password"
+                ref={passwordRef}
+                placeholder={FORM.label.password.placeholder}
+                required
+              />
             </Form.Group>
             <Form.Group className="mb-3" id="passwordConfirm">
-              <Form.Label>Password Confirm</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
+              <Form.Label>{FORM.label.confPassword.title}</Form.Label>
+              <Form.Control
+                type="password"
+                ref={passwordConfirmRef}
+                placeholder={FORM.label.confPassword.placeholder}
+                required
+              />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              {SIGNUP}
+              {FORM.signup.title}
             </Button>
           </Form>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
+        {FORM.haveAccount.title}{" "}
+        <Link to={FORM.haveAccount.url}>{FORM.haveAccount.button}</Link>
       </div>
     </>
   );

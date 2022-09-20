@@ -2,11 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
-import {
-  MINI_DESCRIPTION,
-  TITLE,
-  PASSWORD_RECOVERY,
-} from "../../Data/Constants";
+import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
 
 const ForgotPassword = () => {
@@ -16,7 +12,7 @@ const ForgotPassword = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useTitle(`${PASSWORD_RECOVERY} - ${TITLE} | ${MINI_DESCRIPTION}`);
+  useTitle(`${FORM.recovery.title} - ${TITLE} | ${MINI_DESCRIPTION}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,9 +22,9 @@ const ForgotPassword = () => {
       setError("");
       setLoading(true);
       await resetPassword(emailRef.current.value);
-      setMessage("Password reset e-mail has been sent to you");
+      setMessage(`${FORM.error.reset.success} ${emailRef.current.value}`);
     } catch (e) {
-      setError(`Failed to reset ${e.message}`);
+      setError(`${FORM.error.reset.failed} ${e.message}`);
     }
     setLoading(false);
   };
@@ -37,26 +33,33 @@ const ForgotPassword = () => {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">{PASSWORD_RECOVERY}</h2>
+          <h2 className="text-center mb-4">{FORM.recovery.title}</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Label>{FORM.label.email.title}</Form.Label>
+              <Form.Control
+                type="email"
+                ref={emailRef}
+                placeholder={FORM.label.password.placeholder}
+                required
+              />
             </Form.Group>
 
             <Button disabled={loading} className="w-100" type="submit">
-              Reset Password
+              {FORM.recovery.button}
             </Button>
           </Form>
           <div className="w-100 text-center mt-3">
-            Already know Password? <Link to="/login">Log In</Link>
+            {FORM.haveAccount.knowPassword}{" "}
+            <Link to={FORM.haveAccount.url}>{FORM.haveAccount.button}</Link>
           </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Don't have an account? <Link to="/signup">Sign Up</Link>
+        {FORM.noAccount.title}{" "}
+        <Link to={FORM.noAccount.url}>{FORM.noAccount.button}</Link>
       </div>
     </>
   );

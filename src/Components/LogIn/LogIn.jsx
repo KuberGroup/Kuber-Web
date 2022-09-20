@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
-import { LOGIN, MINI_DESCRIPTION, TITLE } from "../../Data/Constants";
+import { FORM, MINI_DESCRIPTION, TITLE } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
 
 const LogIn = () => {
@@ -13,7 +13,7 @@ const LogIn = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  useTitle(`${LOGIN} - ${TITLE} | ${MINI_DESCRIPTION}`);
+  useTitle(`${FORM.login.title} - ${TITLE} | ${MINI_DESCRIPTION}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const LogIn = () => {
       await login(emailRef.current.value, passwordRef.current.value);
       navigate("/");
     } catch (e) {
-      setError(`Failed to Log In ${e.code}`);
+      setError(`${FORM.error.login} ${e.code}`);
     }
     setLoading(false);
   };
@@ -33,30 +33,43 @@ const LogIn = () => {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">{LOGIN}</h2>
+          <h2 className="text-center mb-4">{FORM.login.title}</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Label>{FORM.label.email.title}</Form.Label>
+              <Form.Control
+                type="email"
+                ref={emailRef}
+                placeholder={FORM.label.email.placeholder}
+                required
+              />
             </Form.Group>
             <Form.Group className="mb-3" id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Label>{FORM.label.password.title}</Form.Label>
+              <Form.Control
+                type="password"
+                ref={passwordRef}
+                placeholder={FORM.label.password.placeholder}
+                required
+              />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              {LOGIN}
+              {FORM.login.title}
             </Button>
           </Form>
 
           <div className="w-100 text-center mt-3">
-            <Link to="/forgot-password">Forgot Password?</Link>
+            <Link to={FORM.resetPasswword.url}>
+              {FORM.resetPasswword.title}
+            </Link>
           </div>
         </Card.Body>
       </Card>
 
       <div className="w-100 text-center mt-2">
-        Don't have an account? <Link to="/signup">Sign Up</Link>
+        {FORM.noAccount.title}{" "}
+        <Link to={FORM.noAccount.url}>{FORM.noAccount.button}</Link>
       </div>
     </>
   );
