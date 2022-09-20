@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import { useTitle } from "../../Hooks/useTitle";
 
 const LogIn = () => {
   const emailRef = useRef();
@@ -10,6 +11,8 @@ const LogIn = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useTitle("Login - Kuber | Online Messaging Provider");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
