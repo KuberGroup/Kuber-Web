@@ -10,6 +10,7 @@ const VerifyEmail = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [emailSent, setEmailSent] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +32,8 @@ const VerifyEmail = () => {
 
   const handleSubmit = async (e) => {
     setTimer(15);
-    setMessage("Verification email re-sent Successful");
+    setEmailSent(true);
+    setMessage("Verification email sent Successful");
 
     try {
       await sendVerificationEmail();
@@ -61,28 +63,49 @@ const VerifyEmail = () => {
           <strong>{currentUser.email}</strong>. If you haven't received it,
           Check SPAM Folder
         </p>
-        <p className="text-center">Didn't receive email?</p>
+        {emailSent ? (
+          <p className="text-center">Didn't receive email?</p>
+        ) : (
+          <p className="text-center">Click below to send verification email?</p>
+        )}
         <div className="d-flex justify-content-around w-100">
-          <Button
-            variant="outline-primary"
-            disabled={disabled}
-            onClick={() => {
-              setTimerText(`in 15`);
-              setDisabled(true);
-              handleSubmit();
-            }}
-            style={{ width: "100%", maxWidth: "150px" }}
-          >
-            Re-send {timerText}
-          </Button>
-          <Button
-            variant="primary"
-            disabled={!currentUser.emailVerified}
-            onClick={() => navigate("/")}
-            style={{ width: "100%", maxWidth: "150px" }}
-          >
-            Verify
-          </Button>
+          {emailSent ? (
+            <>
+              <Button
+                variant="outline-primary"
+                disabled={disabled}
+                onClick={() => {
+                  setTimerText(`in 15`);
+                  setDisabled(true);
+                  handleSubmit();
+                }}
+                style={{ width: "100%", maxWidth: "150px" }}
+              >
+                Re-send {timerText}
+              </Button>
+              <Button
+                variant="primary"
+                disabled={!currentUser.emailVerified}
+                onClick={() => navigate("/")}
+                style={{ width: "100%", maxWidth: "150px" }}
+              >
+                Verify
+              </Button>
+            </>
+          ) : (
+            <Button
+              variant="outline-primary"
+              disabled={disabled}
+              onClick={() => {
+                setTimerText(`in 15`);
+                setDisabled(true);
+                handleSubmit();
+              }}
+              style={{ width: "100%" }}
+            >
+              Send Verification Email
+            </Button>
+          )}
         </div>
       </Card.Body>
     </Card>
