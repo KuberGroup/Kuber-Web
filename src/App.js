@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './Components/Home/Home';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
 import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
+import VerifyEmail from './Components/VerifyEmail/VerifyEmail';
+
 function App() {
   return (
     <div className="App">
@@ -27,6 +29,7 @@ function App() {
                 <Route path='/signup' element={<SignUp />} />
                 <Route path='/login' element={<LogIn />} />
                 <Route path='/forgot-password' element={<ForgotPassword />} />
+                <Route path='/verify-email' element={<VerifyEmail />} />
               </Routes>
             </AuthProvider>
           </Router>

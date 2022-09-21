@@ -10,6 +10,9 @@ const RequireAuth = ({ children }) => {
         return <Navigate to="/login" state={{ from: location }} />;
     }
 
+    if (currentUser && currentUser.emailVerified === false)
+        return <Navigate to="/verify-email" state={{ from: location }} />;
+
     return children;
 }
 

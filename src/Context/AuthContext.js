@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { auth } from '../firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification } from 'firebase/auth';
 
 const AuthContext = React.createContext()
 
@@ -28,6 +28,27 @@ export const AuthProvider = ({ children }) => {
         return sendPasswordResetEmail(auth, email)
     }
 
+    const sendVerificationEmail = () => {
+        sendEmailVerification(auth.currentUser).then(() => {
+            const onIdTokenChangedUnsubscribe = auth.onIdTokenChanged(user => {
+                const unsubscribeSetInterval = setTimeout(() => {
+                    auth.currentUser.reload();
+                    auth.currentUser.getIdToken(/* forceRefresh */ true);
+                }, 1000);
+
+                if (user && user.emailVerified) {
+                    clearInterval(unsubscribeSetInterval); //delete interval
+                    // -> Go to your screnn
+                    // extra safety to get latest user details
+                    auth.currentUser.reload();
+                    setCurrentUser(auth.currentUser);
+                    setLoading(false);
+                    return onIdTokenChangedUnsubscribe(); //unsubscribe onIdTokenChanged
+                }
+            });
+        })
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -43,7 +64,8 @@ export const AuthProvider = ({ children }) => {
         signup,
         login,
         logout,
-        resetPassword
+        resetPassword,
+        sendVerificationEmail
     }
 
     return (
