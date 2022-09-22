@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
 import LoginContainer from "../Containers/LoginContainer";
+import AlertMsg from "../Styles/Alert";
 
 const ForgotPassword = () => {
   const emailRef = useRef();
@@ -35,8 +36,8 @@ const ForgotPassword = () => {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">{FORM.recovery.title}</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          {message && <Alert variant="success">{message}</Alert>}
+          {error && <AlertMsg variant="danger" text={error} />}
+          {message && <AlertMsg variant="success" text={message} />}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" id="email">
               <Form.Label>{FORM.label.email.title}</Form.Label>

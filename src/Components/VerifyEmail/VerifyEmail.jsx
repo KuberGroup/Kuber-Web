@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Button, Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
-import { FiLogOut } from 'react-icons/fi'
+import { FiLogOut } from "react-icons/fi";
 import LoginContainer from "../Containers/LoginContainer";
+import AlertMsg from "../Styles/Alert";
 
 const VerifyEmail = () => {
   const { currentUser, sendVerificationEmail, logout } = useAuth();
@@ -45,35 +46,36 @@ const VerifyEmail = () => {
   };
 
   const handleLogout = async () => {
-    setError('')
+    setError("");
     try {
-      await logout()
-      navigate('login')
+      await logout();
+      navigate("login");
     } catch (e) {
       setError(`Failed to Log In ${e.code}`);
     }
-  }
+  };
 
   if (currentUser.emailVerified) navigate("/");
 
   return (
     <LoginContainer>
-      <div className='position-fixed top-0 end-0 px-4 py-2' style={{ cursor: 'pointer' }}>
-        <div className=' d-flex align-items-center justify-content-center lh-1' onClick={handleLogout}><FiLogOut style={{ marginRight: 5 }} />log Out</div>
+      <div
+        className="position-fixed top-0 end-0 px-4 py-2"
+        style={{ cursor: "pointer" }}
+      >
+        <div
+          className=" d-flex align-items-center justify-content-center lh-1"
+          onClick={handleLogout}
+        >
+          <FiLogOut style={{ marginRight: 5 }} />
+          log Out
+        </div>
       </div>
       <Card>
         <Card.Body className="d-flex flex-column align-items-center justify-content-center">
           <h2 className="text-center mb-4">Email Verification</h2>
-          {error && (
-            <Alert className="text-center" variant="danger">
-              {error}
-            </Alert>
-          )}
-          {message && (
-            <Alert className="text-center" variant="success">
-              {message}
-            </Alert>
-          )}
+          {error && <AlertMsg variant="danger" text={error} />}
+          {message && <AlertMsg variant="success" text={error} />}
           <p className="text-center">
             An email with verification link has been sent to{" "}
             <strong>{currentUser.email}</strong>. If you haven't received it,
@@ -82,7 +84,9 @@ const VerifyEmail = () => {
           {emailSent ? (
             <p className="text-center">Didn't receive email?</p>
           ) : (
-            <p className="text-center">Click below to send verification email?</p>
+            <p className="text-center">
+              Click below to send verification email?
+            </p>
           )}
           <div className="d-flex justify-content-around w-100">
             {emailSent ? (
