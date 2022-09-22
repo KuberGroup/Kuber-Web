@@ -1,32 +1,37 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { FORM, FULL_TITLE } from '../../Data/Constants';
-import { useAuth } from '../../Context/AuthContext';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Alert } from '@mui/material';
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { FORM, FULL_TITLE } from "../../Data/Constants";
+import { useAuth } from "../../Context/AuthContext";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Alert } from "@mui/material";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="https://github.com/KuberGroup">
         {FULL_TITLE}
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -47,7 +52,7 @@ export default function SignIn() {
     try {
       setError("");
       setLoading(true);
-      await login(data.get('email'), data.get('password'));
+      await login(data.get("email"), data.get("password"));
       navigate("/");
     } catch (e) {
       setError(`${FORM.error.login} ${e.code}`);
@@ -57,26 +62,31 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Box
           sx={{
             marginTop: -5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100vh'
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             {FORM.signin.title}
           </Typography>
           {error && <Alert severity="error">{error}</Alert>}
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -106,8 +116,9 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
             >
-              {FORM.signin.title}
+              {loading ? "Signing In" : FORM.signin.title}
             </Button>
             <Grid container>
               <Grid item xs>
@@ -117,14 +128,14 @@ export default function SignIn() {
               </Grid>
               <Grid item>
                 <Link href={FORM.noAccount.url} variant="body2">
-                  {FORM.noAccount.title}{" "}{FORM.noAccount.button}
+                  {FORM.noAccount.title} {FORM.noAccount.button}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright />
       </Container>
-    </ThemeProvider >
+    </ThemeProvider>
   );
 }
