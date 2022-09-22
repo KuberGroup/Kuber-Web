@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import LogIn from './Components/LogIn/LogIn';
 import SignUp from './Components/SignUp/SignUp';
 import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -8,6 +7,7 @@ import Home from './Components/Home/Home';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
 import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
 import VerifyEmail from './Components/VerifyEmail/VerifyEmail';
+import SignIn from './Components/SignIn/SignIn';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
 
 
             <Route path='/signup' element={<SignUp />} />
-            <Route path='/login' element={<LogIn />} />
+            <Route path='/login' element={<SignIn />} />
             <Route path='/forgot-password' element={<ForgotPassword />} />
             <Route path='/verify-email' element={<VerifyEmail />} />
           </Routes>
