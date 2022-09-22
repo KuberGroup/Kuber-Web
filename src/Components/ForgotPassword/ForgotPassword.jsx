@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
+import LoginContainer from "../Containers/LoginContainer";
 
 const ForgotPassword = () => {
   const emailRef = useRef();
@@ -30,7 +31,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <>
+    <LoginContainer>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">{FORM.recovery.title}</h2>
@@ -61,7 +62,7 @@ const ForgotPassword = () => {
         {FORM.noAccount.title}{" "}
         <Link to={FORM.noAccount.url}>{FORM.noAccount.button}</Link>
       </div>
-    </>
+    </LoginContainer>
   );
 };
 

@@ -4,6 +4,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
+import LoginContainer from "../Containers/LoginContainer";
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -34,7 +35,7 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <LoginContainer>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">{FORM.signup.title}</h2>
@@ -77,7 +78,7 @@ const SignUp = () => {
         {FORM.haveAccount.title}{" "}
         <Link to={FORM.haveAccount.url}>{FORM.haveAccount.button}</Link>
       </div>
-    </>
+    </LoginContainer>
   );
 };
 

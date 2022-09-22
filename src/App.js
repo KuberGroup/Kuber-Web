@@ -12,29 +12,24 @@ import VerifyEmail from './Components/VerifyEmail/VerifyEmail';
 function App() {
   return (
     <div className="App">
-      <Container className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: '100vh' }}>
-        <div className='w-100' style={{ maxWidth: '400px' }}>
-          <Router>
-            <AuthProvider>
-              <Routes>
+      <Router>
+        <AuthProvider>
+          <Routes>
 
-                {/* Routes which require Login */}
+            {/* Routes which require Login */}
 
-                <Route exact path='/' element={<RequireAuth><Home /></RequireAuth>} />
+            <Route exact path='/' element={<RequireAuth><Home /></RequireAuth>} />
 
-                {/* Routes which require Login */}
+            {/* Routes which require Login */}
 
 
-                <Route path='/signup' element={<SignUp />} />
-                <Route path='/login' element={<LogIn />} />
-                <Route path='/forgot-password' element={<ForgotPassword />} />
-                <Route path='/verify-email' element={<VerifyEmail />} />
-              </Routes>
-            </AuthProvider>
-          </Router>
-        </div>
-      </Container>
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/login' element={<LogIn />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/verify-email' element={<VerifyEmail />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }

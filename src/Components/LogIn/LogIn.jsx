@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { FORM, MINI_DESCRIPTION, TITLE } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
+import LoginContainer from "../Containers/LoginContainer";
 
 const LogIn = () => {
   const emailRef = useRef();
@@ -30,7 +31,7 @@ const LogIn = () => {
   };
 
   return (
-    <>
+    <LoginContainer>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">{FORM.login.title}</h2>
@@ -71,7 +72,7 @@ const LogIn = () => {
         {FORM.noAccount.title}{" "}
         <Link to={FORM.noAccount.url}>{FORM.noAccount.button}</Link>
       </div>
-    </>
+    </LoginContainer>
   );
 };
 
