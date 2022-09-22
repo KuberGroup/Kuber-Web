@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Form, Button, Card, FloatingLabel } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Button, Card } from "react-bootstrap";
 import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
@@ -7,13 +7,14 @@ import { useTitle } from "../../Hooks/useTitle";
 import LoginContainer from "../Containers/LoginContainer";
 import "./style.css";
 import AlertMsg from "../Styles/Alert";
+import FormInput from "../Styles/Input";
 
 const SignUp = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const { signup } = useAuth();
   const navigate = useNavigate();
 
@@ -21,13 +22,13 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (passwordRef.current.value !== passwordConfirmRef.current.value)
+    if (password !== passwordConfirm)
       return setError(`${FORM.error.passwordNotMatch}`);
 
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(email, password);
 
       navigate("/");
     } catch {
@@ -44,49 +45,31 @@ const SignUp = () => {
           {error && <AlertMsg text={error} />}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" id="email">
-              <FloatingLabel
-                controlId="floatingInput"
+              <FormInput
+                handleInputData={setEmail}
+                value={email}
                 label={FORM.label.email.title}
-                className="mb-3"
-              >
-                <Form.Control
-                  type="email"
-                  placeholder={FORM.label.email.placeholder}
-                  ref={emailRef}
-                  required
-                  className="FormInput"
-                />
-              </FloatingLabel>
+                type="email"
+                required
+              />
             </Form.Group>
             <Form.Group className="mb-3" id="password">
-              <FloatingLabel
-                controlId="floatingInput"
+              <FormInput
+                handleInputData={setPassword}
+                value={password}
                 label={FORM.label.password.title}
-                className="mb-3"
-              >
-                <Form.Control
-                  type="password"
-                  placeholder={FORM.label.password.placeholder}
-                  ref={passwordRef}
-                  required
-                  className="FormInput"
-                />
-              </FloatingLabel>
+                type="password"
+                required
+              />
             </Form.Group>
             <Form.Group className="mb-3" id="passwordConfirm">
-              <FloatingLabel
-                controlId="floatingInput"
+              <FormInput
+                handleInputData={setPasswordConfirm}
+                value={passwordConfirm}
                 label={FORM.label.confPassword.title}
-                className="mb-3"
-              >
-                <Form.Control
-                  type="password"
-                  placeholder={FORM.label.confPassword.placeholder}
-                  ref={passwordConfirmRef}
-                  required
-                  className="FormInput"
-                />
-              </FloatingLabel>
+                type="password"
+                required
+              />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
               {FORM.signup.title}
