@@ -49,7 +49,7 @@ const VerifyEmail = () => {
     setError("");
     try {
       await logout();
-      navigate("login");
+      navigate("/");
     } catch (e) {
       setError(`Failed to Log In ${e.code}`);
     }
