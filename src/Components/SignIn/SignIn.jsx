@@ -3,8 +3,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -16,6 +16,7 @@ import { FORM, FULL_TITLE } from '../../Data/Constants';
 import { useAuth } from '../../Context/AuthContext';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -77,6 +78,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             {FORM.signin.title}
           </Typography>
+          {error && <Alert severity="error">{error}</Alert>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -126,6 +128,6 @@ export default function SignIn() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
