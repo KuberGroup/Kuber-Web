@@ -5,7 +5,7 @@ export const MINI_DESCRIPTION = 'Online Messaging Platform'
 export const FORM = {
     label: {
         email: {
-            title: 'Email',
+            title: 'Email Address',
             placeholder: 'Enter your email'
         },
         password: {
@@ -17,8 +17,8 @@ export const FORM = {
             placeholder: 'Confirm your password'
         },
     },
-    login: {
-        title: 'Log In'
+    signin: {
+        title: 'Sign In'
     },
     signup: {
         title: 'Sign Up'
