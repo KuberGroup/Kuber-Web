@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Alert, Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import {FiLogOut} from 'react-icons/fi'
 
 const VerifyEmail = () => {
-  const { currentUser, sendVerificationEmail } = useAuth();
+  const { currentUser, sendVerificationEmail, logout } = useAuth();
   const [timer, setTimer] = useState(0);
   const [timerText, setTimerText] = useState(`in 00`);
   const [error, setError] = useState("");
@@ -42,9 +43,22 @@ const VerifyEmail = () => {
     }
   };
 
+  const handleLogout = async () => {
+    setError('')
+    try {
+        await logout()
+        navigate('login')
+    } catch (e) {
+        setError(`Failed to Log In ${e.code}`);
+    }
+}
+
   if (currentUser.emailVerified) navigate("/");
 
-  return (
+  return (<>
+    <div className='position-fixed top-0 end-0 px-4 py-2' style={{cursor:'pointer'}}>
+      <div className=' d-flex align-items-center justify-content-center lh-1' onClick={handleLogout}><FiLogOut style={{marginRight: 5}}/>log Out</div>
+    </div>
     <Card>
       <Card.Body className="d-flex flex-column align-items-center justify-content-center">
         <h2 className="text-center mb-4">Email Verification</h2>
@@ -109,6 +123,7 @@ const VerifyEmail = () => {
         </div>
       </Card.Body>
     </Card>
+    </>
   );
 };
 
