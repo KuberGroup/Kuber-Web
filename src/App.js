@@ -8,6 +8,8 @@ import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
 import VerifyEmail from './Components/VerifyEmail/VerifyEmail';
 import SignIn from './Components/SignIn/SignIn';
 
+import './Helpers/Spacing.scss'
+
 function App() {
   return (
     <div className="App">
