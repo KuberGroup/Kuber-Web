@@ -11,3 +11,8 @@ export const Button = (props) => {
         </button >
     )
 }
+
+export const FormButton = (props) => {
+    const { children } = props
+    return <Button {...props} className='Button FormButton'>{children}</Button>
+}
