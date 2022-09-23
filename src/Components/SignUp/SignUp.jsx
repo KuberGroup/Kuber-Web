@@ -9,6 +9,8 @@ import "./style.css";
 import AlertMsg from "../Styles/Alert";
 import FormInput from "../Styles/Input";
 import { FormButton } from "../Styles/Button";
+import { BiLock } from 'react-icons/bi'
+import AuthHeader from "../Headers/AuthHeader";
 
 const SignUp = () => {
   const [error, setError] = useState("");
@@ -42,7 +44,7 @@ const SignUp = () => {
     <LoginContainer>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">{FORM.signup.title}</h2>
+          <AuthHeader>{FORM.signup.title}</AuthHeader>
           {error && <AlertMsg text={error} />}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" id="email">
