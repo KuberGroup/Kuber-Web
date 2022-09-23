@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Form, Card } from "react-bootstrap";
 import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
@@ -9,7 +8,6 @@ import "./style.css";
 import AlertMsg from "../Styles/Alert";
 import FormInput from "../Styles/Input";
 import { FormButton } from "../Styles/Button";
-import { BiLock } from 'react-icons/bi'
 import AuthHeader from "../Headers/AuthHeader";
 
 const SignUp = () => {
@@ -42,44 +40,41 @@ const SignUp = () => {
 
   return (
     <LoginContainer>
-      <Card>
-        <Card.Body>
-          <AuthHeader>{FORM.signup.title}</AuthHeader>
-          {error && <AlertMsg text={error} />}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" id="email">
-              <FormInput
-                handleInputData={setEmail}
-                value={email}
-                label={FORM.label.email.title}
-                type="email"
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" id="password">
-              <FormInput
-                handleInputData={setPassword}
-                value={password}
-                label={FORM.label.password.title}
-                type="password"
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" id="passwordConfirm">
-              <FormInput
-                handleInputData={setPasswordConfirm}
-                value={passwordConfirm}
-                label={FORM.label.confPassword.title}
-                type="password"
-                required
-              />
-            </Form.Group>
-            <FormButton disabled={loading} className="w-100" type="submit">
-              {FORM.signup.title}
-            </FormButton>
-          </Form>
-        </Card.Body>
-      </Card>
+      <AuthHeader>{FORM.signup.title}</AuthHeader>
+      {error && <AlertMsg text={error} />}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-1" id="email">
+          <FormInput
+            handleInputData={setEmail}
+            value={email}
+            label={FORM.label.email.title}
+            type="email"
+            required
+          />
+        </div>
+        <div className="mb-1" id="password">
+          <FormInput
+            handleInputData={setPassword}
+            value={password}
+            label={FORM.label.password.title}
+            type="password"
+            required
+          />
+        </div>
+        <div className="mb-1" id="passwordConfirm">
+          <FormInput
+            handleInputData={setPasswordConfirm}
+            value={passwordConfirm}
+            label={FORM.label.confPassword.title}
+            type="password"
+            required
+          />
+        </div>
+        <FormButton disabled={loading} className="w-100" type="submit">
+          {FORM.signup.title}
+        </FormButton>
+      </form>
+
       <div className="w-100 text-center mt-2">
         <Link to={FORM.haveAccount.url}>
           {FORM.haveAccount.title} {FORM.haveAccount.button}
