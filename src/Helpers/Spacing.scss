@@ -33,21 +33,21 @@ $sides: (
 
         @if $side =='all' {
             .m-#{$space} {
-                margin: #{$space}rem;
+                margin: #{$space}rem !important;
             }
 
             .p-#{$space} {
-                padding: #{$space}rem;
+                padding: #{$space}rem !important;
             }
         }
 
         @else {
             .m#{str-slice($side, 0, 1)}-#{$space} {
-                margin-#{$side}: #{$space}rem;
+                margin-#{$side}: #{$space}rem !important;
             }
 
             .p#{str-slice($side, 0, 1)}-#{$space} {
-                padding-#{$side}: #{$space}rem;
+                padding-#{$side}: #{$space}rem !important;
             }
         }
     }
