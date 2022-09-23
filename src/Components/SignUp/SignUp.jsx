@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Card } from "react-bootstrap";
 import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
@@ -8,6 +8,7 @@ import LoginContainer from "../Containers/LoginContainer";
 import "./style.css";
 import AlertMsg from "../Styles/Alert";
 import FormInput from "../Styles/Input";
+import { FormButton } from "../Styles/Button";
 
 const SignUp = () => {
   const [error, setError] = useState("");
@@ -71,9 +72,9 @@ const SignUp = () => {
                 required
               />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+            <FormButton disabled={loading} className="w-100" type="submit">
               {FORM.signup.title}
-            </Button>
+            </FormButton>
           </Form>
         </Card.Body>
       </Card>
