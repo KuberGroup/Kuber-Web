@@ -9,6 +9,7 @@ import AlertMsg from "../Styles/Alert";
 import FormInput from "../Styles/Input";
 import { FormButton } from "../Styles/Button";
 import AuthHeader from "../Headers/AuthHeader";
+import Copyright from "../Copyright/Copyright";
 
 const SignUp = () => {
   const [error, setError] = useState("");
