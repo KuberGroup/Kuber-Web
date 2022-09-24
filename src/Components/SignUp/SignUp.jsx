@@ -33,8 +33,8 @@ const SignUp = () => {
       await signup(email, password);
 
       navigate("/");
-    } catch {
-      setError(`${FORM.error.signup}`);
+    } catch (e) {
+      setError(`${FORM.error.signup} ${e.code}`);
     }
     setLoading(false);
   };
