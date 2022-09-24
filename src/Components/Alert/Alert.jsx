@@ -1,8 +1,8 @@
 import React from "react";
-import "./AlertMsg.css";
+import "./Alert.css";
 import { TbAlertCircle } from "react-icons/tb";
 
-const AlertMsg = ({ text }) => {
+export const AlertMsg = ({ text }) => {
   return (
     <div className="Alert">
       <TbAlertCircle
@@ -19,5 +19,3 @@ const AlertMsg = ({ text }) => {
     </div>
   );
 };
-
-export default AlertMsg;

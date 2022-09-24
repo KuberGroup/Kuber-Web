@@ -1,8 +1,8 @@
 import React from 'react'
 import { BiLock } from 'react-icons/bi'
-import CenterContainer from '../Containers/CenterContainer'
+import { CenterContainer } from '..'
 
-const AuthHeader = ({ children }) => {
+export const AuthHeader = ({ children }) => {
     return (
 
         <CenterContainer style={{
@@ -35,5 +35,3 @@ const AuthHeader = ({ children }) => {
         </CenterContainer>
     )
 }
-
-export default AuthHeader

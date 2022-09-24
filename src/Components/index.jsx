@@ -1,9 +1,8 @@
-export { default as AlertMsg } from './Alert/AlertMsg';
+export { AlertMsg } from './Alert/Alert';
 export { Button, FormButton } from './Button/Button';
-export { LoginContainer, CenterContainer } from './Containers';
-// export { default as CenterContainer } from './Containers/CenterContainer';
+export { CenterContainer, LoginContainer } from './Containers/Containers';
 export { default as Copyright } from './Copyright/Copyright';
-export { AuthHeader } from './Headers';
-export { default as FormInput } from './Input/Input';
+export { AuthHeader } from './Headers/Headers';
+export { FormInput } from './Input/Input';
 export { default as RequireAuth } from './RequireAuth/RequireAuth';
 export { default as Ripple } from './Ripple/Ripple';

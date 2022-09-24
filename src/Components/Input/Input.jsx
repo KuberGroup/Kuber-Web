@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Input.css";
 
-const FormInput = (props) => {
+export const FormInput = (props) => {
   const [isActive, setIsActive] = useState(false);
   function handleTextChange(text) {
     if (text !== "") {
@@ -28,5 +28,3 @@ const FormInput = (props) => {
     </div>
   );
 };
-
-export default FormInput;
