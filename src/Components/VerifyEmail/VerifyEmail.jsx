@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { FiLogOut } from "react-icons/fi";
 import LoginContainer from "../Containers/LoginContainer";
 import AlertMsg from "../Styles/Alert";
+import AuthHeader from "../Headers/AuthHeader";
+import { FormButton } from "../Styles/Button";
 
 const VerifyEmail = () => {
   const { currentUser, sendVerificationEmail, logout } = useAuth();
@@ -71,50 +72,26 @@ const VerifyEmail = () => {
           log Out
         </div>
       </div>
-      <Card>
-        <Card.Body className="d-flex flex-column align-items-center justify-content-center">
-          <h2 className="text-center mb-4">Email Verification</h2>
-          {error && <AlertMsg variant="danger" text={error} />}
-          {message && <AlertMsg variant="success" text={error} />}
+      <AuthHeader>Email Verification</AuthHeader>
+      <div className="d-flex flex-column align-items-center justify-content-center">
+        {error && <AlertMsg variant="danger" text={error} />}
+        {message && <AlertMsg variant="success" text={message} />}
+        <p className="text-center">
+          An email with verification link has been sent to{" "}
+          <strong>{currentUser.email}</strong>. If you haven't received it,
+          Check SPAM Folder
+        </p>
+        {emailSent ? (
+          <p className="text-center">Didn't receive email?</p>
+        ) : (
           <p className="text-center">
-            An email with verification link has been sent to{" "}
-            <strong>{currentUser.email}</strong>. If you haven't received it,
-            Check SPAM Folder
+            Click below to send verification email?
           </p>
+        )}
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', gap: '1rem' }}>
           {emailSent ? (
-            <p className="text-center">Didn't receive email?</p>
-          ) : (
-            <p className="text-center">
-              Click below to send verification email?
-            </p>
-          )}
-          <div className="d-flex justify-content-around w-100">
-            {emailSent ? (
-              <>
-                <Button
-                  variant="outline-primary"
-                  disabled={disabled}
-                  onClick={() => {
-                    setTimerText(`in 15`);
-                    setDisabled(true);
-                    handleSubmit();
-                  }}
-                  style={{ width: "100%", maxWidth: "150px" }}
-                >
-                  Re-send {timerText}
-                </Button>
-                <Button
-                  variant="primary"
-                  disabled={!currentUser.emailVerified}
-                  onClick={() => navigate("/")}
-                  style={{ width: "100%", maxWidth: "150px" }}
-                >
-                  Verify
-                </Button>
-              </>
-            ) : (
-              <Button
-                variant="outline-primary"
+            <>
+              <FormButton
                 disabled={disabled}
                 onClick={() => {
                   setTimerText(`in 15`);
@@ -123,12 +100,33 @@ const VerifyEmail = () => {
                 }}
                 style={{ width: "100%" }}
               >
-                Send Verification Email
-              </Button>
-            )}
-          </div>
-        </Card.Body>
-      </Card>
+                Re-send {timerText}
+              </FormButton>
+              <FormButton
+                variant="primary"
+                disabled={!currentUser.emailVerified}
+                onClick={() => navigate("/")}
+                style={{ width: "100%" }}
+              >
+                Verify
+              </FormButton>
+            </>
+          ) : (
+            <FormButton
+              variant="outline-primary"
+              disabled={disabled}
+              onClick={() => {
+                setTimerText(`in 15`);
+                setDisabled(true);
+                handleSubmit();
+              }}
+              style={{ width: "100%" }}
+            >
+              Send Verification Email
+            </FormButton>
+          )}
+        </div>
+      </div>
     </LoginContainer>
   );
 };
