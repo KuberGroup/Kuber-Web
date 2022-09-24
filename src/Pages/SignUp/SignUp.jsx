@@ -37,7 +37,7 @@ const SignUp = () => {
   return (
     <LoginContainer>
       <AuthHeader>{FORM.signup.title}</AuthHeader>
-      {error && <AlertMsg text={error} />}
+      {error && <AlertMsg className='mt-1 mb-1' text={error} />}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">
           <FormInput

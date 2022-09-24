@@ -33,7 +33,7 @@ const SignIn = () => {
   return (
     <LoginContainer>
       <AuthHeader>{FORM.signin.title}</AuthHeader>
-      {error && <AlertMsg text={error} />}
+      {error && <AlertMsg text={error} className='mb-1 mt-1' />}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">
           <FormInput
@@ -58,10 +58,7 @@ const SignIn = () => {
         </FormButton>
       </form>
 
-      <div className="w-100 text-center mt-2" style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}>
+      <div className="w-100 text-center mt-2 fl fl-j-sb">
         <Link to={FORM.resetPasswword.url}>
           {FORM.resetPasswword.title} {FORM.resetPasswword.button}
         </Link>

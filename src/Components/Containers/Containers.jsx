@@ -2,23 +2,18 @@ import React from 'react'
 import Copyright from '../Copyright/Copyright'
 
 export const CenterContainer = ({ children, style }) => {
-    const primaryStyle = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
     return (
-        <div style={{ ...primaryStyle, ...style }}>{children}</div>
+        <div className='fl fl-c' style={style}>{children}</div>
     )
 }
 
 export const LoginContainer = ({ children }) => {
     return (
-        <div style={{
-            minHeight: "100vh", display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'
+        <div className='fl fl-d-col fl-c fl-j-sa' style={{
+            minHeight: "100vh",
         }}>
             <div></div>
-            <div className="w-100" style={{ maxWidth: "420px", padding: '1rem' }}>
+            <div className="w-100 p-1" style={{ maxWidth: "420px" }}>
                 {children}
             </div>
 

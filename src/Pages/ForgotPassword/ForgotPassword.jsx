@@ -32,8 +32,8 @@ const ForgotPassword = () => {
   return (
     <LoginContainer>
       <AuthHeader>{FORM.recovery.title}</AuthHeader>
-      {error && <AlertMsg variant="danger" text={error} />}
-      {message && <AlertMsg variant="success" text={message} />}
+      {error && <AlertMsg className='mb-1 mt-1' variant="danger" text={error} />}
+      {message && <AlertMsg className='mb-1 mt-1' variant="success" text={message} />}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">
           <FormInput

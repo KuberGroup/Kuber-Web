@@ -16,7 +16,7 @@
 
 body {
   background-color: #f2f4fb;
-  color: #c1c1c1 !important;
+  color: #a1a1a1 !important;
   font: 400 16px/24px Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Naskh Arabic, Noto Sans Thai, Noto Sans Hebrew,
     Noto Sans Bengali, sans-serif !important;
   word-wrap: break-word;
@@ -95,6 +95,14 @@ button,
 
 .fl-j-sb {
   justify-content: space-between;
+}
+
+.fl-j-sa {
+  justify-content: space-around;
+}
+
+.fl-j-se {
+  justify-content: space-evenly;
 }
 
 .fl-j-fs {

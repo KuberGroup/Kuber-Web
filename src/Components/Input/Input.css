@@ -39,7 +39,8 @@
     transform: translate(0, -8px) scale(0.75);
     margin-left: 0.7rem;
     padding: 0 5px;
-    background-color: #fff;
+    background-color: #f2f4fb;
+    border-radius: 4px;
 }
 
 #float-label:focus-within label {

@@ -58,11 +58,10 @@ const VerifyEmail = () => {
   return (
     <LoginContainer>
       <div
-        className="position-fixed top-0 end-0 px-4 py-2"
-        style={{ cursor: "pointer" }}
+        className="p-fix t-0 r-0 pr-1 pt-1 c-p"
       >
         <div
-          className=" d-flex align-items-center justify-content-center lh-1"
+          className="fl fl-c lhinit"
           onClick={handleLogout}
         >
           <FiLogOut style={{ marginRight: 5 }} />
@@ -70,10 +69,10 @@ const VerifyEmail = () => {
         </div>
       </div>
       <AuthHeader>Email Verification</AuthHeader>
-      <div className="d-flex flex-column align-items-center justify-content-center">
-        {error && <AlertMsg variant="danger" text={error} />}
-        {message && <AlertMsg variant="success" text={message} />}
-        <p className="text-center">
+      <div className="fl fl-c fl-d-col">
+        {error && <AlertMsg className='mb-1 mt-1' variant="danger" text={error} />}
+        {message && <AlertMsg className='mb-1 mt-1' variant="success" text={message} />}
+        <p className="text-center pb-2">
           An email with verification link has been sent to{" "}
           <strong>{currentUser.email}</strong>. If you haven't received it,
           Check SPAM Folder
@@ -85,7 +84,7 @@ const VerifyEmail = () => {
             Click below to send verification email?
           </p>
         )}
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', gap: '1rem' }}>
+        <div className="fl fl-j-sb mt-1" style={{ width: '90%', gap: '1rem' }}>
           {emailSent ? (
             <>
               <FormButton
@@ -95,7 +94,7 @@ const VerifyEmail = () => {
                   setDisabled(true);
                   handleSubmit();
                 }}
-                style={{ width: "100%" }}
+                className='w-100'
               >
                 Re-send {timerText}
               </FormButton>
@@ -103,7 +102,7 @@ const VerifyEmail = () => {
                 variant="primary"
                 disabled={!currentUser.emailVerified}
                 onClick={() => navigate("/")}
-                style={{ width: "100%" }}
+                className='w-100'
               >
                 Verify
               </FormButton>
@@ -117,7 +116,7 @@ const VerifyEmail = () => {
                 setDisabled(true);
                 handleSubmit();
               }}
-              style={{ width: "100%" }}
+              className='w-100'
             >
               Send Verification Email
             </FormButton>
