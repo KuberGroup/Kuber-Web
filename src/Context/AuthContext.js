@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    const login = (email, password) => {
+    const signin = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
     const value = {
         currentUser,
         signup,
-        login,
+        signin,
         logout,
         resetPassword,
         sendVerificationEmail

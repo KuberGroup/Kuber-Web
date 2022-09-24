@@ -43,7 +43,7 @@ export const FORM = {
         url: '/forgot-password'
     },
     error: {
-        login: 'Failed to Log In',
+        signin: 'Failed to Log In',
         signup: 'Failed to Sign Up',
         passwordNotMatch: 'Passwords do not match',
         reset: {
