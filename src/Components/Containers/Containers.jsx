@@ -1,10 +1,14 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
 import Copyright from '../Copyright/Copyright'
 
 export const CenterContainer = ({ children, style }) => {
+    const primaryStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
     return (
-        <Container className="d-flex align-items-center justify-content-center" style={style}>{children}</Container>
+        <div style={{ ...primaryStyle, ...style }}>{children}</div>
     )
 }
 
