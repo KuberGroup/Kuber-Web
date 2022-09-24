@@ -22,6 +22,7 @@ const Home = () => {
                 <h2 className='text-center mb-4'>Profile</h2>
                 {error && <AlertMsg variant='danger' text={error} />}
                 <strong>Email: </strong>{currentUser.email}
+                <p>You are on <strong>{navigator.userAgentData.platform}</strong> device</p>
                 <div className="w-100 text-center mt-2">
                     <FormButton onClick={handleLogout}>Log Out</FormButton>
                 </div>
