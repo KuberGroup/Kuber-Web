@@ -3,45 +3,36 @@ import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
-import LoginContainer from "../Containers/LoginContainer";
-import "./style.css";
-import AlertMsg from "../Styles/Alert";
-import FormInput from "../Styles/Input";
-import { FormButton } from "../Styles/Button";
-import AuthHeader from "../Headers/AuthHeader";
-import Copyright from "../Copyright/Copyright";
 
-const SignUp = () => {
+import { AlertMsg, FormButton, FormInput, LoginContainer, AuthHeader } from "../../Components";
+const SignIn = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const { signup } = useAuth();
+  const { signin } = useAuth();
   const navigate = useNavigate();
 
-  useTitle(`${FORM.signup.title} - ${TITLE} | ${MINI_DESCRIPTION}`);
+  useTitle(`${FORM.signin.title} - ${TITLE} | ${MINI_DESCRIPTION}`);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== passwordConfirm)
-      return setError(`${FORM.error.passwordNotMatch}`);
 
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
+      await signin(email, password);
 
       navigate("/");
     } catch (e) {
-      setError(`${FORM.error.signup} ${e.code}`);
+      setError(`${FORM.error.signin} ${e.code}`);
     }
     setLoading(false);
   };
 
   return (
     <LoginContainer>
-      <AuthHeader>{FORM.signup.title}</AuthHeader>
+      <AuthHeader>{FORM.signin.title}</AuthHeader>
       {error && <AlertMsg text={error} />}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">
@@ -62,27 +53,24 @@ const SignUp = () => {
             required
           />
         </div>
-        <div className="mb-1" id="passwordConfirm">
-          <FormInput
-            handleInputData={setPasswordConfirm}
-            value={passwordConfirm}
-            label={FORM.label.confPassword.title}
-            type="password"
-            required
-          />
-        </div>
         <FormButton disabled={loading} className="w-100" type="submit">
-          {FORM.signup.title}
+          {FORM.signin.title}
         </FormButton>
       </form>
 
-      <div className="w-100 text-center mt-2">
-        <Link to={FORM.haveAccount.url}>
-          {FORM.haveAccount.title} {FORM.haveAccount.button}
+      <div className="w-100 text-center mt-2" style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+      }}>
+        <Link to={FORM.resetPasswword.url}>
+          {FORM.resetPasswword.title} {FORM.resetPasswword.button}
+        </Link>
+        <Link to={FORM.noAccount.url}>
+          {FORM.noAccount.title} {FORM.noAccount.button}
         </Link>
       </div>
     </LoginContainer>
   );
 };
 
-export default SignUp;
+export default SignIn;

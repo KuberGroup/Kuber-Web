@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { FiLogOut } from "react-icons/fi";
-import LoginContainer from "../Containers/LoginContainer";
-import AlertMsg from "../Styles/Alert";
-import AuthHeader from "../Headers/AuthHeader";
-import { FormButton } from "../Styles/Button";
+import { AlertMsg, FormButton, LoginContainer, AuthHeader } from "../../Components";
 
 const VerifyEmail = () => {
   const { currentUser, sendVerificationEmail, logout } = useAuth();

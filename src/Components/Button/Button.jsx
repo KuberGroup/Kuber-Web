@@ -1,5 +1,5 @@
 import React from 'react'
-import Ripple from './Ripple'
+import Ripple from '../Ripple/Ripple'
 import './Button.css'
 
 export const Button = (props) => {

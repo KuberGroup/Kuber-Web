@@ -3,11 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
-import LoginContainer from "../Containers/LoginContainer";
-import AuthHeader from "../Headers/AuthHeader";
-import AlertMsg from "../Styles/Alert";
-import { FormButton } from "../Styles/Button";
-import FormInput from "../Styles/Input";
+import { AlertMsg, FormButton, FormInput, LoginContainer, AuthHeader } from "../../Components";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");

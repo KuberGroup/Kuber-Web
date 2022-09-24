@@ -1,5 +1,5 @@
 import React from "react";
-import "./Alert.css";
+import "./AlertMsg.css";
 import { TbAlertCircle } from "react-icons/tb";
 
 const AlertMsg = ({ text }) => {

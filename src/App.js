@@ -1,13 +1,13 @@
 import React from 'react';
-import SignUp from './Components/SignUp/SignUp';
+// import SignUp from './Components/SignUp/SignUp';
 import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './Components/Home/Home';
+// import Home from './Components/Home/Home';
 import RequireAuth from './Components/RequireAuth/RequireAuth';
-import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
-import VerifyEmail from './Components/VerifyEmail/VerifyEmail';
-import SignIn from './Components/SignIn/SignIn';
-
+// import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
+// import VerifyEmail from './Components/VerifyEmail/VerifyEmail';
+// import SignIn from './Components/SignIn/SignIn';
+import { Home, SignIn, SignUp, VerifyEmail, ForgotPassword } from './Pages';
 import './Helpers/Spacing.scss'
 
 function App() {
