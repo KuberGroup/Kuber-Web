@@ -53,7 +53,7 @@ const VerifyEmail = () => {
     }
   };
 
-  if (currentUser.emailVerified) navigate("/");
+  if (currentUser.emailVerified) navigate("/create-profile");
 
   return (
     <LoginContainer>

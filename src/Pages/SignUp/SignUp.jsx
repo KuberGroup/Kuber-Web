@@ -27,7 +27,7 @@ const SignUp = () => {
       setLoading(true);
       await signup(email, password);
 
-      navigate("/");
+      navigate("/create-profile");
     } catch (e) {
       setError(`${FORM.error.signup} ${e.code}`);
     }
