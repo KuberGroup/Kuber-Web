@@ -245,6 +245,11 @@ textarea {
   text-overflow: ellipsis;
 }
 
+.single-line-ellipsis {
+  line-height: 1em;
+  height: 1em;
+}
+
 /* grid clear : style that clears the flow */
 
 .row::after {

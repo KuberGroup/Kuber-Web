@@ -30,3 +30,13 @@ export const AuthHeader = ({ children }) => {
         </CenterContainer>
     )
 }
+
+export const Header = () => {
+    return (
+        <div className="p-abs t-0 l-0 w-100 fl fl-c fl-j-fs" style={{
+            height: '45px',
+            backgroundColor: '#fff',
+            zIndex: 0,
+        }}><span className='pl-1'>Kuber Group</span></div>
+    )
+}
