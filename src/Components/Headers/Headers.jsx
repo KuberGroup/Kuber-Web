@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiLock } from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom'
 import { CenterContainer } from '..'
-
+import { useAuth } from '../../Context/AuthContext'
+import { FiLogOut } from "react-icons/fi";
 export const AuthHeader = ({ children }) => {
     return (
 
@@ -32,11 +34,29 @@ export const AuthHeader = ({ children }) => {
 }
 
 export const Header = () => {
+    const [error, setError] = useState('')
+    const { currentUser, logout } = useAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = async () => {
+        setError('')
+        try {
+            await logout()
+            navigate('login')
+        } catch (e) {
+            setError(`Failed to Log In ${e.code}`);
+        }
+    }
+
     return (
-        <div className="p-abs t-0 l-0 w-100 fl fl-c fl-j-fs" style={{
+        <div className="p-abs t-0 l-0 w-100 fl fl-c fl-j-sb pl-1 pr-1" style={{
             height: '45px',
             backgroundColor: '#fff',
             zIndex: 0,
-        }}><span className='pl-1'>Kuber Group</span></div>
+        }}>
+            <span className='pl-1'>Kuber Group</span>
+            <span className=" fl fl-c pr-1 c-p" style={{ color: '#ff0000' }} onClick={handleLogout}>
+                <FiLogOut style={{ marginRight: 5 }} />Log Out</span>
+        </div>
     )
 }
