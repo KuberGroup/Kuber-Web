@@ -11,7 +11,6 @@ const CreateProfile = () => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const CreateUserInDb = async () => {
-        console.log(currentUser)
         try {
             setError("");
             setLoading(true);
@@ -27,7 +26,7 @@ const CreateProfile = () => {
         }
         setLoading(false);
     }
-    useEffect(() => { console.log('called'); CreateUserInDb() }, [])
+    useEffect(() => { CreateUserInDb() }, [])
     return (
         <div className='fl fl-d-col fl-c w-100 h-100vh'>
             {error && <AlertMsg text={error} />}
