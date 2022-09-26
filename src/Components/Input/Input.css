@@ -1,7 +1,6 @@
 #float-label {
     display: flex;
     flex-direction: column;
-    min-width: 350px;
 }
 
 #float-label input {
