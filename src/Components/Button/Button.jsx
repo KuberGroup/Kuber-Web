@@ -18,9 +18,9 @@ export const FormButton = (props) => {
     return <Button {...props} className={`Button FormButton ${className}`}>{children}</Button>
 }
 
-export const StartNewChatButton = () => {
+export const StartNewChatButton = (props) => {
     return (
-        <div className='p-abs b-0 r-0 fl fl-c m-1 c-p StartNewChatButton'>
+        <div className='p-abs b-0 r-0 fl fl-c m-1 c-p StartNewChatButton' {...props}>
             <BiMessageSquareAdd color='#fff' />
         </div>
     )

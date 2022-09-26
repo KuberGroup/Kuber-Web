@@ -7,7 +7,7 @@ import RequireAuth from './Components/RequireAuth/RequireAuth';
 // import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
 // import VerifyEmail from './Components/VerifyEmail/VerifyEmail';
 // import SignIn from './Components/SignIn/SignIn';
-import { Home, SignIn, SignUp, VerifyEmail, ForgotPassword, CreateProfile } from './Pages';
+import { Home, SignIn, SignUp, VerifyEmail, ForgotPassword, CreateProfile, StartNewChat } from './Pages';
 import './Helpers/Spacing.scss'
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
 
             <Route exact path='/' element={<RequireAuth><Home /></RequireAuth>} />
             <Route exact path='/create-profile' element={<RequireAuth><CreateProfile /></RequireAuth>} />
+            <Route exact path='/start-new-chat' element={<RequireAuth><StartNewChat /></RequireAuth>} />
 
             {/* Routes which require Login */}
 
