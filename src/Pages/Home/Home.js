@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { AlertMsg, Copyright, FormButton, Header, LoginContainer, UserCard } from '../../Components'
 import { StartNewChatButton } from '../../Components/Button/Button'
 import { useAuth } from '../../Context/AuthContext'
-// import { handleStartNewChat } from '../../Helpers/RouteHandlers'
 
 const Home = () => {
     const [error, setError] = useState('')
@@ -20,7 +19,6 @@ const Home = () => {
     }
 
     const handleStartNewChat = () => {
-        console.log('hi')
         navigate('start-new-chat')
     }
 
