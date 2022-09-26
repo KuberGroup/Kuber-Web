@@ -11,7 +11,7 @@ const Copyright = () => {
             fontSize: '0.875rem',
             lineHeight: 1.43,
             letterSpacing: '0.01071em',
-            color: 'rgba(0, 0, 0, 0.6)',
+            color: '#999',
         }}
         >
             {"Copyright © "}
