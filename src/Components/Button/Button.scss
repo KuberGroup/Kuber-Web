@@ -35,3 +35,24 @@
     border-color: #0d6efd;
     opacity: .65;
 }
+
+.StartNewChatButton {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    user-select: none;
+    background-color: #9c27b0;
+    scale: .95;
+    transition: all .1s ease-in-out;
+
+    &:hover {
+        background-color: #8e24aa;
+        scale: 1;
+    }
+
+    &:active {
+        background-color: #7b1fa2;
+        scale: 1;
+    }
+}
