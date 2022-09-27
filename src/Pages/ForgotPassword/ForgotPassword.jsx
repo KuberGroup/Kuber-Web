@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
-import { AlertMsg, FormButton, FormInput, LoginContainer, AuthHeader } from "../../Components";
+import {
+  AlertMsg,
+  FormButton,
+  FormInput,
+  LoginContainer,
+  AuthHeader,
+} from "../../Components";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
+  const emailRef = useRef();
   const { resetPassword } = useAuth();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -21,8 +27,8 @@ const ForgotPassword = () => {
       setMessage("");
       setError("");
       setLoading(true);
-      await resetPassword(email);
-      setMessage(`${FORM.error.reset.success} ${email}`);
+      await resetPassword(emailRef.current.value);
+      setMessage(`${FORM.error.reset.success} ${emailRef.current.value}`);
     } catch (e) {
       setError(`${FORM.error.reset.failed} ${e.code}`);
     }
@@ -32,15 +38,18 @@ const ForgotPassword = () => {
   return (
     <LoginContainer>
       <AuthHeader>{FORM.recovery.title}</AuthHeader>
-      {error && <AlertMsg className='mb-1 mt-1' variant="danger" text={error} />}
-      {message && <AlertMsg className='mb-1 mt-1' variant="success" text={message} />}
+      {error && (
+        <AlertMsg className="mb-1 mt-1" variant="danger" text={error} />
+      )}
+      {message && (
+        <AlertMsg className="mb-1 mt-1" variant="success" text={message} />
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">
           <FormInput
-            handleInputData={setEmail}
-            value={email}
             type="email"
             label={FORM.label.email.title}
+            ref={emailRef}
             required
           />
         </div>
@@ -51,7 +60,8 @@ const ForgotPassword = () => {
       </form>
       <div className="w-100 text-center mt-2">
         <Link to={FORM.haveAccount.url}>
-          {FORM.haveAccount.knowPassword}{" "}{FORM.haveAccount.button}</Link>
+          {FORM.haveAccount.knowPassword} {FORM.haveAccount.button}
+        </Link>
       </div>
     </LoginContainer>
   );

@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
 import "./style.css";
+import {
+  AlertMsg,
+  FormButton,
+  FormInput,
+  LoginContainer,
+  AuthHeader,
+} from "../../Components";
 
-import { AlertMsg, FormButton, FormInput, LoginContainer, AuthHeader } from "../../Components";
 const SignUp = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const navigate = useNavigate();
 
@@ -19,13 +25,13 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== passwordConfirm)
+    if (passwordRef.current.value !== passwordConfirmRef.current.value)
       return setError(`${FORM.error.passwordNotMatch}`);
 
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
+      await signup(emailRef.current.value, passwordRef.current.value);
 
       navigate("/create-profile");
     } catch (e) {
@@ -37,32 +43,29 @@ const SignUp = () => {
   return (
     <LoginContainer>
       <AuthHeader>{FORM.signup.title}</AuthHeader>
-      {error && <AlertMsg className='mt-1 mb-1' text={error} />}
+      {error && <AlertMsg className="mt-1 mb-1" text={error} />}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">
           <FormInput
-            handleInputData={setEmail}
-            value={email}
             label={FORM.label.email.title}
             type="email"
+            ref={emailRef}
             required
           />
         </div>
         <div className="mb-1" id="password">
           <FormInput
-            handleInputData={setPassword}
-            value={password}
             label={FORM.label.password.title}
             type="password"
+            ref={passwordRef}
             required
           />
         </div>
         <div className="mb-1" id="passwordConfirm">
           <FormInput
-            handleInputData={setPasswordConfirm}
-            value={passwordConfirm}
             label={FORM.label.confPassword.title}
             type="password"
+            ref={passwordConfirmRef}
             required
           />
         </div>
