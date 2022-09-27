@@ -3,7 +3,8 @@
     flex-direction: column;
 }
 
-#float-label input {
+#float-label input,
+#float-label input:-internal-autofill-selected {
     width: 100%;
     height: 56px;
     padding: 0 0.8rem;
@@ -33,7 +34,7 @@
 }
 
 #float-label:focus-within label,
-#float-label input:-internal-autofill-selected+label,
+#float-label input:-internal-autofill-selected + label,
 #float-label .Active {
     transform: translate(0, -8px) scale(0.75);
     margin-left: 0.7rem;
