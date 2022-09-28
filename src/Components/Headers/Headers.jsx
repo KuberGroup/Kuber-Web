@@ -43,7 +43,6 @@ export const AuthHeader = ({ children }) => {
 };
 
 export const Header = ({ showLogout }) => {
-  console.log(showLogout);
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const navigate = useNavigate();
