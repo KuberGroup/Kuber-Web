@@ -1,0 +1,48 @@
+#float-label {
+    display: flex;
+    flex-direction: column;
+
+    input,
+    input:-internal-autofill-selected {
+        width: 100%;
+        height: 56px;
+        padding: 0 0.8rem;
+        outline: 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+
+        &:focus {
+            border: 1px solid #0d6efd;
+        }
+    }
+
+    label {
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 0 12px;
+        color: #999;
+        pointer-events: none;
+
+        position: absolute;
+        transform: translate(0, 16px) scale(1);
+        transform-origin: top left;
+        transition: all 0.2s ease-out;
+    }
+
+    &:focus-within label,
+    input:-internal-autofill-selected + label,
+    .Active {
+        transform: translate(0, -8px) scale(0.75);
+        margin-left: 0.7rem;
+        padding: 0 5px;
+        background-color: #f2f4fb;
+        border-radius: 4px;
+    }
+
+    &:focus-within label {
+        color: #0d6efd;
+    }
+}

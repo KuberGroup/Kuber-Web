@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { forwardRef } from "react";
-import "./Input.css";
+import "./Input.scss";
 
 export const FormInput = forwardRef((props, ref) => {
   const [isActive, setIsActive] = useState(false);
