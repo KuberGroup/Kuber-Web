@@ -12,7 +12,7 @@ const Home = () => {
 
     return (
         <>
-            <MainContainer>
+            <MainContainer logout={true}>
                 {/* users list */}
                 <div className='p-rel w-100 h-100vh' style={{ maxWidth: 480 }}>
                     <div className=' p-rel fl fl-d-col w-100 h-100vh m-0' style={{ maxWidth: 480, marginTop: '50px', overflow: 'scroll' }}>

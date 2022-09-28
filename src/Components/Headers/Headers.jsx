@@ -42,7 +42,8 @@ export const AuthHeader = ({ children }) => {
   );
 };
 
-export const Header = () => {
+export const Header = ({ showLogout }) => {
+  console.log(showLogout);
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -68,14 +69,16 @@ export const Header = () => {
       }}
     >
       <span className="pl-1">Kuber Group</span>
-      <span
-        className=" fl fl-c pr-1 c-p"
-        style={{ color: "#ff0000" }}
-        onClick={handleLogout}
-      >
-        <FiLogOut style={{ marginRight: 5 }} />
-        Log Out
-      </span>
+      {showLogout && (
+        <span
+          className=" fl fl-c pr-1 c-p"
+          style={{ color: "#ff0000" }}
+          onClick={handleLogout}
+        >
+          <FiLogOut style={{ marginRight: 5 }} />
+          Log Out
+        </span>
+      )}
     </div>
   );
 };
