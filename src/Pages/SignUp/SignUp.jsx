@@ -3,7 +3,6 @@ import { useAuth } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { MINI_DESCRIPTION, TITLE, FORM } from "../../Data/Constants";
 import { useTitle } from "../../Hooks/useTitle";
-import "./style.css";
 import {
   AlertMsg,
   FormButton,
