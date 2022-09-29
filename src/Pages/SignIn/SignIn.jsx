@@ -33,7 +33,10 @@ const SignIn = () => {
 
       navigate("/");
     } catch (e) {
-      setError(`${FORM.error.signin} ${e.code}`);
+      setError({
+        variant: "error",
+        message: `${FORM.error.signin} ${e.code}`,
+      });
     }
     setLoading(false);
   };
@@ -41,7 +44,11 @@ const SignIn = () => {
   return (
     <LoginContainer>
       <AuthHeader>{FORM.signin.title}</AuthHeader>
-      {error && <AlertMsg text={error} className="mb-1 mt-1" />}
+      {error && (
+        <AlertMsg variant={error.variant} className="mb-1 mt-1">
+          {error.message}
+        </AlertMsg>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">
           <FormInput

@@ -28,9 +28,15 @@ const ForgotPassword = () => {
       setError("");
       setLoading(true);
       await resetPassword(emailRef.current.value);
-      setMessage(`${FORM.error.reset.success} ${emailRef.current.value}`);
+      setError({
+        variant: "success",
+        message: `${FORM.error.reset.success} ${emailRef.current.value}`,
+      });
     } catch (e) {
-      setError(`${FORM.error.reset.failed} ${e.code}`);
+      setError({
+        variant: "error",
+        message: `${FORM.error.reset.failed} ${e.code}`,
+      });
     }
     setLoading(false);
   };
@@ -39,10 +45,9 @@ const ForgotPassword = () => {
     <LoginContainer>
       <AuthHeader>{FORM.recovery.title}</AuthHeader>
       {error && (
-        <AlertMsg className="mb-1 mt-1" variant="danger" text={error} />
-      )}
-      {message && (
-        <AlertMsg className="mb-1 mt-1" variant="success" text={message} />
+        <AlertMsg className="mb-1 mt-1" variant={error.variant}>
+          {error.message}
+        </AlertMsg>
       )}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">

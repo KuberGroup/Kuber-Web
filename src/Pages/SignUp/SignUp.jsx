@@ -25,7 +25,10 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value)
-      return setError(`${FORM.error.passwordNotMatch}`);
+      return setError({
+        variant: "error",
+        message: FORM.error.passwordNotMatch,
+      });
 
     try {
       setError("");
@@ -34,7 +37,10 @@ const SignUp = () => {
 
       navigate("/create-profile");
     } catch (e) {
-      setError(`${FORM.error.signup} ${e.code}`);
+      setError({
+        variant: "error",
+        message: `${FORM.error.signup} ${e.code}`,
+      });
     }
     setLoading(false);
   };
@@ -42,7 +48,11 @@ const SignUp = () => {
   return (
     <LoginContainer>
       <AuthHeader>{FORM.signup.title}</AuthHeader>
-      {error && <AlertMsg className="mt-1 mb-1" text={error} />}
+      {error && (
+        <AlertMsg variant={error.variant} className="mb-1 mt-1">
+          {error.message}
+        </AlertMsg>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-1" id="email">
           <FormInput
