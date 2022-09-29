@@ -6,16 +6,30 @@
     font-size: 0.875rem;
     line-height: 1.43;
     letter-spacing: 0.01071em;
-    background-color: rgb(253, 237, 237);
     display: flex;
     align-items: center;
     padding: 6px 16px;
-    color: rgb(95, 33, 32);
     margin: 0.8rem 0;
+    .icon {
+        margin-right: 2px;
+        padding: 7px 0;
+        font-size: 32px;
+        opacity: 0.9;
+    }
 }
 
 .Alert > div {
     padding: 8px 0;
     min-width: 0;
     overflow: auto;
+}
+
+.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.error {
+    background-color: rgb(253, 237, 237);
+    color: rgb(95, 33, 32);
 }
