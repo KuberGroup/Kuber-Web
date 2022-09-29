@@ -15,7 +15,6 @@ const ForgotPassword = () => {
   const emailRef = useRef();
   const { resetPassword } = useAuth();
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   useTitle(`${FORM.recovery.title} - ${TITLE} | ${MINI_DESCRIPTION}`);
@@ -24,7 +23,6 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     try {
-      setMessage("");
       setError("");
       setLoading(true);
       await resetPassword(emailRef.current.value);

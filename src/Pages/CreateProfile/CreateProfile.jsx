@@ -31,7 +31,7 @@ const CreateProfile = () => {
   };
   useEffect(() => {
     CreateUserInDb();
-  }, []);
+  });
   return (
     <div className="fl fl-d-col fl-c w-100 h-100vh">
       {error && (
@@ -39,7 +39,9 @@ const CreateProfile = () => {
           {error.message}
         </AlertMsg>
       )}
-      <span style={{ fontSize: 32 }}>Creating User Profile...</span>
+      <span style={{ fontSize: 32 }}>
+        {loading ? "Create Profile" : "Creating User Profile..."}
+      </span>
     </div>
   );
 };
