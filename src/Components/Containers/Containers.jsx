@@ -32,7 +32,12 @@ export const MainContainer = ({ children, logout }) => {
   return (
     <div className="fl fl-d-col fl-c fl-j-fs w-100 h-100vh">
       <Header showLogout={logout} />
-      {children}
+      <div
+        className="p-rel fl w-100 pl-1 pr-1 pb-1 fl-c"
+        style={{ marginTop: 50, height: "calc(100vh - 50px)" }}
+      >
+        {children}
+      </div>
     </div>
   );
 };

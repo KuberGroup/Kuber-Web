@@ -13,37 +13,35 @@ const Home = () => {
     return (
         <>
             <MainContainer logout={true}>
-                <div className='p-rel fl w-100 pl-1 pr-1 pb-1 fl-c' style={{ marginTop: 50, height: 'calc(100vh - 50px)' }}>
-                    {/* users list */}
-                    <div className='p-rel fl fl-c w-100 h-100' style={{ maxWidth: 480 }}>
-                        <div className=' p-rel fl fl-d-col w-100 h-100 m-0' style={{ maxWidth: 480, overflowY: 'scroll' }}>
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            <UserCard />
-                            {/* start new chat button */}
-                            <div className='fl fl-c' style={{ background: '#fff', padding: '1.5rem 1rem .5rem' }}>
-                                <Copyright />
-                            </div>
+                {/* users list */}
+                <div className='p-rel fl fl-c w-100 h-100' style={{ maxWidth: 480 }}>
+                    <div className=' p-rel fl fl-d-col w-100 h-100 m-0' style={{ maxWidth: 480, overflowY: 'scroll' }}>
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        <UserCard />
+                        {/* start new chat button */}
+                        <div className='fl fl-c' style={{ background: '#fff', padding: '1.5rem 1rem .5rem' }}>
+                            <Copyright />
                         </div>
-                        <StartNewChatButton onClick={handleStartNewChat} />
                     </div>
-
-                    {/* Messages */}
-                    <div className=' p-rel fl fl-d-col w-100 h-100 m-0' style={{ overflow: 'scroll', background: '#000' }}>Messages Here</div>
+                    <StartNewChatButton onClick={handleStartNewChat} />
                 </div>
+
+                {/* Messages */}
+                <div className=' p-rel fl fl-d-col w-100 h-100 m-0' style={{ overflow: 'scroll', background: '#000' }}>Messages Here</div>
             </MainContainer>
         </>
     )
