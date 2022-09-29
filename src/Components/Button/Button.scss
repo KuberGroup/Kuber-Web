@@ -37,18 +37,13 @@
 }
 
 .StartNewChatButton {
-    width: 45px;
-    height: 45px;
     border-radius: 50%;
     user-select: none;
     background-color: #9c27b0;
     transition: all 0.1s ease-in-out;
+    padding: 0.6rem;
 
     &:hover {
         background-color: #8e24aa;
-    }
-
-    .icon {
-        transform: translateX(.5px);
     }
 }
