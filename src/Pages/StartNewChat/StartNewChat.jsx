@@ -6,14 +6,24 @@ import {
   MainContainer,
   UserCard,
 } from "../../Components";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  serverTimestamp,
+  where,
+} from "firebase/firestore";
 import { db } from "../../firebase";
+import { useAuth } from "../../Context/AuthContext";
 
 const StartNewChat = () => {
   const searchRef = useRef();
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const { currentUser } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +32,7 @@ const StartNewChat = () => {
       setLoading(true);
       await SearchUserInFirebase(searchRef.current.value);
     } catch (e) {
+      setSuccessMessage("");
       setError(e.code);
     }
     setLoading(false);
@@ -35,7 +46,33 @@ const StartNewChat = () => {
 
     querySnapshot.forEach((doc) => {
       setUser(doc.data());
+      setError("");
+      setSuccessMessage("User found");
     });
+  };
+
+  const createNewChatroom = async () => {
+    // Create New Chatrooom
+    try {
+      setSuccessMessage("");
+      setLoading(true);
+      // const docRef = await addDoc(collection(db, "chatRoom"), {
+      await addDoc(collection(db, "chatRoom"), {
+        group: false,
+        members: [currentUser.uid, user.uid],
+        recentMessage: {
+          messageText: "Select User to Start Chat with.",
+          sendAt: null,
+        },
+        timestamp: serverTimestamp(),
+      });
+      // console.log("Document written with ID: ", docRef.id);
+      setSuccessMessage("Chatroom Created");
+    } catch (e) {
+      setError("");
+      setSuccessMessage(e.code);
+    }
+    setLoading(false);
   };
 
   return (
@@ -55,7 +92,12 @@ const StartNewChat = () => {
             </p>
           </div>
 
-          {error && <AlertMsg className="mb-1" text={error} />}
+          {error && <AlertMsg className="mb-1">{error}</AlertMsg>}
+          {successMessage && (
+            <AlertMsg className="mb-1" text={successMessage} variant="success">
+              {successMessage}
+            </AlertMsg>
+          )}
           {!user ? (
             <form onSubmit={handleSubmit} className="w-100 pl-1 pr-1">
               <div className="mb-1" id="searchUser">
@@ -72,9 +114,20 @@ const StartNewChat = () => {
             </form>
           ) : (
             <div className="w-100 pt-1">
-              <UserCard user={user} newChat={true} />
+              <UserCard
+                user={user}
+                newChat={true}
+                onClick={createNewChatroom}
+              />
               <div className="w-100 fl fl-c">
-                <div onClick={() => setUser(null)} className="p-1 m-1 c-p">
+                <div
+                  onClick={() => {
+                    setUser(null);
+                    setError("");
+                    setSuccessMessage("");
+                  }}
+                  className="p-1 m-1 c-p"
+                >
                   Wrong User, Search Again?
                 </div>
               </div>
