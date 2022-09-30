@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Copyright, MainContainer, UserCard } from '../../Components'
+import { Copyright, FormInput, LeftMessage, MainContainer, RightMessage, UserCard } from '../../Components'
 import { StartNewChatButton } from '../../Components/Button/Button'
 
 const Home = () => {
@@ -41,7 +41,47 @@ const Home = () => {
                 </div>
 
                 {/* Messages */}
-                <div className=' p-rel fl fl-d-col w-100 h-100 m-0' style={{ overflow: 'scroll', background: '#000' }}>Messages Here</div>
+                <div className=' p-rel fl fl-d-col w-100 h-100 m-0' style={{ background: '#fff' }}>
+                    <div className='fl' style={{ height: 45 }}>Username</div>
+                    <div className='fl fl-d-col h-100' style={{ overflow: 'scroll' }}>
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                        <LeftMessage />
+                        <RightMessage />
+
+                    </div>
+                    <div className='w-100'>
+                        <FormInput label='Write Message Here.' className='w-100' />
+                    </div>
+                </div>
             </MainContainer>
         </>
     )
