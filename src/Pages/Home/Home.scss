@@ -1,0 +1,26 @@
+// assumed mobile screen size
+$mobile: 768px;
+
+@media screen and (max-width: $mobile) {
+    .breakpoint {
+        flex-direction: column;
+    }
+
+    .ChatContainer {
+        position: absolute;
+        transform: translateY(100vh);
+        transition: transform 0.1s ease-in-out;
+        &.active {
+            transform: translateY(0);
+        }
+    }
+
+    .UserContainer {
+        width: 100% !important;
+        max-width: 768px !important;
+        > div {
+            width: 100% !important;
+            max-width: 768px !important;
+        }
+    }
+}
