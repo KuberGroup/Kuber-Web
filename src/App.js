@@ -1,12 +1,7 @@
 import React from 'react';
-// import SignUp from './Components/SignUp/SignUp';
 import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-// import Home from './Components/Home/Home';
-import RequireAuth from './Components/RequireAuth/RequireAuth';
-// import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
-// import VerifyEmail from './Components/VerifyEmail/VerifyEmail';
-// import SignIn from './Components/SignIn/SignIn';
+import { RequireAuth } from './Components/';
 import { Home, SignIn, SignUp, VerifyEmail, ForgotPassword, CreateProfile, StartNewChat } from './Pages';
 import './Helpers/Spacing.scss'
 
@@ -18,18 +13,16 @@ function App() {
           <Routes>
 
             {/* Routes which require Login */}
-
             <Route exact path='/' element={<RequireAuth><Home /></RequireAuth>} />
             <Route exact path='/create-profile' element={<RequireAuth><CreateProfile /></RequireAuth>} />
             <Route exact path='/start-new-chat' element={<RequireAuth><StartNewChat /></RequireAuth>} />
-
+            <Route path='/verify-email' element={<RequireAuth><VerifyEmail /></RequireAuth>} />
             {/* Routes which require Login */}
 
 
             <Route path='/signup' element={<SignUp />} />
             <Route path='/login' element={<SignIn />} />
             <Route path='/forgot-password' element={<ForgotPassword />} />
-            <Route path='/verify-email' element={<VerifyEmail />} />
           </Routes>
         </AuthProvider>
       </Router>
