@@ -60,14 +60,16 @@ const Home = () => {
                 <div className='p-rel breakpoint fl fl-c w-100 h-100'>
                     {/* users list */}
                     <div id='home' className='UserContainer p-rel fl fl-c w-100 h-100' style={{ maxWidth: 480 }}>
-                        <div className=' p-rel fl fl-d-col w-100 h-100 m-0' style={{ maxWidth: 480, overflowY: 'scroll' }}>
-                            {chats.map((chat, index) =>
-                                <UserCard
-                                    key={index}
-                                    id={chat.id}
-                                    user={chat}
-                                />
-                            )}
+                        <div className=' p-rel fl fl-d-col w-100 h-100 m-0 fl-j-sb' style={{ maxWidth: 480, overflowY: 'scroll', background: '#fff' }}>
+                            <div>
+                                {chats.map((chat, index) =>
+                                    <UserCard
+                                        key={index}
+                                        id={chat.id}
+                                        user={chat}
+                                    />
+                                )}
+                            </div>
                             {/* start new chat button */}
                             <div className='fl fl-c' style={{ background: '#fff', padding: '1.5rem 1rem .5rem' }}>
                                 <Copyright />
