@@ -6,11 +6,13 @@ import { StartNewChatButton } from '../../Components/Button/Button'
 import { useAuth } from '../../Context/AuthContext'
 import { db } from '../../firebase'
 import './Home.scss'
+import { BiMessageSquareAdd } from 'react-icons/bi'
 const Home = () => {
     const navigate = useNavigate()
     const { currentUser } = useAuth()
     const [chats, setChats] = useState([])
     const [loading, setLoading] = useState(true)
+    const [isEmpty, setIsEmpty] = useState(true)
 
     const handleStartNewChat = () => {
         navigate('start-new-chat')
@@ -25,31 +27,39 @@ const Home = () => {
         )
 
         const unsubscribe = onSnapshot(chatListQuery, (querySnapshot) => {
-            const queryPromises = querySnapshot.docs.map((item) => {
-                return new Promise((resolve, reject) => {
-                    const temp = [];
-                    const freindId = item.data().members.filter((member) => member !== currentUser.uid);
-                    getDoc(doc(db, 'users', freindId[0])).then((snapshot) => {
-                        temp.push(snapshot.data().displayName);
-                        temp.push(snapshot.data().photoURL);
-                        resolve({
-                            ...item.data(), id: item.id, displayName: temp[0], photoURL: temp[1],
+            if (querySnapshot.empty) {
+                setIsEmpty(true)
+                setLoading(false)
+            }
+            else {
+                setIsEmpty(false)
+                setLoading(true)
+                const queryPromises = querySnapshot.docs.map((item) => {
+                    return new Promise((resolve, reject) => {
+                        const temp = [];
+                        const freindId = item.data().members.filter((member) => member !== currentUser.uid);
+                        getDoc(doc(db, 'users', freindId[0])).then((snapshot) => {
+                            temp.push(snapshot.data().displayName);
+                            temp.push(snapshot.data().photoURL);
+                            resolve({
+                                ...item.data(), id: item.id, displayName: temp[0], photoURL: temp[1],
+                            })
                         })
                     })
                 })
-            })
-            Promise
-                .all(queryPromises)
-                .then(chatsData => {
-                    setChats(chatsData)
-                })
-                .finally(() => {
-                    setLoading(false)
-                })
+                Promise
+                    .all(queryPromises)
+                    .then(chatsData => {
+                        setChats(chatsData)
+                    })
+                    .finally(() => {
+                        setLoading(false)
+                    })
+            }
         });
 
         return () => unsubscribe()
-    }, [currentUser.uid])
+    }, [currentUser.uid, isEmpty])
 
     if (loading) {
         return <MainContainer logout={true}><div className='fl-c' style={{ fontSize: 32 }}>Loading...</div></MainContainer>
@@ -61,14 +71,21 @@ const Home = () => {
                     {/* users list */}
                     <div id='home' className='UserContainer p-rel fl fl-c w-100 h-100' style={{ maxWidth: 480 }}>
                         <div className=' p-rel fl fl-d-col w-100 h-100 m-0 fl-j-sb' style={{ maxWidth: 480, overflowY: 'scroll', background: '#fff' }}>
-                            <div>
-                                {chats.map((chat) =>
-                                    <UserCard
-                                        key={chat.id}
-                                        id={chat.id}
-                                        user={chat}
-                                    />
-                                )}
+                            <div className='h-100 w-100'>
+                                {isEmpty ? <div className='fl fl-c w-100 h-100' style={{ fontSize: 32 }}>
+                                    <p className='fl fl-w-w fl-c lhinit p-1 text-center'>
+                                        No Chats, click <BiMessageSquareAdd color="#a1a1a1" size={30} style={{ margin: '0 .5rem' }} />
+                                        below to start a new chat
+                                    </p>
+                                </div> :
+                                    chats.map((chat) =>
+                                        <UserCard
+                                            key={chat.id}
+                                            id={chat.id}
+                                            user={chat}
+                                        />
+                                    )}
+
                             </div>
                             {/* start new chat button */}
                             <div className='fl fl-c' style={{ background: '#fff', padding: '1.5rem 1rem .5rem' }}>
