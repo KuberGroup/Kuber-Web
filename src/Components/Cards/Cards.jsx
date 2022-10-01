@@ -1,5 +1,6 @@
 import React from "react";
 import Ripple from "../Ripple/Ripple";
+import { BiUser } from "react-icons/bi";
 
 export const UserCard = (props) => {
   const {
@@ -24,15 +25,34 @@ export const UserCard = (props) => {
         }}
         {...rest}
       >
-        <div
-          className="user-pic c-p"
-          style={{
-            width: 50,
-            height: 50,
-            borderRadius: "50%",
-            background: "#eee",
-          }}
-        ></div>
+        {user.photoURL ? (
+          <img
+            src={user.photoURL}
+            alt=""
+            className="user-pic c-p"
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: "50%",
+              background: "#eee",
+              border: "none",
+            }}
+          />
+        ) : (
+          <div
+            className="user-pic c-p fl fl-c"
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: "50%",
+              background: "#eee",
+              border: "none",
+            }}
+          >
+            <BiUser size={35} />
+          </div>
+        )}
+
         <div
           className="user-data fl pl-1 c-p"
           style={{ width: "calc(100% - 50px)" }}
@@ -45,14 +65,14 @@ export const UserCard = (props) => {
             >
               {newChat
                 ? `Click to Start new chat with ${user.displayName}`
-                : "Last message"}
+                : user.recentMessage.messageText}
             </div>
           </div>
           <div
             className="timestamp fl fl-c"
             style={{ width: 80, fontSize: 10, color: "#ccc" }}
           >
-            {newChat ? "" : "2:30 PM"}
+            {newChat ? "" : user.recentMessage.sendAt}
           </div>
         </div>
         <Ripple />
