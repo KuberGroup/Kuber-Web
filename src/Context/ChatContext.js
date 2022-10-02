@@ -49,7 +49,6 @@ export const ChatProvider = ({ children }) => {
                         .all(queryPromises)
                         .then(chatsData => {
                             setChats(chatsData)
-                            console.log('mounted')
                         })
                         .finally(() => {
                             setLoading(false)
