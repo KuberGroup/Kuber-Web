@@ -11,12 +11,12 @@ import {
 
 const VerifyEmail = () => {
   const { currentUser, sendVerificationEmail, logout } = useAuth();
+  const navigate = useNavigate();
   const [timer, setTimer] = useState(0);
   const [timerText, setTimerText] = useState(`in 00`);
   const [error, setError] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [emailSent, setEmailSent] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     let myInterval = setInterval(() => {
@@ -66,7 +66,8 @@ const VerifyEmail = () => {
     }
   };
 
-  if (currentUser.emailVerified) navigate("/create-profile");
+  if (!currentUser) return navigate("/login");
+  if (currentUser.emailVerified) return navigate("/create-profile");
 
   return (
     <LoginContainer>

@@ -17,9 +17,9 @@ function App() {
               <Route exact path='/' element={<RequireAuth><Home /></RequireAuth>} />
               <Route exact path='/create-profile' element={<RequireAuth><CreateProfile /></RequireAuth>} />
               <Route exact path='/start-new-chat' element={<RequireAuth><StartNewChat /></RequireAuth>} />
-              <Route path='/verify-email' element={<RequireAuth><VerifyEmail /></RequireAuth>} />
               {/* Routes which require Login */}
 
+              <Route path='/verify-email' element={<VerifyEmail />} />
               <Route path='/signup' element={<SignUp />} />
               <Route path='/login' element={<SignIn />} />
               <Route path='/forgot-password' element={<ForgotPassword />} />
