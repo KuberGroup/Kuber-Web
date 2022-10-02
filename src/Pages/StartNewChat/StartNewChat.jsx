@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const StartNewChat = () => {
   const searchRef = useRef();
@@ -23,6 +24,7 @@ const StartNewChat = () => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,6 +80,7 @@ const StartNewChat = () => {
         variant: "success",
         message: "Chatroom created",
       });
+      navigate("/");
     } catch (e) {
       setError({
         variant: "error",
