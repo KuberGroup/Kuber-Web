@@ -5,7 +5,6 @@
 }
 
 .FormButton {
-    background: #1976d2;
     padding: 5px 30px;
     color: #fff;
     font-size: 20px;
@@ -15,9 +14,20 @@
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
     width: 100%;
 
+    &.filled {
+        background: #1976d2;
+    }
+
+    &.outline {
+        background: #fff;
+        color: #1976d2;
+        border: 1px solid #1976d2;
+    }
+
     &:hover {
         text-decoration: none;
         background-color: #1565c0;
+        color: #fff;
         box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
             0px 1px 10px 0px rgb(0 0 0 / 12%);
     }

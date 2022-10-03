@@ -14,9 +14,9 @@ export const Button = (props) => {
 };
 
 export const FormButton = (props) => {
-  const { children, className } = props;
+  const { children, className, variant = "filled", ...rest } = props;
   return (
-    <Button {...props} className={`Button FormButton ${className}`}>
+    <Button {...rest} className={`Button FormButton ${className} ${variant}`}>
       {children}
     </Button>
   );
