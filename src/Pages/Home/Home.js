@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Copyright, FormInput, LeftMessage, MainContainer, RightMessage, UserCard } from '../../Components'
 import { StartNewChatButton } from '../../Components/Button/Button'
 import './Home.scss'
@@ -14,9 +14,20 @@ const Home = () => {
         navigate('start-new-chat')
     }
 
-    if (loading) {
-        return <MainContainer logout={true}><div className='fl-c' style={{ fontSize: 32 }}>Loading...</div></MainContainer>
+    const { id } = useParams()
+
+    const StartChat = (id) => {
+        console.log('chat for id: ', id)
     }
+
+    if (id) StartChat(id)
+
+    if (loading) return (
+        <MainContainer logout={true}>
+            <div className='fl-c' style={{ fontSize: 32 }}>Loading...</div>
+        </MainContainer>
+    )
+
     return (
         <>
             <MainContainer logout={true}>
@@ -36,6 +47,7 @@ const Home = () => {
                                             key={chat.id}
                                             id={chat.id}
                                             user={chat}
+                                            onClick={() => navigate(`/chat/${chat.id}`)}
                                         />
                                     )}
 

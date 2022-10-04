@@ -15,6 +15,9 @@ function App() {
             <Routes>
               {/* Routes which require Login */}
               <Route exact path='/' element={<RequireAuth><Home /></RequireAuth>} />
+              <Route exact path='/chat' element={<RequireAuth><Home /></RequireAuth>}>
+                <Route exact path=':id' element={<RequireAuth><Home /></RequireAuth>} />
+              </Route>
               <Route exact path='/create-profile' element={<RequireAuth><CreateProfile /></RequireAuth>} />
               <Route exact path='/start-new-chat' element={<RequireAuth><StartNewChat /></RequireAuth>} />
               {/* Routes which require Login */}
