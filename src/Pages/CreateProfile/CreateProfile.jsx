@@ -21,14 +21,14 @@ const CreateProfile = () => {
     try {
       setError("");
       setLoading(true);
-      // await setDoc(doc(db, "users", currentUser.uid), {
-      //   email: currentUser.email,
-      //   uid: currentUser.uid,
-      //   displayName: nameRef || currentUser.displayName || "Kuber User",
-      //   photoURL: currentUser.photoURL || null,
-      // });
-      // navigate("/");
-      console.log(nameRef || currentUser.displayName || "Kuber User");
+      await setDoc(doc(db, "users", currentUser.uid), {
+        email: currentUser.email,
+        uid: currentUser.uid,
+        displayName:
+          nameRef.current.value || currentUser.displayName || "Kuber User",
+        photoURL: currentUser.photoURL || null,
+      });
+      navigate("/");
     } catch (e) {
       setError({
         variant: "error",
@@ -37,9 +37,19 @@ const CreateProfile = () => {
     }
     setLoading(false);
   };
-  // useEffect(() => {
-  //   CreateUserInDb();
-  // });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (nameRef.current.value === "")
+      return setError({ variant: "error", message: "Please enter a name" });
+    CreateUserInDb();
+  };
+
+  const Skip = () => {
+    nameRef.current.value = "";
+    CreateUserInDb();
+  };
+
   return (
     <LoginContainer>
       <AuthHeader>Create Profile</AuthHeader>
@@ -48,24 +58,19 @@ const CreateProfile = () => {
           {error.message}
         </AlertMsg>
       )}
-      <form onSubmit={CreateUserInDb}>
+      <form onSubmit={handleSubmit} onReset={Skip}>
         <div className="mb-1" id="email">
-          <FormInput
-            type="text"
-            label="Enter Your Name"
-            ref={nameRef}
-            required
-          />
+          <FormInput type="text" label="Enter Your Name" ref={nameRef} />
         </div>
-        <FormButton disabled={loading} className="w-100" type="submit">
-          {loading ? "Creating Profile..." : "Create Profile"}
-        </FormButton>
+        <div className="fl" style={{ gap: "1rem" }}>
+          <FormButton className="w-100" type="reset" variant="outline">
+            Skip
+          </FormButton>
+          <FormButton disabled={loading} className="w-100" type="submit">
+            {loading ? "Creating Profile..." : "Create Profile"}
+          </FormButton>
+        </div>
       </form>
-      <div className="w-100 text-center mt-2">
-        <FormButton className="w-100" type="submit" variant="outline">
-          Skip
-        </FormButton>
-      </div>
     </LoginContainer>
   );
 };
