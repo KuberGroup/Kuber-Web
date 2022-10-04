@@ -2,7 +2,7 @@ import React from 'react';
 import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { RequireAuth } from './Components/';
-import { Home, SignIn, SignUp, VerifyEmail, ForgotPassword, CreateProfile, StartNewChat } from './Pages';
+import { Home, SignIn, SignUp, VerifyEmail, ForgotPassword, CreateProfile, StartNewChat, NotFound } from './Pages';
 import './Helpers/Spacing.scss'
 import { ChatProvider } from './Context/ChatContext';
 
@@ -23,6 +23,9 @@ function App() {
               <Route path='/signup' element={<SignUp />} />
               <Route path='/login' element={<SignIn />} />
               <Route path='/forgot-password' element={<ForgotPassword />} />
+
+              {/* Default NO_PAGE */}
+              <Route path='*' element={<NotFound />} />
             </Routes>
           </ChatProvider>
         </AuthProvider>
