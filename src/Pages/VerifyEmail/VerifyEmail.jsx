@@ -98,6 +98,7 @@ const VerifyEmail = () => {
           {emailSent ? (
             <>
               <FormButton
+                variant="outline"
                 disabled={disabled}
                 onClick={() => {
                   setTimerText(`in 15`);
@@ -109,9 +110,14 @@ const VerifyEmail = () => {
                 Re-send {timerText}
               </FormButton>
               <FormButton
-                variant="primary"
-                disabled={!currentUser.emailVerified}
-                onClick={() => navigate("/")}
+                onClick={() => {
+                  if (currentUser.emailVerified) navigate("/create-profile");
+                  else
+                    setError({
+                      variant: "error",
+                      message: "Please Verify your email first",
+                    });
+                }}
                 className="w-100"
               >
                 Verify
@@ -119,7 +125,6 @@ const VerifyEmail = () => {
             </>
           ) : (
             <FormButton
-              variant="outline-primary"
               disabled={disabled}
               onClick={() => {
                 setTimerText(`in 15`);
