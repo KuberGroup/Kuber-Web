@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Copyright, FormInput, LeftMessage, MainContainer, RightMessage, UserCard } from '../../Components'
+import { Copyright, MainContainer, MessageContainer, UserCard } from '../../Components'
 import { StartNewChatButton } from '../../Components/Button/Button'
 import './Home.scss'
 import { BiMessageSquareAdd } from 'react-icons/bi'
@@ -15,12 +15,6 @@ const Home = () => {
     }
 
     const { id } = useParams()
-
-    const StartChat = (id) => {
-        console.log('chat for id: ', id)
-    }
-
-    if (id) StartChat(id)
 
     if (loading) return (
         <MainContainer logout={true}>
@@ -61,47 +55,11 @@ const Home = () => {
                     </div>
 
                     {/* Messages */}
-                    <div className='ChatContainer p-rel fl fl-d-col w-100 h-100 m-0' style={{ background: '#fff' }}>
-                        <div className='fl' style={{ height: 45 }}>Username</div>
-                        <div className='fl fl-d-col h-100' style={{ overflow: 'scroll' }}>
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                            <LeftMessage />
-                            <RightMessage />
-
-                        </div>
-                        <div className='w-100'>
-                            <FormInput label='Write Message Here.' className='w-100' />
-                        </div>
-                    </div>
+                    {id ? <MessageContainer chatId={id} /> : <div className='fl fl-c w-100 h-100' style={{ fontSize: 32, background: '#fff' }}>
+                        <p className='fl fl-w-w fl-c lhinit p-1 text-center'>
+                            Select a chat to start messaging
+                        </p>
+                    </div>}
                 </div>
             </MainContainer>
         </>

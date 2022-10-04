@@ -9,6 +9,7 @@ export {
 export { default as Copyright } from "./Copyright/Copyright";
 export { AuthHeader, Header } from "./Headers/Headers";
 export { FormInput } from "./Input/Input";
-export { LeftMessage, RightMessage } from './Messages/Messages'
+export { LeftMessage, RightMessage } from "./Messages/Messages";
+export { MessageContainer } from "./Messages/MessageContainer";
 export { default as RequireAuth } from "./RequireAuth/RequireAuth";
 export { default as Ripple } from "./Ripple/Ripple";
