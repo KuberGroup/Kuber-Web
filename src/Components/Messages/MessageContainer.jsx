@@ -1,5 +1,13 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import React, { useRef } from "react";
+import {
+  addDoc,
+  collection,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { useChat } from "../../Context/ChatContext";
 import { db } from "../../firebase";
@@ -12,7 +20,38 @@ export const MessageContainer = ({ chatId }) => {
   const chat = chats.find((chat) => chat.id === chatId);
   const messageRef = useRef();
   const { currentUser } = useAuth();
-  console.log(currentUser);
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // get messages from chat
+  useEffect(() => {
+    const chatListQuery = query(
+      collection(db, "message", chat.id, "messages"),
+      orderBy("timestamp", "desc"),
+      limit(20)
+    );
+
+    const unsubscribe = onSnapshot(chatListQuery, (querySnapShot) => {
+      const queryPromises = querySnapShot.docs.map((item) => {
+        return new Promise((resolve, reject) => {
+          resolve({
+            ...item.data(),
+            chatId: item.id,
+          });
+        });
+      });
+
+      Promise.all(queryPromises)
+        .then((chatsData) => {
+          setMessages(chatsData);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    });
+
+    return () => unsubscribe();
+  }, [chat.id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +65,6 @@ export const MessageContainer = ({ chatId }) => {
   };
 
   const sendMessage = (payload) => {
-    console.log(payload);
     return addDoc(collection(db, "message", chat.id, "messages"), {
       uid: currentUser.uid,
       displayName: currentUser.displayName || "Kuber User",
@@ -48,38 +86,15 @@ export const MessageContainer = ({ chatId }) => {
         {chat.displayName}
       </div>
       <div className="fl fl-d-col h-100" style={{ overflow: "scroll" }}>
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
-
-        <LeftMessage />
-        <RightMessage />
+        {loading
+          ? "Loading..."
+          : messages.map((message) => {
+              return message.uid === currentUser.uid ? (
+                <RightMessage key={message.id} message={message} />
+              ) : (
+                <LeftMessage key={message.id} message={message} />
+              );
+            })}
       </div>
       <form className="w-100 fl" onSubmit={handleSubmit}>
         <div className="w-100">
