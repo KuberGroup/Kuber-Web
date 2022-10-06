@@ -85,7 +85,7 @@ export const MessageContainer = ({ chatId }) => {
       <div className="fl" style={{ height: 45 }}>
         {chat.displayName}
       </div>
-      <div className="fl fl-d-col h-100" style={{ overflow: "scroll" }}>
+      <div className="fl fl-d-col-rev h-100" style={{ overflow: "scroll" }}>
         {loading
           ? "Loading..."
           : messages.map((message) => {
