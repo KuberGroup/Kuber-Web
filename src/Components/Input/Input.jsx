@@ -24,3 +24,26 @@ export const FormInput = forwardRef((props, ref) => {
     </div>
   );
 });
+
+export const MessageInput = forwardRef((props, ref) => {
+  const { className, ...rest } = props;
+  const [isActive, setIsActive] = useState(false);
+  function handleTextChange(text) {
+    if (text.target.value !== "") return setIsActive(true);
+    return setIsActive(false);
+  }
+
+  return (
+    <div id="message-input">
+      <input
+        type="text"
+        value={props.value}
+        onChange={handleTextChange}
+        required={false}
+        ref={ref}
+        placeholder={props.label ? props.label : "Label"}
+        {...rest}
+      />
+    </div>
+  );
+});

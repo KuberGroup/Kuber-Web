@@ -12,8 +12,9 @@ import { useAuth } from "../../Context/AuthContext";
 import { useChat } from "../../Context/ChatContext";
 import { db } from "../../firebase";
 import { Button } from "../Button/Button";
-import { FormInput } from "../Input/Input";
+import { MessageInput } from "../";
 import { LeftMessage, RightMessage } from "./Messages";
+import { BiSend } from "react-icons/bi";
 
 export const MessageContainer = ({ chatId }) => {
   const { chats } = useChat();
@@ -97,23 +98,25 @@ export const MessageContainer = ({ chatId }) => {
             })}
       </div>
       <form className="w-100 fl" onSubmit={handleSubmit}>
-        <div className="w-100">
-          <FormInput
+        <div className="w-100" style={{ paddingRight: "5px" }}>
+          <MessageInput
             label="Write Message Here."
             className="w-100"
             ref={messageRef}
           />
         </div>
         <Button
-          className="p-rel"
+          className="p-rel fl fl-c c-p"
           style={{
-            width: 45,
-            height: 45,
             background: "rgb(156, 39, 176)",
             color: "#fff",
+            borderRadius: "50%",
+            padding: "0.5rem",
+            width: "45px",
+            height: "45px",
           }}
         >
-          Send
+          <BiSend size={24} />
         </Button>
       </form>
     </div>
