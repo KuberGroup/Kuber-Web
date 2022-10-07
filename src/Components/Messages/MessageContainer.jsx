@@ -56,7 +56,12 @@ export const MessageContainer = ({ chatId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (messageRef.current.value === "") return;
+    if (
+      messageRef.current.value === "" || // do not send empty message
+      messageRef.current.value.trim().length === 0 //do not send messages with only whitespaces
+    )
+      return (messageRef.current.value = "");
+
     try {
       await sendMessage(messageRef.current.value);
     } catch (e) {
