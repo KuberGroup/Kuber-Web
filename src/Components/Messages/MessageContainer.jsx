@@ -14,7 +14,8 @@ import { db } from "../../firebase";
 import { Button } from "../Button/Button";
 import { MessageInput } from "../";
 import { LeftMessage, RightMessage } from "./Messages";
-import { BiSend } from "react-icons/bi";
+import { BiSend, BiArrowBack } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 export const MessageContainer = ({ chatId }) => {
   const { chats } = useChat();
@@ -23,6 +24,7 @@ export const MessageContainer = ({ chatId }) => {
   const { currentUser } = useAuth();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // get messages from chat
   useEffect(() => {
@@ -89,6 +91,9 @@ export const MessageContainer = ({ chatId }) => {
       style={{ background: "#fff" }}
     >
       <div className="fl" style={{ height: 45 }}>
+        <div className="backBtn" onClick={() => navigate(-1)}>
+          <BiArrowBack />
+        </div>
         {chat.displayName}
       </div>
       <div className="fl fl-d-col-rev h-100" style={{ overflow: "scroll" }}>
