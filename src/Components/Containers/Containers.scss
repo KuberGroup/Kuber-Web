@@ -1,0 +1,8 @@
+// assumed mobile screen size
+$mobile: 768px;
+
+@media screen and (max-width: $mobile) {
+    .main-container {
+        padding: 0 !important;
+    }
+}
