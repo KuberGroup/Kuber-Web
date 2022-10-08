@@ -28,8 +28,8 @@ const Home = () => {
                 <div className='fl w-100 h-100 breakpoint'>
                     <div className={`p-rel fl w-100 h-100 child ${id ? 'active' : ''}`} >
                         {/* users list */}
-                        <div id='home' className='UserContainer p-rel fl fl-c w-100 h-100' style={{ maxWidth: 480 }}>
-                            <div className=' p-rel fl fl-d-col w-100 h-100 m-0 fl-j-sb' style={{ maxWidth: 480, overflowY: 'scroll', background: '#fff' }}>
+                        <div id='home' className='UserContainer p-rel fl fl-c w-100 h-100'>
+                            <div className=' p-rel fl fl-d-col w-100 h-100 m-0 fl-j-sb' style={{ overflowY: 'scroll', background: '#fff' }}>
                                 <div className='h-100 w-100'>
                                     {isEmpty ? <div className='fl fl-c w-100 h-100' style={{ fontSize: 32 }}>
                                         <p className='fl fl-w-w fl-c lhinit p-1 text-center'>
@@ -56,7 +56,7 @@ const Home = () => {
                         </div>
 
                         {/* Messages */}
-                        {id ? <MessageContainer chatId={id} /> : <div className='fl fl-c w-100 h-100' style={{ fontSize: 32, background: '#fff' }}>
+                        {id ? <MessageContainer chatId={id} /> : <div className='ChatContainer fl fl-c w-100 h-100' style={{ fontSize: 32, background: '#fff' }}>
                             <p className='fl fl-w-w fl-c lhinit p-1 text-center'>
                                 Select a chat to start messaging
                             </p>

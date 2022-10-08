@@ -31,14 +31,9 @@ export const LoginContainer = ({ children }) => {
 
 export const MainContainer = ({ children, logout }) => {
   return (
-    <div className="fl fl-d-col fl-c fl-j-fs w-100 h-100vh">
+    <div className="fl fl-d-col fl-c fl-j-fs w-100vw h-100vh">
       <Header showLogout={logout} />
-      <div
-        className="p-rel fl w-100 pl-1 pr-1 pb-1 fl-c main-container"
-        style={{ marginTop: 50, height: "calc(100vh - 50px)" }}
-      >
-        {children}
-      </div>
+      <div className="p-rel fl w-100 fl-c main-container">{children}</div>
     </div>
   );
 };

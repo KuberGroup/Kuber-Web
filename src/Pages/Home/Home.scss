@@ -1,14 +1,25 @@
 // assumed mobile screen size
 $mobile: 768px;
-
+@media screen and (min-width: $mobile) {
+    .UserContainer {
+        width: 100%;
+        max-width: 480px;
+    }
+}
 @media screen and (max-width: $mobile) {
     .breakpoint {
-        overflow: hidden;
+        position: relative;
         .child {
             width: 200vw;
+            position: absolute;
             .UserContainer,
             .ChatContainer {
-                width: 100vw !important;
+                width: 100vw;
+            }
+
+            .ChatContainer {
+                height: 100vh !important;
+                transform: translateY(-50px);
             }
             &.active {
                 transform: translateX(-100vw);
