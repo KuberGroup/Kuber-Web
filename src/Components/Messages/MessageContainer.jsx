@@ -16,6 +16,7 @@ import { MessageInput } from "../";
 import { LeftMessage, RightMessage } from "./Messages";
 import { BiSend, BiArrowBack } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import "./MessageContainer.scss";
 
 export const MessageContainer = ({ chatId }) => {
   const { chats } = useChat();
@@ -90,11 +91,11 @@ export const MessageContainer = ({ chatId }) => {
       className="ChatContainer p-rel fl fl-d-col w-100 h-100 m-0"
       style={{ background: "#fff" }}
     >
-      <div className="fl" style={{ height: 45 }}>
-        <div className="backBtn" onClick={() => navigate(-1)}>
+      <div className="fl ChatHeader fl-c fl-j-fs">
+        <Button className="BackBtn p-rel fl fl-c" onClick={() => navigate(-1)}>
           <BiArrowBack />
-        </div>
-        {chat.displayName}
+        </Button>
+        <div className="UserName fl fl-c">{chat.displayName}</div>
       </div>
       <div className="fl fl-d-col-rev h-100" style={{ overflow: "scroll" }}>
         {loading

@@ -1,0 +1,16 @@
+.ChatHeader {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    .BackBtn {
+        border-radius: 50%;
+        padding: 0.5rem;
+        margin-left: 0.6rem;
+        font-size: 1.5rem;
+    }
+    .UserName {
+        font-size: 1.2rem;
+        font-weight: 400;
+        padding: 0.8rem;
+        padding-left: 0.1rem;
+    }
+}
