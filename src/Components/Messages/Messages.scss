@@ -1,0 +1,65 @@
+.message {
+    margin-bottom: 12px;
+    padding-right: 9%;
+    padding-left: 9%;
+
+    .box {
+        padding: 6px 7px 8px 9px;
+        box-sizing: border-box;
+        &.left {
+            background: #eee;
+            border-radius: 10px 10px 10px 0;
+            color: #111;
+            max-width: calc(100% - 100px);
+            .timestamp {
+                color: #999;
+            }
+        }
+        &.right {
+            background: #9c27b0;
+            border-radius: 10px 10px 0 10px;
+            color: rgb(245, 245, 245);
+            max-width: calc(100% - 100px);
+            .timestamp {
+                color: rgb(230, 230, 230);
+            }
+        }
+        .spacer {
+            width: 56px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .timestamp {
+            font-size: 10px;
+            float: right;
+            margin: -10px 0 -5px 4px;
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .message {
+        padding-right: 3%;
+        padding-left: 3%;
+    }
+}
+
+@media (max-width: 912px) {
+    .message {
+        padding-right: 6%;
+        padding-left: 6%;
+    }
+}
+
+@media (max-width: 768px) {
+    .message {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+}
+@media (max-width: 480px) {
+    .message {
+        padding-right: 3%;
+        padding-left: 3%;
+    }
+}

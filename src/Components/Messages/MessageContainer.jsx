@@ -100,7 +100,10 @@ export const MessageContainer = ({ chatId }) => {
         </Button>
         <div className="UserName fl fl-c">{chat.displayName}</div>
       </div>
-      <div className="fl fl-d-col-rev h-100" style={{ overflow: "scroll" }}>
+      <div
+        className="fl fl-d-col-rev h-100 pt-2"
+        style={{ overflow: "scroll" }}
+      >
         {loading
           ? "Loading..."
           : messages.map((message) => {
