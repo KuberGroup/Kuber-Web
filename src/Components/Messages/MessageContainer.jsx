@@ -92,7 +92,10 @@ export const MessageContainer = ({ chatId }) => {
       style={{ background: "#fff" }}
     >
       <div className="fl ChatHeader fl-c fl-j-fs">
-        <Button className="BackBtn p-rel fl fl-c" onClick={() => navigate(-1)}>
+        <Button
+          className="BackBtn p-rel fl fl-c c-p"
+          onClick={() => navigate(-1)}
+        >
           <BiArrowBack />
         </Button>
         <div className="UserName fl fl-c">{chat.displayName}</div>
@@ -102,9 +105,9 @@ export const MessageContainer = ({ chatId }) => {
           ? "Loading..."
           : messages.map((message) => {
               return message.uid === currentUser.uid ? (
-                <RightMessage key={message.id} message={message} />
+                <RightMessage key={message.chatId} message={message} />
               ) : (
-                <LeftMessage key={message.id} message={message} />
+                <LeftMessage key={message.chatId} message={message} />
               );
             })}
       </div>
