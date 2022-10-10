@@ -4,7 +4,8 @@
     overflow: hidden;
 }
 .ChatHeader {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     .BackBtn {
         border-radius: 50%;

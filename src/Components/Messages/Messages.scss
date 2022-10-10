@@ -6,20 +6,20 @@
     .box {
         padding: 6px 7px 8px 9px;
         box-sizing: border-box;
+        max-width: 75%;
+        border-radius: 10px;
         &.left {
+            border-bottom-left-radius: 0;
             background: #eee;
-            border-radius: 10px 10px 10px 0;
             color: #111;
-            max-width: calc(100% - 100px);
             .timestamp {
                 color: #999;
             }
         }
         &.right {
+            border-bottom-right-radius: 0;
             background: #9c27b0;
-            border-radius: 10px 10px 0 10px;
             color: rgb(245, 245, 245);
-            max-width: calc(100% - 100px);
             .timestamp {
                 color: rgb(230, 230, 230);
             }
@@ -27,10 +27,9 @@
         .spacer {
             width: 56px;
             display: inline-block;
-            vertical-align: middle;
         }
         .timestamp {
-            font-size: 10px;
+            font-size: 0.6rem;
             float: right;
             margin: -10px 0 -5px 4px;
         }
