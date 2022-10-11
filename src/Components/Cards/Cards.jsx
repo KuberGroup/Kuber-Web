@@ -1,6 +1,7 @@
 import React from "react";
 import Ripple from "../Ripple/Ripple";
 import { BiUser } from "react-icons/bi";
+import "./Cards.scss";
 
 export const UserCard = (props) => {
   const {
@@ -11,15 +12,15 @@ export const UserCard = (props) => {
       uid: null,
     },
     newChat = false,
+    className = "",
     ...rest
   } = props;
 
   return (
-    <div className="fl" style={{ background: "#fff" }}>
+    <div className={`fl user ${className}`}>
       <div
         className="p-rel fl c-p w-100"
         style={{
-          background: "#fff",
           padding: ".5rem 1rem",
           overflow: "hidden",
         }}

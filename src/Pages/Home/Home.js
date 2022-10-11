@@ -38,7 +38,13 @@ const Home = () => {
                                         </p>
                                     </div> :
                                         chats.map((chat) =>
-                                            <UserCard
+                                            (id === chat.id) ? <UserCard
+                                                key={chat.id}
+                                                id={chat.id}
+                                                user={chat}
+                                                onClick={() => navigate(`/chat/${chat.id}`)}
+                                                className='active'
+                                            /> : <UserCard
                                                 key={chat.id}
                                                 id={chat.id}
                                                 user={chat}

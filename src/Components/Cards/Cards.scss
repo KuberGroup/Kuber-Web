@@ -1,0 +1,13 @@
+.user {
+    background: #fff;
+    margin-left: 6px;
+    &.active {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .user {
+        margin-left: 0;
+    }
+}
