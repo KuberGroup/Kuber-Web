@@ -1,11 +1,13 @@
 import {
   addDoc,
   collection,
+  doc,
   limit,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
@@ -57,6 +59,20 @@ export const MessageContainer = ({ chatId }) => {
     return () => unsubscribe();
   }, [chat.id]);
 
+  const updateChatroom = async (payload) => {
+    return updateDoc(doc(db, "chatRoom", chat.id), {
+      recentMessage: {
+        messageText: payload,
+        sendAt: serverTimestamp(),
+      },
+    })
+      .then(function (docRef) {})
+      .catch(function (error) {
+        // eslint-disable-next-line no-console
+        console.error("Error writing document: ", error);
+      });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -66,7 +82,10 @@ export const MessageContainer = ({ chatId }) => {
       return (messageRef.current.value = "");
 
     try {
-      await sendMessage(messageRef.current.value);
+      const payload = messageRef.current.value;
+      sendMessage(payload).then((msgRef) => {
+        updateChatroom(payload);
+      });
     } catch (e) {
       console.log(e);
     }

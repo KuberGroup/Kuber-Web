@@ -10,11 +10,13 @@ export const LeftMessage = ({ message }) => {
           <span className="spacer"></span>
         </div>
         <div className="lhinit timestamp">
-          {message.timestamp.toDate().toLocaleString("en-US", {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-          })}
+          {message.timestamp
+            ? message.timestamp.toDate().toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+              })
+            : "sending..."}
         </div>
       </div>
     </div>

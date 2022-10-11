@@ -73,7 +73,15 @@ export const UserCard = (props) => {
             className="timestamp fl fl-c"
             style={{ width: 80, fontSize: 10, color: "#ccc" }}
           >
-            {newChat ? "" : user.recentMessage.sendAt}
+            {newChat
+              ? ""
+              : user.recentMessage.sendAt
+              ? user.recentMessage.sendAt.toDate().toLocaleString("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                })
+              : "s"}
           </div>
         </div>
         <Ripple />
