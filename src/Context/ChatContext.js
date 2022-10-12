@@ -31,7 +31,6 @@ export const ChatProvider = ({ children }) => {
                 }
                 else {
                     setIsEmpty(false)
-                    setLoading(true)
                     const queryPromises = querySnapshot.docs.map((item) => {
                         return new Promise((resolve, reject) => {
                             const temp = [];
