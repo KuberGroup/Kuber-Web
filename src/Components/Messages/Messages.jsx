@@ -1,5 +1,6 @@
 import React from "react";
 import "./Messages.scss";
+import { BiCheck, BiCheckDouble, BiTime } from "react-icons/bi";
 
 export const LeftMessage = ({ message }) => {
   return (
@@ -32,13 +33,28 @@ export const RightMessage = ({ message }) => {
           <span className="spacer"></span>
         </div>
         <div className="lhinit timestamp">
-          {message.timestamp
-            ? message.timestamp.toDate().toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true,
-              })
-            : "sending..."}
+          {message.timestamp ? (
+            <>
+              <span>
+                {message.timestamp.toDate().toLocaleString("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                })}
+              </span>
+              <div className="icon">
+                <span>
+                  {message.seenby.includes(message.freindId) ? (
+                    <BiCheckDouble size={15} />
+                  ) : (
+                    <BiCheck size={15} />
+                  )}
+                </span>
+              </div>
+            </>
+          ) : (
+            <BiTime size={15} />
+          )}
         </div>
       </div>
     </div>

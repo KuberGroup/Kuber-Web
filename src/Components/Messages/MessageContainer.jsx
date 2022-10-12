@@ -128,7 +128,10 @@ export const MessageContainer = ({ chatId }) => {
           ? "Loading..."
           : messages.map((message) => {
               return message.uid === currentUser.uid ? (
-                <RightMessage key={message.chatId} message={message} />
+                <RightMessage
+                  key={message.chatId}
+                  message={{ ...message, freindId: freindId }}
+                />
               ) : (
                 <LeftMessage key={message.chatId} message={message} />
               );
