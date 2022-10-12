@@ -28,6 +28,7 @@ export const MessageContainer = ({ chatId }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const freindId = chat.members.filter((member) => member !== currentUser.uid);
 
   // get messages from chat
   useEffect(() => {
@@ -98,7 +99,7 @@ export const MessageContainer = ({ chatId }) => {
       displayName: currentUser.displayName || "Kuber User",
       text: payload,
       profilePicUrl: currentUser.photoURL,
-      receiver: chat.id,
+      receiver: freindId,
       chatRoom: chat.id,
       seenby: [currentUser.uid],
       timestamp: serverTimestamp(),
