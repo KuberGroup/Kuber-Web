@@ -11,7 +11,7 @@ const Home = () => {
     const navigate = useNavigate()
 
     const handleStartNewChat = () => {
-        navigate('start-new-chat')
+        navigate('/start-new-chat')
     }
 
     const { id } = useParams()
