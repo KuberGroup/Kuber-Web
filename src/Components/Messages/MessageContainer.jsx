@@ -2,7 +2,7 @@ import {
   addDoc,
   collection,
   doc,
-  limit,
+  // limit,
   onSnapshot,
   orderBy,
   query,
@@ -34,8 +34,8 @@ export const MessageContainer = ({ chatId }) => {
   useEffect(() => {
     const chatListQuery = query(
       collection(db, "message", chat.id, "messages"),
-      orderBy("timestamp", "desc"),
-      limit(20)
+      orderBy("timestamp", "desc")
+      // limit(20)
     );
 
     const unsubscribe = onSnapshot(chatListQuery, (querySnapShot) => {
