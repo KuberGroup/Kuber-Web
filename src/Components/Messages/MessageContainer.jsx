@@ -9,14 +9,14 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import React, { useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { useChat } from "../../Context/ChatContext";
 import { db } from "../../firebase";
 import { Button } from "../Button/Button";
 import { MessageInput } from "../";
 import { LeftMessage, RightMessage } from "./Messages";
-import { BiSend, BiArrowBack } from "react-icons/bi";
+import { BiSend, BiArrowBack, BiChevronsDown } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import "./MessageContainer.scss";
 
@@ -29,6 +29,8 @@ export const MessageContainer = ({ chatId }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const freindId = chat.members.filter((member) => member !== currentUser.uid);
+  const [atBottom, setAtBottom] = useState(true);
+  const messageEndRef = createRef();
 
   // get messages from chat
   useEffect(() => {
@@ -106,6 +108,29 @@ export const MessageContainer = ({ chatId }) => {
     });
   };
 
+  const scrollIndicator = useMemo(() => {
+    if (!atBottom) {
+      return (
+        <div className="scroll-indicator">
+          <div className="scroll-indicator__icon">
+            <BiChevronsDown />
+          </div>
+        </div>
+      );
+    }
+  }, [atBottom]);
+
+  useEffect(() => {
+    if (atBottom) messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, messageEndRef, atBottom]);
+
+  const HandleScroll = (e) => {
+    const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
+
+    if (scrollTop + clientHeight + 50 >= scrollHeight) setAtBottom(true);
+    else setAtBottom(false);
+  };
+
   return (
     <div
       className="ChatContainer p-rel fl fl-d-col w-100 h-100 m-0"
@@ -121,12 +146,13 @@ export const MessageContainer = ({ chatId }) => {
         <div className="UserName fl fl-c">{chat.displayName}</div>
       </div>
       <div
-        className="fl fl-d-col-rev h-100 pt-2"
+        className="fl fl-d-col h-100 pt-2"
         style={{ overflow: "scroll" }}
+        onScroll={HandleScroll}
       >
         {loading
           ? "Loading..."
-          : messages.map((message) => {
+          : [...messages].reverse().map((message) => {
               return message.uid === currentUser.uid ? (
                 <RightMessage
                   key={message.chatId}
@@ -136,7 +162,9 @@ export const MessageContainer = ({ chatId }) => {
                 <LeftMessage key={message.chatId} message={message} />
               );
             })}
+        <div ref={messageEndRef} />
       </div>
+      {scrollIndicator}
       <form className="w-100 fl" onSubmit={handleSubmit}>
         <div className="w-100" style={{ paddingRight: "5px" }}>
           <MessageInput
