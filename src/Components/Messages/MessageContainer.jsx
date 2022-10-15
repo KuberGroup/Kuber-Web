@@ -112,13 +112,20 @@ export const MessageContainer = ({ chatId }) => {
     if (!atBottom) {
       return (
         <div className="scroll-indicator">
-          <div className="scroll-indicator__icon">
+          <div
+            className="scroll-indicator__icon"
+            onClick={() =>
+              messageEndRef.current?.scrollIntoView({
+                behavior: "smooth",
+              })
+            }
+          >
             <BiChevronsDown />
           </div>
         </div>
       );
     }
-  }, [atBottom]);
+  }, [atBottom, messageEndRef]);
 
   useEffect(() => {
     if (atBottom) messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
