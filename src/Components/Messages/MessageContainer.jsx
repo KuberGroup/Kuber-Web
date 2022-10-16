@@ -93,6 +93,7 @@ export const MessageContainer = ({ chatId }) => {
       console.log(e);
     }
     messageRef.current.value = "";
+    messageRef.current.focus();
   };
 
   const sendMessage = (payload) => {
