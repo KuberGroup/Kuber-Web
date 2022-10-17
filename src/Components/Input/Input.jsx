@@ -30,7 +30,7 @@ export const MessageInput = forwardRef((props, ref) => {
 
   return (
     <div id="message-input">
-      <input
+      <textarea
         type="text"
         value={props.value}
         required={false}

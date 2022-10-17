@@ -182,6 +182,7 @@ export const MessageContainer = ({ chatId }) => {
           />
         </div>
         <Button
+          type="submit"
           className="p-rel fl fl-c c-p"
           style={{
             background: "rgb(156, 39, 176)",
