@@ -1,9 +1,28 @@
 // assumed mobile screen size
 $mobile: 768px;
-@media screen and (min-width: $mobile) {
+@media screen and (min-width: $mobile) and (max-width: 900px) {
     .UserContainer {
         width: 100%;
-        max-width: 480px;
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
+}
+@media screen and (min-width: 900px) and (max-width: 1024px) {
+    .UserContainer {
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1300px) {
+    .UserContainer {
+        flex: 0 0 35%;
+        max-width: 35%;
+    }
+}
+@media screen and (min-width: 1300px) {
+    .UserContainer {
+        flex: 0 0 30%;
+        max-width: 30%;
     }
 }
 @media screen and (max-width: $mobile) {
