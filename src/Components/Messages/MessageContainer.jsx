@@ -179,6 +179,10 @@ export const MessageContainer = ({ chatId }) => {
             label="Write Message Here."
             className="w-100"
             ref={messageRef}
+            onFocus={() => {
+              if (atBottom)
+                messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
           />
         </div>
         <Button
