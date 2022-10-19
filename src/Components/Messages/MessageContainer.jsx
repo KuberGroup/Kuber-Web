@@ -153,24 +153,26 @@ export const MessageContainer = ({ chatId }) => {
         </Button>
         <div className="UserName fl fl-c">{chat.displayName}</div>
       </div>
-      <div
-        className="fl fl-d-col h-100 pt-2"
-        style={{ overflow: "scroll" }}
-        onScroll={HandleScroll}
-      >
-        {loading
-          ? "Loading..."
-          : [...messages].reverse().map((message) => {
-              return message.uid === currentUser.uid ? (
-                <RightMessage
-                  key={message.chatId}
-                  message={{ ...message, freindId: freindId }}
-                />
-              ) : (
-                <LeftMessage key={message.chatId} message={message} />
-              );
-            })}
-        <div ref={messageEndRef} />
+      <div className="fl h-100" style={{ overflow: "hidden" }}>
+        <div
+          className="fl fl-d-col h-100 pt-2"
+          style={{ overflow: "scroll" }}
+          onScroll={HandleScroll}
+        >
+          {loading
+            ? "Loading..."
+            : [...messages].reverse().map((message) => {
+                return message.uid === currentUser.uid ? (
+                  <RightMessage
+                    key={message.chatId}
+                    message={{ ...message, freindId: freindId }}
+                  />
+                ) : (
+                  <LeftMessage key={message.chatId} message={message} />
+                );
+              })}
+          <div ref={messageEndRef} />
+        </div>
       </div>
       {scrollIndicator}
       <form className="w-100 fl" onSubmit={handleSubmit}>
@@ -180,6 +182,7 @@ export const MessageContainer = ({ chatId }) => {
             className="w-100"
             ref={messageRef}
             onFocus={() => {
+              console.log(atBottom);
               if (atBottom)
                 messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
             }}
