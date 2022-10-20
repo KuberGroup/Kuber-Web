@@ -116,9 +116,7 @@ export const MessageContainer = ({ chatId }) => {
           <div
             className="scroll-indicator__icon"
             onClick={() =>
-              messageEndRef.current?.scrollIntoView({
-                behavior: "smooth",
-              })
+              messageEndRef.current?.scrollIntoView({ behavior: "smooth" })
             }
           >
             <BiChevronsDown />
@@ -129,7 +127,7 @@ export const MessageContainer = ({ chatId }) => {
   }, [atBottom, messageEndRef]);
 
   useEffect(() => {
-    if (atBottom) messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (atBottom) messageEndRef.current?.scrollIntoView();
   }, [messages, messageEndRef, atBottom]);
 
   const HandleScroll = (e) => {
@@ -182,9 +180,7 @@ export const MessageContainer = ({ chatId }) => {
             className="w-100"
             ref={messageRef}
             onFocus={() => {
-              console.log(atBottom);
-              if (atBottom)
-                messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+              if (atBottom) messageEndRef.current?.scrollIntoView();
             }}
           />
         </div>
