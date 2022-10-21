@@ -21,6 +21,22 @@
         }
     }
 
+    form {
+        padding: 0 4px 6px;
+        .input-container {
+            padding-right: 5px;
+        }
+        button[type="submit"] {
+            background: rgb(156, 39, 176);
+            color: #fff;
+            border-radius: 50%;
+            padding: 0.5rem;
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+        }
+    }
+
     .scroll-indicator {
         position: absolute;
         bottom: 5rem;

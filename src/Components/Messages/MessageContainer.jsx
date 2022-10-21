@@ -174,9 +174,9 @@ export const MessageContainer = ({ chatId }) => {
       </div>
       {scrollIndicator}
       <form className="w-100 fl" onSubmit={handleSubmit}>
-        <div className="w-100" style={{ paddingRight: "5px" }}>
+        <div className="w-100 input-container">
           <MessageInput
-            label="Write Message Here."
+            label="Write Message Here..."
             className="w-100"
             ref={messageRef}
             onFocus={() => {
@@ -184,18 +184,7 @@ export const MessageContainer = ({ chatId }) => {
             }}
           />
         </div>
-        <Button
-          type="submit"
-          className="p-rel fl fl-c c-p"
-          style={{
-            background: "rgb(156, 39, 176)",
-            color: "#fff",
-            borderRadius: "50%",
-            padding: "0.5rem",
-            width: "45px",
-            height: "45px",
-          }}
-        >
+        <Button type="submit" className="p-rel fl fl-c c-p">
           <BiSend size={24} />
         </Button>
       </form>
