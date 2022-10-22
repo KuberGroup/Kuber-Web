@@ -161,10 +161,7 @@ export const MessageContainer = ({ chatId }) => {
   const isKeyboardOpen = useDetectKeyboardOpen();
 
   useEffect(() => {
-    if (isKeyboardOpen && atBottom) {
-      setAtBottom(true);
-      messageEndRef.current?.scrollIntoView();
-    }
+    if (isKeyboardOpen && atBottom) messageEndRef.current?.scrollIntoView();
   }, [isKeyboardOpen, messageEndRef, atBottom]);
 
   return (
