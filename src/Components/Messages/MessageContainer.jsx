@@ -137,6 +137,36 @@ export const MessageContainer = ({ chatId }) => {
     else setAtBottom(false);
   };
 
+  const useDetectKeyboardOpen = (minKeyboardHeight = 300, defaultValue) => {
+    const [isKeyboardOpen, setIsKeyboardOpen] = useState(defaultValue);
+
+    useEffect(() => {
+      const listener = () => {
+        const newState =
+          window.screen.height - minKeyboardHeight >
+          window.visualViewport.height;
+        if (isKeyboardOpen !== newState) {
+          setIsKeyboardOpen(newState);
+        }
+      };
+      window.visualViewport.addEventListener("resize", listener);
+      return () => {
+        window.visualViewport.removeEventListener("resize", listener);
+      };
+    }, [isKeyboardOpen, minKeyboardHeight]);
+
+    return isKeyboardOpen;
+  };
+
+  const isKeyboardOpen = useDetectKeyboardOpen();
+
+  useEffect(() => {
+    if (isKeyboardOpen) {
+      setAtBottom(true);
+      messageEndRef.current?.scrollIntoView();
+    }
+  }, [isKeyboardOpen, messageEndRef]);
+
   return (
     <div
       className="ChatContainer p-rel fl fl-d-col w-100 h-100 m-0"
@@ -179,9 +209,7 @@ export const MessageContainer = ({ chatId }) => {
             label="Write Message Here..."
             className="w-100"
             ref={messageRef}
-            onFocus={() => {
-              if (atBottom) messageEndRef.current?.scrollIntoView();
-            }}
+            onFocus={messageEndRef.current?.scrollIntoView()}
           />
         </div>
         <Button type="submit" className="p-rel fl fl-c c-p">
