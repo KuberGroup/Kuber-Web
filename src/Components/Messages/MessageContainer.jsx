@@ -180,7 +180,7 @@ export const MessageContainer = ({ chatId }) => {
       </div>
       <div className="fl h-100" style={{ overflow: "hidden" }}>
         <div
-          className="fl fl-d-col h-100 pt-2"
+          className="fl fl-d-col h-100 pt-2 w-100"
           style={{ overflow: "scroll" }}
           onScroll={HandleScroll}
         >
