@@ -73,20 +73,28 @@
 
 #search-input {
     padding: 0.4rem 0 0.6rem 0.4rem;
+
     .search-container {
         border: 1px solid transparent;
-        padding: 0.6rem 1rem;
         border-radius: 4px;
         background-color: #f2f4fb;
+
+        .icon {
+            margin: 0.6rem;
+        }
 
         input {
             font-size: 14px;
             padding-left: 0.4rem;
             color: #333;
+            padding: 0.6rem 1rem 0.6rem 2.2rem;
+            border-radius: 4px;
+            background-color: transparent;
         }
 
         &:focus-within {
             border-color: #6e00ff;
+
             .icon {
                 color: #6f00ffb7;
             }
