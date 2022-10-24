@@ -18,6 +18,8 @@ const Home = () => {
     const { id } = useParams()
 
     const filteredUsers = useMemo(() => {
+        if (!query) return chats //if no query dont search, return `chats` instead
+
         return chats.filter(item => {
             return item.displayName.toLowerCase().includes(query.toLowerCase())
         })
