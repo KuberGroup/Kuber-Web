@@ -70,3 +70,26 @@
         }
     }
 }
+
+#search-input {
+    padding: 0.4rem 0 0.6rem 0.4rem;
+    .search-container {
+        border: 1px solid transparent;
+        padding: 0.6rem 1rem;
+        border-radius: 4px;
+        background-color: #f2f4fb;
+
+        input {
+            font-size: 14px;
+            padding-left: 0.4rem;
+            color: #333;
+        }
+
+        &:focus-within {
+            border-color: #6e00ff;
+            .icon {
+                color: #6f00ffb7;
+            }
+        }
+    }
+}

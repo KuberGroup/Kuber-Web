@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Copyright, MainContainer, MessageContainer, UserCard } from '../../Components'
+import { Copyright, MainContainer, MessageContainer, SearchInput, UserCard } from '../../Components'
 import { StartNewChatButton } from '../../Components/Button/Button'
 import './Home.scss'
 import { BiMessageSquareAdd } from 'react-icons/bi'
@@ -38,12 +38,10 @@ const Home = () => {
                         <div id='home' className='UserContainer p-rel fl fl-c w-100 h-100'>
                             <div className=' p-rel fl fl-d-col w-100 h-100 m-0 fl-j-sb' style={{ overflowY: 'scroll', background: '#fff' }}>
                                 <div className='h-100 w-100'>
-                                    <input value={query} type='search' onChange={e => setQuery(e.target.value)} placeholder='search by name' className='w-100' style={{
-                                        border: '1px solid #6e00ff',
-                                        fontSize: 16,
-                                        padding: '.6rem 1rem',
-                                        borderRadius: 4
-                                    }} />
+
+                                    {/* search box for filtering users */}
+                                    <SearchInput value={query} onChange={e => setQuery(e.target.value)} />
+
                                     {isEmpty ? <div className='fl fl-c w-100 h-100' style={{ fontSize: 32 }}>
                                         <p className='fl fl-w-w fl-c lhinit p-1 text-center'>
                                             No Chats, click <BiMessageSquareAdd color="#a1a1a1" size={30} style={{ margin: '0 .5rem' }} />

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { forwardRef } from "react";
+import React, { useState, forwardRef } from "react";
 import "./Input.scss";
+import { BiSearch } from "react-icons/bi";
 
 export const FormInput = forwardRef((props, ref) => {
   const [isActive, setIsActive] = useState(false);
@@ -38,6 +38,27 @@ export const MessageInput = forwardRef((props, ref) => {
         placeholder={props.label ? props.label : "Label"}
         {...rest}
       />
+    </div>
+  );
+});
+
+export const SearchInput = forwardRef((props, ref) => {
+  const { className, ...rest } = props;
+
+  return (
+    <div id="search-input" className="w-100">
+      <div className="search-container fl fl-c ">
+        <BiSearch size={18} className="icon" />
+        <input
+          type="search"
+          value={props.value}
+          required={false}
+          ref={ref}
+          placeholder="Search"
+          className={`w-100 ${className}`}
+          {...rest}
+        />
+      </div>
     </div>
   );
 });
