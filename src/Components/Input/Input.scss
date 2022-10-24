@@ -93,3 +93,9 @@
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    #search-input {
+        padding: 0.4rem 0.4rem 0.6rem;
+    }
+}
