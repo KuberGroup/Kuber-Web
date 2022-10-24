@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { CenterContainer } from "..";
 import { useAuth } from "../../Context/AuthContext";
 import { FiLogOut } from "react-icons/fi";
+import "./Headers.scss";
+
 export const AuthHeader = ({ children }) => {
   return (
     <CenterContainer
@@ -59,15 +61,8 @@ export const Header = ({ showLogout }) => {
   };
 
   return (
-    <div
-      className="p-abs t-0 l-0 w-100 fl fl-c fl-j-sb pl-1 pr-1"
-      style={{
-        height: "45px",
-        backgroundColor: "#fff",
-        zIndex: 0,
-      }}
-    >
-      <span className="pl-1">Kuber Group</span>
+    <div id="header" className="p-abs t-0 l-0 w-100 fl fl-c fl-j-sb pl-1 pr-1">
+      <span className="pl-1 logo">Kuber Group</span>
       {showLogout && (
         <span
           className=" fl fl-c pr-1 c-p"

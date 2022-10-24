@@ -2,8 +2,8 @@
 $mobile: 768px;
 .main-container {
     padding: 0.4rem 1rem;
-    margin-top: 45px;
-    height: calc(100vh - 45px);
+    margin-top: 50px;
+    height: calc(100vh - 50px);
 }
 @media screen and (max-width: $mobile) {
     .main-container {
