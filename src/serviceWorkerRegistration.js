@@ -63,10 +63,10 @@ async function askPermission(registration, payload) {
     }
   }).then(function (permissionResult) {
     if (permissionResult === 'granted') {
-      // const options = {
-      //   badge: '/images/demos/badge-128x128.png',
-      // };
-      registration.showNotification(payload);
+      const options = {
+        badge: `${process.env.PUBLIC_URL}/favicon-32x32.png`,
+      };
+      registration.showNotification(payload, options);
     }
     if (permissionResult !== 'granted') {
       throw new Error("We weren't granted permission.");
