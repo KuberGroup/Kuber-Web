@@ -7,9 +7,6 @@
 // existing tabs open on the page have been closed, since previously cached
 // resources are updated in the background.
 
-// To learn more about the benefits of this model and instructions on how to
-// opt-in, read https://cra.link/PWA
-
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
   // [::1] is the IPv6 localhost address.
@@ -40,8 +37,7 @@ export function register(config) {
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
           console.log(
-            'This web app is being served cache-first by a service ' +
-            'worker. To learn more, visit https://cra.link/PWA'
+            'This web app is being served cache-first by a service worker'
           );
         });
       } else {
@@ -91,8 +87,10 @@ function registerValidSW(swUrl, config) {
               // content until all client tabs are closed.
               console.log(
                 'New content is available and will be used when all ' +
-                'tabs for this page are closed. See https://cra.link/PWA.'
+                'tabs for this page are closed.'
               );
+
+              //  See https://cra.link/PWA
 
               askPermission(registration, 'App is Updated in Background, Restart & Enjoy!')
 
