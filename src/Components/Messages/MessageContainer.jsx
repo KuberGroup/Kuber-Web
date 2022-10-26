@@ -32,6 +32,8 @@ export const MessageContainer = ({ chatId }) => {
   const freindId = chat.members.filter((member) => member !== currentUser.uid);
   const [atBottom, setAtBottom] = useState(true);
   const messageEndRef = createRef();
+  const isFirstRender = useRef(true);
+  const lastUnreadMessage = useRef(null);
 
   // get messages from chat
   useEffect(() => {
@@ -200,15 +202,34 @@ export const MessageContainer = ({ chatId }) => {
             });
         };
 
-        //if last message is not read by current user
+        //get details to show tag when chat is just started
+        if (isFirstRender.current) {
+          if (!lastMessage.seenby.includes(currentUser.uid)) {
+            lastUnreadMessage.current =
+              unreadMessages[unreadMessages.length - 1];
 
+            isFirstRender.current = false;
+          }
+        } else {
+          lastUnreadMessage.current = null;
+        }
+
+        //if last message is not read by current user
         if (document.visibilityState === "visible")
           !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
         else
           document.onvisibilitychange = () => {
-            if (document.visibilityState === "visible")
+            if (document.visibilityState !== "visible") {
+              isFirstRender.current = true;
+            }
+            if (document.visibilityState === "visible") {
+              lastUnreadMessage.current =
+                unreadMessages[unreadMessages.length - 1];
+              isFirstRender.current = false;
+
               !lastMessage.seenby.includes(currentUser.uid) &&
                 updateReadStatus();
+            }
           };
       }
     }
@@ -243,7 +264,27 @@ export const MessageContainer = ({ chatId }) => {
                     message={{ ...message, freindId: freindId }}
                   />
                 ) : (
-                  <LeftMessage key={message.chatId} message={message} />
+                  <>
+                    {lastUnreadMessage.current?.chatId === message.chatId && (
+                      <div className="fl fl-c w-100">
+                        <span
+                          style={{
+                            background: "#999",
+                            color: "#fff",
+                            textAlign: "center",
+                            padding: ".2rem 1rem",
+                            fontSize: "12px",
+                            fontWeight: "bold",
+                            borderRadius: "20px",
+                          }}
+                        >
+                          Unread Messages
+                        </span>
+                      </div>
+                    )}
+
+                    <LeftMessage key={message.chatId} message={message} />
+                  </>
                 );
               })}
           <div ref={messageEndRef} />

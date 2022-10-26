@@ -3,6 +3,17 @@ import "./Messages.scss";
 import { BiCheck, BiCheckDouble, BiTime } from "react-icons/bi";
 
 export const LeftMessage = ({ message }) => {
+  if (!message)
+    return (
+      <div className="message w-100 fl">
+        <div className="box right">
+          <div className="">
+            <span>NOT SEEN</span>
+            <span className="spacer"></span>
+          </div>
+        </div>
+      </div>
+    );
   return (
     <div className="message w-100 fl">
       <div className="box left">
