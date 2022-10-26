@@ -3,7 +3,7 @@ import {
   collection,
   doc,
   increment,
-  // limit,
+  limit,
   onSnapshot,
   orderBy,
   query,
@@ -41,8 +41,8 @@ export const MessageContainer = ({ chatId }) => {
   useEffect(() => {
     const chatListQuery = query(
       collection(db, "message", chat.id, "messages"),
-      orderBy("timestamp", "desc")
-      // limit(20)
+      orderBy("timestamp", "desc"),
+      limit(50)
     );
 
     //reset firstRender & lastUnreadMessage for every time chat changes
@@ -179,77 +179,76 @@ export const MessageContainer = ({ chatId }) => {
 
   // update read status
   useEffect(() => {
-    if (messages.length > 0) {
-      const unreadMessages = messages.filter(
-        (message) => !message.seenby.includes(currentUser.uid)
-      );
-      const lastMessage = messages[0];
-      if (lastMessage.uid !== currentUser.uid) {
-        const updateReadStatus = async () => {
-          const batch = writeBatch(db);
+    //if there are no messages
+    if (messages.length === 0) return;
 
-          unreadMessages.forEach(async (message) => {
-            const messageRef = doc(
-              db,
-              "message",
-              chat.id,
-              "messages",
-              message.chatId
-            );
-            batch.update(messageRef, {
-              seenby: [...message.seenby, currentUser.uid],
-            });
-          });
+    const unreadMessages = messages.filter(
+      (message) => !message.seenby.includes(currentUser.uid)
+    );
+    const lastMessage = messages[0];
 
-          const chatRoomRef = doc(db, "chatRoom", chat.id);
-          batch.update(chatRoomRef, {
-            [`unseenMessageCount.${currentUser.uid}`]: 0,
-          });
+    //if last message is not sent by current user
+    if (lastMessage.uid === currentUser.uid) return;
 
-          return batch
-            .commit()
-            .then(function (docRef) {
-              // console.log("Document written with ID: ", docRef);
-            })
-            .catch(function (error) {
-              // eslint-disable-next-line no-console
-              // console.error("Error writing document: ", error);
-            });
-        };
+    const updateReadStatus = async () => {
+      const batch = writeBatch(db);
 
-        //get details to show tag when chat is just started
-        if (isFirstRender.current) {
-          if (!lastMessage.seenby.includes(currentUser.uid)) {
-            lastUnreadMessage.current =
-              unreadMessages[unreadMessages.length - 1];
+      unreadMessages.forEach(async (message) => {
+        const messageRef = doc(
+          db,
+          "message",
+          chat.id,
+          "messages",
+          message.chatId
+        );
+        batch.update(messageRef, {
+          seenby: [...message.seenby, currentUser.uid],
+        });
+      });
 
-            isFirstRender.current = false;
-          }
-        } else {
-          setTimeout(() => {
-            lastUnreadMessage.current = null;
-          }, 100);
-        }
+      const chatRoomRef = doc(db, "chatRoom", chat.id);
+      batch.update(chatRoomRef, {
+        [`unseenMessageCount.${currentUser.uid}`]: 0,
+      });
 
-        //if last message is not read by current user
-        if (document.visibilityState === "visible")
-          !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
-        else
-          document.onvisibilitychange = () => {
-            if (document.visibilityState !== "visible") {
-              isFirstRender.current = true;
-            }
-            if (document.visibilityState === "visible") {
-              lastUnreadMessage.current =
-                unreadMessages[unreadMessages.length - 1];
-              isFirstRender.current = false;
+      return batch
+        .commit()
+        .then(function (docRef) {
+          // console.log("Document written with ID: ", docRef);
+        })
+        .catch(function (error) {
+          // eslint-disable-next-line no-console
+          // console.error("Error writing document: ", error);
+        });
+    };
 
-              !lastMessage.seenby.includes(currentUser.uid) &&
-                updateReadStatus();
-            }
-          };
-      }
+    //get details to show tag when chat is just started
+    if (isFirstRender.current) {
+      // if (lastMessage.seenby.includes(currentUser.uid)) return;
+      // as already checked above if last message is not sent by current user => if (lastMessage.uid === currentUser.uid) return;
+
+      lastUnreadMessage.current = unreadMessages[unreadMessages.length - 1];
+      isFirstRender.current = false;
+    } else {
+      setTimeout(() => {
+        lastUnreadMessage.current = null;
+      }, 100);
     }
+
+    //if last message is not read by current user
+    if (document.visibilityState === "visible")
+      !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
+    else
+      document.onvisibilitychange = () => {
+        if (document.visibilityState !== "visible") {
+          isFirstRender.current = true;
+        } else if (document.visibilityState === "visible") {
+          lastUnreadMessage.current = unreadMessages[unreadMessages.length - 1];
+          isFirstRender.current = false;
+
+          !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
+        }
+      };
   }, [messages, currentUser.uid, chat.id]);
 
   return (
@@ -284,7 +283,7 @@ export const MessageContainer = ({ chatId }) => {
                   <>
                     {lastUnreadMessage.current?.chatId === message.chatId && (
                       <div
-                        className="fl fl-c w-100"
+                        className="message w-100 fl fl-c"
                         id={`unreadBadge_${message.chatId}`}
                         ref={lastUnreadMessageRef}
                       >
