@@ -201,7 +201,15 @@ export const MessageContainer = ({ chatId }) => {
         };
 
         //if last message is not read by current user
-        !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
+
+        if (document.visibilityState === "visible")
+          !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
+        else
+          document.onvisibilitychange = () => {
+            if (document.visibilityState === "visible")
+              !lastMessage.seenby.includes(currentUser.uid) &&
+                updateReadStatus();
+          };
       }
     }
   }, [messages, currentUser.uid, chat.id]);
