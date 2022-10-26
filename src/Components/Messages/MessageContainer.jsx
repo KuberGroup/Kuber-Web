@@ -8,6 +8,7 @@ import {
   query,
   serverTimestamp,
   updateDoc,
+  writeBatch,
 } from "firebase/firestore";
 import React, { createRef, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
@@ -163,6 +164,47 @@ export const MessageContainer = ({ chatId }) => {
   useEffect(() => {
     if (isKeyboardOpen && atBottom) messageEndRef.current?.scrollIntoView();
   }, [isKeyboardOpen, messageEndRef, atBottom]);
+
+  // update read status
+  useEffect(() => {
+    if (messages.length > 0) {
+      const unreadMessages = messages.filter(
+        (message) => !message.seenby.includes(currentUser.uid)
+      );
+      const lastMessage = messages[0];
+      if (lastMessage.uid !== currentUser.uid) {
+        const updateReadStatus = async () => {
+          const batch = writeBatch(db);
+
+          unreadMessages.forEach(async (message) => {
+            const messageRef = doc(
+              db,
+              "message",
+              chat.id,
+              "messages",
+              message.chatId
+            );
+            batch.update(messageRef, {
+              seenby: [...message.seenby, currentUser.uid],
+            });
+          });
+
+          return batch
+            .commit()
+            .then(function (docRef) {
+              console.log("Document written with ID: ", docRef);
+            })
+            .catch(function (error) {
+              // eslint-disable-next-line no-console
+              console.error("Error writing document: ", error);
+            });
+        };
+
+        //if last message is not read by current user
+        !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
+      }
+    }
+  }, [messages, currentUser.uid, chat.id]);
 
   return (
     <div

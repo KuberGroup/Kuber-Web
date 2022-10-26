@@ -44,7 +44,7 @@ export const RightMessage = ({ message }) => {
               </span>
               <div className="icon">
                 <span>
-                  {message.seenby.includes(message.freindId) ? (
+                  {message.seenby.includes(message.freindId.toString()) ? (
                     <BiCheckDouble size={15} />
                   ) : (
                     <BiCheck size={15} />
