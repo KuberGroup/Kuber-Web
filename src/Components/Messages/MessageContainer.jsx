@@ -283,7 +283,7 @@ export const MessageContainer = ({ chatId }) => {
                   <>
                     {lastUnreadMessage.current?.chatId === message.chatId && (
                       <div
-                        className="fl fl-c w-100"
+                        className="message w-100 fl fl-c"
                         id={`unreadBadge_${message.chatId}`}
                         ref={lastUnreadMessageRef}
                       >
