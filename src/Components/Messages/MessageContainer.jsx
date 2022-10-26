@@ -192,11 +192,11 @@ export const MessageContainer = ({ chatId }) => {
           return batch
             .commit()
             .then(function (docRef) {
-              console.log("Document written with ID: ", docRef);
+              // console.log("Document written with ID: ", docRef);
             })
             .catch(function (error) {
               // eslint-disable-next-line no-console
-              console.error("Error writing document: ", error);
+              // console.error("Error writing document: ", error);
             });
         };
 
