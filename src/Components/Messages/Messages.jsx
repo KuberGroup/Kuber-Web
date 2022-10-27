@@ -5,7 +5,7 @@ import { BiCheck, BiCheckDouble, BiTime } from "react-icons/bi";
 export const LeftMessage = ({ message }) => {
   if (!message)
     return (
-      <div className="message w-100 fl">
+      <div className="message l w-100 fl">
         <div className="box right">
           <div className="">
             <span>NOT SEEN</span>
@@ -15,7 +15,7 @@ export const LeftMessage = ({ message }) => {
       </div>
     );
   return (
-    <div className="message w-100 fl">
+    <div className="message l w-100 fl">
       <div className="box left">
         <div className="">
           <span>{message.text}</span>
@@ -37,7 +37,7 @@ export const LeftMessage = ({ message }) => {
 
 export const RightMessage = ({ message }) => {
   return (
-    <div className="message w-100 fl fl-j-fe">
+    <div className="message r w-100 fl fl-j-fe">
       <div className="box right">
         <div className="">
           <span>{message.text}</span>

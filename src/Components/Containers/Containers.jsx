@@ -29,10 +29,10 @@ export const LoginContainer = ({ children }) => {
   );
 };
 
-export const MainContainer = ({ children, logout }) => {
+export const MainContainer = ({ children, logout, back }) => {
   return (
     <div className="fl fl-d-col fl-c fl-j-fs w-100vw h-100vh">
-      <Header showLogout={logout} />
+      <Header showLogout={logout} back={back} />
       <div className="p-rel fl w-100 fl-c main-container">{children}</div>
     </div>
   );
