@@ -73,6 +73,7 @@ const StartNewChat = () => {
           messageText: "Select User to Start Chat with.",
           sendAt: null,
         },
+        unseenMessageCount: 0,
         timestamp: serverTimestamp(),
       });
       // console.log("Document written with ID: ", docRef.id);

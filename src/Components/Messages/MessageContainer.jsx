@@ -71,6 +71,7 @@ export const MessageContainer = ({ chatId }) => {
         messageText: payload,
         sendAt: serverTimestamp(),
       },
+      unseenMessageCount: chat.unseenMessageCount + 1,
     })
       .then(function (docRef) {})
       .catch(function (error) {
