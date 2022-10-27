@@ -43,8 +43,10 @@ export const MessageContainer = ({ chatId }) => {
     );
 
     //reset firstRender & lastUnreadMessage for every time chat changes
-    isFirstRender.current = true;
-    lastUnreadMessage.current = null;
+    if (!isFirstRender.current) {
+      isFirstRender.current = true;
+      lastUnreadMessage.current = null;
+    }
 
     const unsubscribe = onSnapshot(chatListQuery, (querySnapShot) => {
       const queryPromises = querySnapShot.docs.map((item) => {
@@ -97,7 +99,7 @@ export const MessageContainer = ({ chatId }) => {
         updateChatroom(payload);
       });
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
     messageRef.current.value = "";
     messageRef.current.focus();

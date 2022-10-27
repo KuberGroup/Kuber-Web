@@ -50,16 +50,16 @@ export const Header = ({ showLogout = false, back = false }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    setError("");
+    setError("awaiting logout");
     try {
       await logout();
       navigate("login");
     } catch (e) {
-      setError(`Failed to Log In ${e.code}`);
-      console.log(error);
+      setError(e.code);
+      // console.log(error);
     }
   };
-  console.log(back);
+
   return (
     <div
       id="header"
@@ -75,7 +75,9 @@ export const Header = ({ showLogout = false, back = false }) => {
           style={{ color: "#ff0000" }}
           onClick={handleLogout}
         >
-          <FiLogOut style={{ marginRight: 5 }} />
+          {" "}
+          {error}
+          <FiLogOut style={{ marginRight: 5, marginLeft: 2 }} />
           Log Out
         </span>
       )}
