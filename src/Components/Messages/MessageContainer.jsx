@@ -188,6 +188,7 @@ export const MessageContainer = ({ chatId }) => {
 
     //if last message is not sent by current user
     if (lastMessage.uid === currentUser.uid) return;
+    if (unreadMessages.length === 0) return;
 
     const updateReadStatus = async () => {
       const batch = writeBatch(db);
@@ -214,6 +215,10 @@ export const MessageContainer = ({ chatId }) => {
         .commit()
         .then(function (docRef) {
           // console.log("Document written with ID: ", docRef);
+          setTimeout(() => {
+            isFirstRender.current = false;
+            lastUnreadMessage.current = null;
+          }, 100);
         })
         .catch(function (error) {
           // eslint-disable-next-line no-console
@@ -222,32 +227,23 @@ export const MessageContainer = ({ chatId }) => {
     };
 
     //get details to show tag when chat is just started
-    if (isFirstRender.current) {
-      // if (lastMessage.seenby.includes(currentUser.uid)) return;
-      // as already checked above if last message is not sent by current user => if (lastMessage.uid === currentUser.uid) return;
-
+    if (isFirstRender.current && unreadMessages.length > 0)
       lastUnreadMessage.current = unreadMessages[unreadMessages.length - 1];
-      isFirstRender.current = false;
-    } else {
-      setTimeout(() => {
-        lastUnreadMessage.current = null;
-      }, 100);
-    }
 
     //if last message is not read by current user
-    if (document.visibilityState === "visible")
-      !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
-    else
-      document.onvisibilitychange = () => {
-        if (document.visibilityState !== "visible") {
-          isFirstRender.current = true;
-        } else if (document.visibilityState === "visible") {
-          lastUnreadMessage.current = unreadMessages[unreadMessages.length - 1];
-          isFirstRender.current = false;
+    if (document.visibilityState === "visible") {
+      updateReadStatus();
+    }
 
-          !lastMessage.seenby.includes(currentUser.uid) && updateReadStatus();
-        }
-      };
+    document.onvisibilitychange = () => {
+      if (document.visibilityState !== "visible") {
+        isFirstRender.current = true;
+        lastUnreadMessage.current = unreadMessages[unreadMessages.length - 1];
+      }
+      if (document.visibilityState === "visible") {
+        updateReadStatus();
+      }
+    };
   }, [messages, currentUser.uid, chat.id]);
 
   return (
