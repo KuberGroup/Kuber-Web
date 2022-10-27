@@ -59,29 +59,48 @@ export const UserCard = (props) => {
           style={{ width: "calc(100% - 50px)" }}
         >
           <div className="name-data w-100 fl fl-d-col fl-j-se lhinit h-100 ellipsis">
-            <div className="name-item ellipsis">{user.displayName}</div>
-            <div
-              className="message-item ellipsis"
-              style={{ fontSize: 14, color: "#ccc" }}
-            >
-              {newChat
-                ? `Click to Start new chat with ${user.displayName}`
-                : user.recentMessage.messageText}
+            <div className="fl fl-j-sb">
+              <div className="name-item ellipsis">{user.displayName}</div>
+              <div
+                className="timestamp fl fl-c pr-1"
+                style={{ fontSize: 10, color: "#ccc" }}
+              >
+                {newChat
+                  ? ""
+                  : user.recentMessage.sendAt
+                  ? user.recentMessage.sendAt.toDate().toLocaleString("en-US", {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: true,
+                    })
+                  : "s"}
+              </div>
             </div>
-          </div>
-          <div
-            className="timestamp fl fl-c"
-            style={{ width: 80, fontSize: 10, color: "#ccc" }}
-          >
-            {newChat
-              ? ""
-              : user.recentMessage.sendAt
-              ? user.recentMessage.sendAt.toDate().toLocaleString("en-US", {
-                  hour: "numeric",
-                  minute: "numeric",
-                  hour12: true,
-                })
-              : "s"}
+            <div className="fl fl-j-sb">
+              <div
+                className="message-item ellipsis"
+                style={{ fontSize: 14, color: "#ccc" }}
+              >
+                {newChat
+                  ? `Click to Start new chat with ${user.displayName}`
+                  : user.recentMessage.messageText}
+              </div>
+              {user.unseenMessageCount > 0 && (
+                <div className="timestamp fl fl-c pr-1">
+                  <span
+                    style={{
+                      fontSize: 10,
+                      color: "#ccc",
+                      background: "#6e00ff",
+                      padding: ".2rem .3rem",
+                      borderRadius: "25px",
+                    }}
+                  >
+                    {user.unseenMessageCount}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <Ripple />
