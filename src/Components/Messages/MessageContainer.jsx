@@ -2,6 +2,7 @@ import {
   addDoc,
   collection,
   doc,
+  increment,
   // limit,
   onSnapshot,
   orderBy,
@@ -71,7 +72,7 @@ export const MessageContainer = ({ chatId }) => {
         messageText: payload,
         sendAt: serverTimestamp(),
       },
-      unseenMessageCount: chat.unseenMessageCount + 1,
+      [`unseenMessageCount.${freindId}`]: increment(1),
     })
       .then(function (docRef) {})
       .catch(function (error) {
@@ -194,7 +195,7 @@ export const MessageContainer = ({ chatId }) => {
 
           const chatRoomRef = doc(db, "chatRoom", chat.id);
           batch.update(chatRoomRef, {
-            unseenMessageCount: 0,
+            [`unseenMessageCount.${currentUser.uid}`]: 0,
           });
 
           return batch
