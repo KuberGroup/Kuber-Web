@@ -218,7 +218,9 @@ export const MessageContainer = ({ chatId }) => {
             isFirstRender.current = false;
           }
         } else {
-          lastUnreadMessage.current = null;
+          setTimeout(() => {
+            lastUnreadMessage.current = null;
+          }, 100);
         }
 
         //if last message is not read by current user
@@ -273,7 +275,10 @@ export const MessageContainer = ({ chatId }) => {
                 ) : (
                   <>
                     {lastUnreadMessage.current?.chatId === message.chatId && (
-                      <div className="fl fl-c w-100">
+                      <div
+                        className="fl fl-c w-100"
+                        id={`unreadBadge_${message.chatId}`}
+                      >
                         <span
                           style={{
                             background: "#999",
