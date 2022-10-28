@@ -192,6 +192,11 @@ export const MessageContainer = ({ chatId }) => {
             });
           });
 
+          const chatRoomRef = doc(db, "chatRoom", chat.id);
+          batch.update(chatRoomRef, {
+            unseenMessageCount: 0,
+          });
+
           return batch
             .commit()
             .then(function (docRef) {
