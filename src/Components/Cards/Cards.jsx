@@ -2,6 +2,7 @@ import React from "react";
 import Ripple from "../Ripple/Ripple";
 import { BiUser } from "react-icons/bi";
 import "./Cards.scss";
+import { useAuth } from "../../Context/AuthContext";
 
 export const UserCard = (props) => {
   const {
@@ -15,6 +16,7 @@ export const UserCard = (props) => {
     className = "",
     ...rest
   } = props;
+  const { currentUser } = useAuth();
 
   return (
     <div className={`fl user ${className}`}>
@@ -85,7 +87,7 @@ export const UserCard = (props) => {
                   ? `Click to Start new chat with ${user.displayName}`
                   : user.recentMessage.messageText}
               </div>
-              {user.unseenMessageCount > 0 && (
+              {user.unseenMessageCount?.[currentUser.uid] > 0 && (
                 <div className="timestamp fl fl-c pr-1">
                   <span
                     style={{
@@ -96,7 +98,7 @@ export const UserCard = (props) => {
                       borderRadius: "25px",
                     }}
                   >
-                    {user.unseenMessageCount}
+                    {user.unseenMessageCount?.[currentUser.uid]}
                   </span>
                 </div>
               )}
