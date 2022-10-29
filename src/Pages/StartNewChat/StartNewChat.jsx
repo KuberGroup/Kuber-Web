@@ -17,6 +17,7 @@ import {
 import { db } from "../../firebase";
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useChat } from "../../Context/ChatContext";
 
 const StartNewChat = () => {
   const searchRef = useRef();
@@ -25,6 +26,7 @@ const StartNewChat = () => {
   const [user, setUser] = useState(null);
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const { chats } = useChat();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,7 +67,14 @@ const StartNewChat = () => {
     try {
       setError("");
       setLoading(true);
-      // const docRef = await addDoc(collection(db, "chatRoom"), {
+
+      const chatRoomExists = chats.filter((chat) =>
+        chat.members.includes(user.uid)
+      );
+
+      if (chatRoomExists.length > 0)
+        return navigate(`/chat/${chatRoomExists[0].id}`);
+
       await addDoc(collection(db, "chatRoom"), {
         group: false,
         members: [currentUser.uid, user.uid],
@@ -78,13 +87,13 @@ const StartNewChat = () => {
           [user.uid]: 0,
         },
         timestamp: serverTimestamp(),
+      }).then((docRef) => {
+        setError({
+          variant: "success",
+          message: "Chatroom created",
+        });
+        navigate(`/chat/${docRef.id}`);
       });
-      // console.log("Document written with ID: ", docRef.id);
-      setError({
-        variant: "success",
-        message: "Chatroom created",
-      });
-      navigate("/");
     } catch (e) {
       setError({
         variant: "error",
