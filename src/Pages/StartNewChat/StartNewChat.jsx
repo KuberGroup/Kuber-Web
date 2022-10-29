@@ -136,7 +136,14 @@ const StartNewChat = () => {
               <UserCard
                 user={user}
                 newChat={true}
-                onClick={createNewChatroom}
+                onClick={() =>
+                  user.uid === currentUser.uid
+                    ? setError({
+                        variant: "error",
+                        message: "You cant start chat with yourself",
+                      })
+                    : createNewChatroom()
+                }
               />
               <div className="w-100 fl fl-c">
                 <div onClick={() => setUser(null)} className="p-1 m-1 c-p">
