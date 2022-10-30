@@ -35,6 +35,7 @@ export const MessageContainer = ({ chatId }) => {
   const messageEndRef = createRef();
   const isFirstRender = useRef(true);
   const lastUnreadMessage = useRef(null);
+  const lastUnreadMessageRef = createRef();
 
   // get messages from chat
   useEffect(() => {
@@ -131,9 +132,12 @@ export const MessageContainer = ({ chatId }) => {
     }
   }, [atBottom, messageEndRef]);
 
+  //when comp mounts, scroll to bottom or last unread message
   useEffect(() => {
+    if (lastUnreadMessage.current)
+      return lastUnreadMessageRef.current?.scrollIntoView({ block: "center" });
     if (atBottom) messageEndRef.current?.scrollIntoView();
-  }, [messages, messageEndRef, atBottom]);
+  }, [messages, messageEndRef, atBottom, lastUnreadMessageRef]);
 
   const HandleScroll = (e) => {
     const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
@@ -278,6 +282,7 @@ export const MessageContainer = ({ chatId }) => {
                       <div
                         className="fl fl-c w-100"
                         id={`unreadBadge_${message.chatId}`}
+                        ref={lastUnreadMessageRef}
                       >
                         <span
                           style={{
