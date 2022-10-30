@@ -44,7 +44,11 @@ export const MessageContainer = ({ chatId }) => {
       orderBy("timestamp", "desc")
       // limit(20)
     );
+
+    //reset firstRender & lastUnreadMessage for every time chat changes
     isFirstRender.current = true;
+    lastUnreadMessage.current = null;
+
     const unsubscribe = onSnapshot(chatListQuery, (querySnapShot) => {
       const queryPromises = querySnapShot.docs.map((item) => {
         return new Promise((resolve, reject) => {
