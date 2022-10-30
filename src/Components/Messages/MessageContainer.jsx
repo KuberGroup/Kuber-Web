@@ -44,7 +44,7 @@ export const MessageContainer = ({ chatId }) => {
       orderBy("timestamp", "desc")
       // limit(20)
     );
-
+    isFirstRender.current = true;
     const unsubscribe = onSnapshot(chatListQuery, (querySnapShot) => {
       const queryPromises = querySnapShot.docs.map((item) => {
         return new Promise((resolve, reject) => {
