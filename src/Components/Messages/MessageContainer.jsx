@@ -3,7 +3,7 @@ import {
   collection,
   doc,
   increment,
-  // limit,
+  limit,
   onSnapshot,
   orderBy,
   query,
@@ -41,8 +41,8 @@ export const MessageContainer = ({ chatId }) => {
   useEffect(() => {
     const chatListQuery = query(
       collection(db, "message", chat.id, "messages"),
-      orderBy("timestamp", "desc")
-      // limit(20)
+      orderBy("timestamp", "desc"),
+      limit(50)
     );
 
     //reset firstRender & lastUnreadMessage for every time chat changes
