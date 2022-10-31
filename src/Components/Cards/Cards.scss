@@ -1,13 +1,66 @@
 .user {
     background: #fff;
     margin-left: 6px;
+    border-radius: 8px;
+
     &.active {
-        background: rgba(0, 0, 0, 0.05);
+        background: #f2f4fb;
+    }
+
+    &:hover:not(.active) {
+        background-color: #f2f4fbb6;
+    }
+
+    > div.p-rel {
+        padding: 0.5rem 1rem 0.5rem 0.8rem;
+        overflow: hidden;
+
+        .user-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #dfe4f5;
+            border: none;
+            flex-shrink: 0;
+        }
+        .user-data {
+            width: calc(100% - 50px);
+            justify-content: space-evenly;
+            .name-data {
+                > .fl {
+                    flex-grow: 1;
+                }
+
+                .timestamp {
+                    font-size: 10px;
+                    color: #ccc;
+                }
+            }
+
+            .message-data {
+                .message-item {
+                    font-size: 14px;
+                    color: #ccc;
+                }
+
+                .notif-badge {
+                    span {
+                        font-size: 10px;
+                        color: #f7f7f7;
+                        background: #9c27b0;
+                        padding: 0.1rem 0.3rem;
+                        border-radius: 25px;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
     }
 }
 
 @media screen and (max-width: 768px) {
     .user {
         margin-left: 0;
+        border-radius: 0;
     }
 }
