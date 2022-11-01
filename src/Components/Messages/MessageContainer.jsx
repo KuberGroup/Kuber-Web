@@ -15,11 +15,9 @@ import React, { createRef, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { useChat } from "../../Context/ChatContext";
 import { db } from "../../firebase";
-import { Button } from "../Button/Button";
-import { MessageInput } from "../";
+import { MessageInput, Button, BackButton } from "../";
 import { LeftMessage, RightMessage } from "./Messages";
-import { BiSend, BiArrowBack, BiChevronsDown } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { BiSend, BiChevronsDown } from "react-icons/bi";
 import "./MessageContainer.scss";
 
 export const MessageContainer = ({ chatId }) => {
@@ -29,7 +27,6 @@ export const MessageContainer = ({ chatId }) => {
   const { currentUser } = useAuth();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const freindId = chat.members.filter((member) => member !== currentUser.uid);
   const [atBottom, setAtBottom] = useState(true);
   const messageEndRef = createRef();
@@ -257,12 +254,7 @@ export const MessageContainer = ({ chatId }) => {
       style={{ background: "#fff" }}
     >
       <div className="fl ChatHeader fl-c fl-j-fs">
-        <Button
-          className="BackBtn p-rel fl fl-c c-p"
-          onClick={() => navigate(-1)}
-        >
-          <BiArrowBack />
-        </Button>
+        <BackButton />
         <div className="UserName fl fl-c">{chat.displayName}</div>
       </div>
       <div className="fl h-100" style={{ overflow: "hidden" }}>
