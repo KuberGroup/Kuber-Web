@@ -56,10 +56,10 @@ export const Header = ({ showLogout = false, back = false }) => {
       navigate("login");
     } catch (e) {
       setError(`Failed to Log In ${e.code}`);
-      console.log(error);
+      // console.log(error);
     }
   };
-  console.log(back);
+
   return (
     <div
       id="header"

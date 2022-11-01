@@ -97,7 +97,7 @@ export const MessageContainer = ({ chatId }) => {
         updateChatroom(payload);
       });
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
     messageRef.current.value = "";
     messageRef.current.focus();
