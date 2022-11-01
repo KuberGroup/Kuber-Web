@@ -1,5 +1,5 @@
 export { AlertMsg } from "./Alert/Alert";
-export { Button, FormButton } from "./Button/Button";
+export { Button, FormButton, BackButton } from "./Button/Button";
 export { UserCard } from "./Cards/Cards";
 export {
   CenterContainer,
