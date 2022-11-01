@@ -104,7 +104,7 @@ const StartNewChat = () => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer back>
       <div className="p-rel fl fl-c w-100 h-100" style={{ maxWidth: 480 }}>
         <div
           className=" p-rel fl fl-c fl-d-col w-100 h-100 m-0"

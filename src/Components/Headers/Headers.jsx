@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BiLock } from "react-icons/bi";
+import { IoArrowBackSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { CenterContainer } from "..";
+import { CenterContainer, Button } from "..";
 import { useAuth } from "../../Context/AuthContext";
 import { FiLogOut } from "react-icons/fi";
 import "./Headers.scss";
@@ -44,7 +45,7 @@ export const AuthHeader = ({ children }) => {
   );
 };
 
-export const Header = ({ showLogout }) => {
+export const Header = ({ showLogout = false, back = false }) => {
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -59,10 +60,23 @@ export const Header = ({ showLogout }) => {
       console.log(error);
     }
   };
-
+  console.log(back);
   return (
-    <div id="header" className="p-abs t-0 l-0 w-100 fl fl-c fl-j-sb pl-1 pr-1">
-      <span className="pl-1 logo">Kuber Group</span>
+    <div
+      id="header"
+      className={`p-abs t-0 l-0 w-100 fl fl-c fl-j-sb ${!back && "pl-1 pr-1"}`}
+    >
+      <div className="fl fl-c">
+        {back && (
+          <Button
+            className="BackBtn p-rel fl fl-c c-p"
+            onClick={() => navigate(-1)}
+          >
+            <IoArrowBackSharp />
+          </Button>
+        )}
+        <span className={`${!back && "pl-1"} logo`}>Kuber Group</span>
+      </div>
       {showLogout && (
         <span
           className=" fl fl-c pr-1 c-p"

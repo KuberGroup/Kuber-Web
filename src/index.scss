@@ -246,6 +246,13 @@ textarea {
   height: 1em;
 }
 
+.BackBtn {
+  border-radius: 50%;
+  padding: 0.5rem;
+  margin-left: 0.6rem;
+  font-size: 1.5rem;
+}
+
 /* grid clear : style that clears the flow */
 
 .row::after {
