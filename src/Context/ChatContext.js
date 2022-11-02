@@ -20,7 +20,6 @@ export const ChatProvider = ({ children }) => {
             const chatListQuery = query(
                 collection(db, 'chatRoom'),
                 where('members', 'array-contains', currentUser.uid),
-                where('group', '==', false),
                 orderBy('recentMessage.sendAt', 'desc')
             )
 
@@ -35,13 +34,21 @@ export const ChatProvider = ({ children }) => {
                         return new Promise((resolve, reject) => {
                             const temp = [];
                             const freindId = item.data().members.filter((member) => member !== currentUser.uid);
-                            getDoc(doc(db, 'users', freindId[0])).then((snapshot) => {
-                                temp.push(snapshot.data().displayName);
-                                temp.push(snapshot.data().photoURL);
+
+                            if (item.data().group) {
                                 resolve({
-                                    ...item.data(), id: item.id, displayName: temp[0], photoURL: temp[1],
+                                    id: item.id,
+                                    ...item.data()
                                 })
-                            })
+                            } else {
+                                getDoc(doc(db, 'users', freindId[0])).then((snapshot) => {
+                                    temp.push(snapshot.data().displayName);
+                                    temp.push(snapshot.data().photoURL);
+                                    resolve({
+                                        ...item.data(), id: item.id, displayName: temp[0], photoURL: temp[1],
+                                    })
+                                })
+                            }
                         })
                     })
                     Promise

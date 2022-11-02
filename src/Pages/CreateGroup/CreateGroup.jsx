@@ -21,6 +21,7 @@ const CreateGroup = () => {
   const navigate = useNavigate();
   const { chats } = useChat();
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const [name, setName] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +30,7 @@ const CreateGroup = () => {
         variant: "error",
         message: "Please enter a group name",
       });
-
+    setName(nameRef.current.value);
     setStep(false);
   };
 
@@ -60,6 +61,7 @@ const CreateGroup = () => {
 
       await addDoc(collection(db, "chatRoom"), {
         group: true,
+        displayName: name,
         members: [currentUser.uid, ...freindIdsOfSelectedUsers],
         recentMessage: {
           messageText: `${
@@ -77,7 +79,7 @@ const CreateGroup = () => {
           variant: "success",
           message: "Chatroom created",
         });
-        // navigate(`/chat/${docRef.id}`);
+        navigate(`/chat/${docRef.id}`);
       });
     } catch (e) {
       console.log(e);
@@ -145,14 +147,17 @@ const CreateGroup = () => {
             <div className="w-100 pt-1">
               <div className="user-list" style={{ maxHeight: "60vh" }}>
                 <form onSubmit={createNewChatroom}>
-                  {chats.map((user) => (
-                    <Checkbox
-                      key={user.id}
-                      label={user.displayName}
-                      onChange={handleSelectUser}
-                      value={user.id}
-                    />
-                  ))}
+                  {chats.map(
+                    (user) =>
+                      !user.group && (
+                        <Checkbox
+                          key={user.id}
+                          label={user.displayName}
+                          onChange={handleSelectUser}
+                          value={user.id}
+                        />
+                      )
+                  )}
                   <FormButton
                     disabled={loading}
                     className="w-100"
