@@ -2,15 +2,27 @@ import React from "react";
 import "./Messages.scss";
 import { BiCheck, BiCheckDouble, BiTime } from "react-icons/bi";
 
-export const LeftMessage = ({ message }) => {
-  if (!message)
+export const LeftMessage = ({ message, group }) => {
+  if (group)
     return (
       <div className="message l w-100 fl">
-        <div className="box right">
-          <div className="">
-            <span>NOT SEEN</span>
-            <span className="spacer"></span>
+        <div className="fl fl-d-col">
+          <div className="box left">
+            <div className="display-initial">
+              <span>{message.text}</span>
+              <span className="spacer"></span>
+            </div>
+            <div className="lhinit timestamp">
+              {message.timestamp
+                ? message.timestamp.toDate().toLocaleString("en-US", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })
+                : "sending..."}
+            </div>
           </div>
+          <div className="group-name">Sender's Name</div>
         </div>
       </div>
     );

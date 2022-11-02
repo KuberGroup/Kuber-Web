@@ -310,7 +310,11 @@ export const MessageContainer = ({ chatId }) => {
                       </div>
                     )}
 
-                    <LeftMessage key={message.chatId} message={message} />
+                    <LeftMessage
+                      key={message.chatId}
+                      message={message}
+                      group={chat.group}
+                    />
                   </>
                 );
               })}
