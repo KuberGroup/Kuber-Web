@@ -71,13 +71,30 @@ export const MessageContainer = ({ chatId }) => {
   }, [chat.id]);
 
   const updateChatroom = async (payload) => {
-    return updateDoc(doc(db, "chatRoom", chat.id), {
-      recentMessage: {
-        messageText: payload,
-        sendAt: serverTimestamp(),
-      },
-      [`unseenMessageCount.${freindId}`]: increment(1),
-    })
+    if (!chat.group)
+      return updateDoc(doc(db, "chatRoom", chat.id), {
+        recentMessage: {
+          messageText: payload,
+          sendAt: serverTimestamp(),
+        },
+        [`unseenMessageCount.${freindId}`]: increment(1),
+      })
+        .then(function (docRef) {})
+        .catch(function (error) {
+          // eslint-disable-next-line no-console
+          console.error("Error writing document: ", error);
+        });
+
+    const batch = writeBatch(db);
+    const messageRef = doc(db, "chatRoom", chat.id);
+    freindId.forEach((id) => {
+      batch.update(messageRef, {
+        [`unseenMessageCount.${id}`]: increment(1),
+      });
+    });
+
+    return batch
+      .commit()
       .then(function (docRef) {})
       .catch(function (error) {
         // eslint-disable-next-line no-console

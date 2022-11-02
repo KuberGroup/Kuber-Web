@@ -2,7 +2,7 @@ import React from 'react';
 import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { RequireAuth } from './Components/';
-import { Home, SignIn, SignUp, VerifyEmail, ForgotPassword, CreateProfile, StartNewChat, NotFound } from './Pages';
+import { Home, SignIn, SignUp, VerifyEmail, ForgotPassword, CreateProfile, StartNewChat, NotFound, CreateGroup } from './Pages';
 import './Helpers/Spacing.scss'
 import { ChatProvider } from './Context/ChatContext';
 
@@ -20,6 +20,7 @@ function App() {
               </Route>
               <Route exact path='/create-profile' element={<RequireAuth><CreateProfile /></RequireAuth>} />
               <Route exact path='/start-new-chat' element={<RequireAuth><StartNewChat /></RequireAuth>} />
+              <Route exact path='/create-group' element={<RequireAuth><CreateGroup /></RequireAuth>} />
               {/* Routes which require Login */}
 
               <Route path='/verify-email' element={<VerifyEmail />} />

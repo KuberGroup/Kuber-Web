@@ -62,3 +62,21 @@ export const SearchInput = forwardRef((props, ref) => {
     </div>
   );
 });
+
+export const Checkbox = forwardRef((props, ref) => {
+  const { className, ...rest } = props;
+
+  return (
+    <div id="checkbox">
+      <label className="container">{props.label ? props.label : "Label"}</label>
+      <input
+        type="checkbox"
+        value={props.value}
+        required={false}
+        ref={ref}
+        className={`w-100 p-abs ${className}`}
+        {...rest}
+      />
+    </div>
+  );
+});
