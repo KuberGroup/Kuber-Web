@@ -6,3 +6,4 @@ export { default as ForgotPassword } from "./ForgotPassword/ForgotPassword";
 export { default as VerifyEmail } from "./VerifyEmail/VerifyEmail";
 export { default as CreateProfile } from "./CreateProfile/CreateProfile";
 export { default as NotFound } from "./NotFound/NotFound";
+export { default as CreateGroup } from "./CreateGroup/CreateGroup";
