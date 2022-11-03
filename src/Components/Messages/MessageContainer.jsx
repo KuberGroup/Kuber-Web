@@ -314,6 +314,7 @@ export const MessageContainer = ({ chatId }) => {
                       key={message.chatId}
                       message={message}
                       group={chat.group}
+                      users={chat.users}
                     />
                   </>
                 );

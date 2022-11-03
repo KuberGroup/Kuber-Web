@@ -2,7 +2,8 @@ import React from "react";
 import "./Messages.scss";
 import { BiCheck, BiCheckDouble, BiTime } from "react-icons/bi";
 
-export const LeftMessage = ({ message, group }) => {
+export const LeftMessage = ({ message, group, users }) => {
+  const user = users[message.uid];
   if (group)
     return (
       <div className="message l w-100 fl">
@@ -22,7 +23,7 @@ export const LeftMessage = ({ message, group }) => {
                 : "sending..."}
             </div>
           </div>
-          <div className="group-name">Sender's Name</div>
+          <div className="group-name">{user.displayName}</div>
         </div>
       </div>
     );

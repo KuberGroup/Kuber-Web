@@ -36,9 +36,19 @@ export const ChatProvider = ({ children }) => {
                             const freindId = item.data().members.filter((member) => member !== currentUser.uid);
 
                             if (item.data().group) {
+                                const users = {}
+                                freindId.forEach(id => {
+                                    getDoc(doc(db, 'users', id)).then((doc) => {
+                                        users[doc.data().uid] = {
+                                            displayName: doc.data().displayName,
+                                            photoURL: doc.data().photoURL
+                                        }
+                                    })
+                                })
                                 resolve({
                                     id: item.id,
-                                    ...item.data()
+                                    ...item.data(),
+                                    users
                                 })
                             } else {
                                 getDoc(doc(db, 'users', freindId[0])).then((snapshot) => {
