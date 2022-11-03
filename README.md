@@ -9,7 +9,7 @@ Live: https://kubergroup.netlify.app
 ### Others
 - Improved `User Card` UI
 - Added back button in UI
-- Hnadle errors Occured during LogOut
+- Handle errors Occur during LogOut
 
 ### Bug Fixes
 - Improved Stability && Minor Fixes
