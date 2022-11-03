@@ -3,8 +3,8 @@ import "./Messages.scss";
 import { BiCheck, BiCheckDouble, BiTime } from "react-icons/bi";
 
 export const LeftMessage = ({ message, group, users }) => {
-  const user = users[message.uid];
-  if (group)
+  if (group) {
+    const user = users[message.uid];
     return (
       <div className="message l w-100 fl">
         <div className="fl fl-d-col">
@@ -27,6 +27,7 @@ export const LeftMessage = ({ message, group, users }) => {
         </div>
       </div>
     );
+  }
   return (
     <div className="message l w-100 fl">
       <div className="box left">
