@@ -1,6 +1,8 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, forwardRef, useRef } from "react";
 import "./Input.scss";
 import { BiSearch } from "react-icons/bi";
+import { IoImageOutline } from "react-icons/io5";
+import { Button } from "../";
 
 export const FormInput = forwardRef((props, ref) => {
   const [isActive, setIsActive] = useState(false);
@@ -27,9 +29,34 @@ export const FormInput = forwardRef((props, ref) => {
 
 export const MessageInput = forwardRef((props, ref) => {
   const { className, ...rest } = props;
+  const imageInputRef = useRef();
+
+  const handleChange = (e) => {
+    alert(`Image selected ${e.target.value}`);
+
+    // clear the input
+    imageInputRef.current.value = "";
+  };
 
   return (
     <div id="message-input">
+      {/* image picker */}
+      <div id="image-picker" className="fl fl-c h-100">
+        <input
+          type="file"
+          alt="Select Image"
+          onChange={handleChange}
+          accept="image/*"
+          ref={imageInputRef}
+          style={{ display: "none" }}
+        />
+        <Button
+          onClick={() => imageInputRef.current.click()}
+          className="p-rel image-picker-btn"
+        >
+          <IoImageOutline size={34} className="icon fl fl-h" />
+        </Button>
+      </div>
       <textarea
         type="text"
         value={props.value}
