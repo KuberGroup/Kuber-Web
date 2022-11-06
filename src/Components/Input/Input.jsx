@@ -54,7 +54,7 @@ export const MessageInput = forwardRef((props, ref) => {
           onClick={() => imageInputRef.current.click()}
           className="p-rel image-picker-btn"
         >
-          <IoImageOutline size={34} className="icon fl fl-h" />
+          <IoImageOutline size={26} className="icon fl fl-h" />
         </Button>
       </div>
       <textarea
