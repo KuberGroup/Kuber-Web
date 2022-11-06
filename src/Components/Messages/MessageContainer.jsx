@@ -18,6 +18,7 @@ import { db } from "../../firebase";
 import { MessageInput, Button, BackButton } from "../";
 import { LeftMessage, RightMessage } from "./Messages";
 import { BiSend, BiChevronsDown } from "react-icons/bi";
+import { GrFormClose } from "react-icons/gr";
 import "./MessageContainer.scss";
 
 export const MessageContainer = ({ chatId }) => {
@@ -33,6 +34,7 @@ export const MessageContainer = ({ chatId }) => {
   const isFirstRender = useRef(true);
   const lastUnreadMessage = useRef(null);
   const lastUnreadMessageRef = createRef();
+  const [imageSelected, setImageSelected] = useState(null);
 
   // get messages from chat
   useEffect(() => {
@@ -263,6 +265,24 @@ export const MessageContainer = ({ chatId }) => {
     };
   }, [messages, currentUser.uid, chat.id]);
 
+  const imagePreview = useMemo(() => {
+    if (imageSelected) {
+      return (
+        <div className="image-preview fl fl-c">
+          <div className="close-btn p-rel">
+            <Button
+              className="p-rel btn fl fl-c"
+              onClick={() => setImageSelected(null)}
+            >
+              <GrFormClose size={24} />
+            </Button>
+          </div>
+          <img src={imageSelected} alt="preview" />
+        </div>
+      );
+    }
+  }, [imageSelected]);
+
   return (
     <div
       className="ChatContainer p-rel fl fl-d-col w-100 h-100 m-0"
@@ -324,13 +344,21 @@ export const MessageContainer = ({ chatId }) => {
       </div>
       {scrollIndicator}
       <form className="w-100 fl" onSubmit={handleSubmit}>
+        {/* image preview when onChange */}
+        {imagePreview}
+
         <div className="w-100 input-container">
-          <MessageInput
-            label="Write Message Here..."
-            className="w-100"
-            ref={messageRef}
-            onFocus={messageEndRef.current?.scrollIntoView()}
-          />
+          <div id="message-input">
+            <MessageInput
+              label="Write Message Here..."
+              className="w-100"
+              ref={messageRef}
+              onFocus={messageEndRef.current?.scrollIntoView()}
+              onImageChange={(e) =>
+                setImageSelected(URL.createObjectURL(e.target.files[0]))
+              }
+            />
+          </div>
         </div>
         <Button type="submit" className="p-rel fl fl-c c-p">
           <BiSend size={24} />
