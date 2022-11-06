@@ -61,3 +61,35 @@
         }
     }
 }
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    bottom: 58px;
+    max-height: calc(100vh - 58px - 45px - 10px);
+    backdrop-filter: blur(5px);
+    align-items: end;
+    .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 0.8rem;
+        .btn {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            padding: 0.5rem;
+            font-size: 1.5rem;
+            background-color: rgba(226, 226, 226, 0.658);
+            cursor: pointer;
+        }
+    }
+    img {
+        width: 95%;
+        height: 95%;
+        object-fit: contain;
+        object-position: center;
+    }
+}

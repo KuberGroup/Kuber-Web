@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useRef } from "react";
+import React, { useState, forwardRef } from "react";
 import "./Input.scss";
 import { BiSearch } from "react-icons/bi";
 import { IoImageOutline } from "react-icons/io5";
@@ -29,34 +29,10 @@ export const FormInput = forwardRef((props, ref) => {
 
 export const MessageInput = forwardRef((props, ref) => {
   const { className, ...rest } = props;
-  const imageInputRef = useRef();
-
-  const handleChange = (e) => {
-    alert(`Image selected ${e.target.value}`);
-
-    // clear the input
-    imageInputRef.current.value = "";
-  };
 
   return (
-    <div id="message-input">
-      {/* image picker */}
-      <div id="image-picker" className="fl fl-c h-100">
-        <input
-          type="file"
-          alt="Select Image"
-          onChange={handleChange}
-          accept="image/*"
-          ref={imageInputRef}
-          style={{ display: "none" }}
-        />
-        <Button
-          onClick={() => imageInputRef.current.click()}
-          className="p-rel image-picker-btn"
-        >
-          <IoImageOutline size={26} className="icon fl fl-h" />
-        </Button>
-      </div>
+    <>
+      <ImageInput onChange={props.onImageChange} />
       <textarea
         type="text"
         value={props.value}
@@ -65,6 +41,28 @@ export const MessageInput = forwardRef((props, ref) => {
         placeholder={props.label ? props.label : "Label"}
         {...rest}
       />
+    </>
+  );
+});
+
+export const ImageInput = forwardRef((props, ref) => {
+  return (
+    <div id="image-picker" className="fl fl-c h-100">
+      <input
+        type="file"
+        alt="Select Image"
+        accept="image/*"
+        ref={ref}
+        style={{ display: "none" }}
+        id="file"
+        onChange={props.onChange}
+      />
+      <Button
+        onClick={() => document.getElementById("file").click()}
+        className="p-rel image-picker-btn"
+      >
+        <IoImageOutline size={26} className="icon fl fl-h" />
+      </Button>
     </div>
   );
 });
