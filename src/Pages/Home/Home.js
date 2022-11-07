@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Copyright, MainContainer, MessageContainer, SearchInput, UserCard } from '../../Components'
+import { Copyright, MainContainer, MessageContainer, SearchInput, UserCard, SpeedDial } from '../../Components'
 import { StartNewChatButton } from '../../Components/Button/Button'
 import './Home.scss'
 import { BiMessageSquareAdd } from 'react-icons/bi'
@@ -71,7 +71,8 @@ const Home = () => {
                                     <Copyright />
                                 </div>
                             </div>
-                            <StartNewChatButton onClick={handleStartNewChat} />
+                            {/* <StartNewChatButton onClick={handleStartNewChat} /> */}
+                            <SpeedDial />
                         </div>
 
                         {/* Messages */}
