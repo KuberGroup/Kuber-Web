@@ -2,7 +2,7 @@ import React from "react";
 import Ripple from "../Ripple/Ripple";
 import "./Button.scss";
 import { BiMessageSquareAdd } from "react-icons/bi";
-import { IoArrowBackSharp } from "react-icons/io5";
+import { IoArrowBackSharp, IoPeople, IoPersonAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 export const Button = (props) => {
@@ -55,6 +55,7 @@ export const BackButton = (props) => {
 
 // mui style speed dial
 export const SpeedDial = (props) => {
+  const navigate = useNavigate();
   return (
     <div className="speed-dial p-abs fl fl-c fl-d-col-rev">
       <Button className="dialer p-rel fl fl-c c-p">
@@ -62,16 +63,22 @@ export const SpeedDial = (props) => {
       </Button>
       <div className="dials fl fl-d-col-rev">
         <div className="dial p-rel">
-          <Button className="p-rel fl fl-c c-p">
-            <AiOutlinePlus />
+          <Button
+            className="p-rel fl fl-c c-p"
+            onClick={() => navigate("/start-new-chat")}
+          >
+            <IoPersonAdd />
           </Button>
-          <span className="tooltip">tooltip</span>
+          <span className="tooltip">Start New Chat</span>
         </div>
         <div className="dial p-rel">
-          <Button className="p-rel fl fl-c c-p">
-            <AiOutlinePlus />
+          <Button
+            className="p-rel fl fl-c c-p"
+            onClick={() => navigate("/create-group")}
+          >
+            <IoPeople />
           </Button>
-          <span className="tooltip">tooltip</span>
+          <span className="tooltip">Create Group</span>
         </div>
       </div>
     </div>
