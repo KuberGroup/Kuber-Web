@@ -64,3 +64,132 @@
     margin-left: 0.6rem;
     font-size: 1.5rem;
 }
+
+// speed dial button
+.speed-dial {
+    pointer-events: none;
+    bottom: 1rem;
+    right: 1rem;
+
+    &:hover {
+        & .dialer {
+            transform: rotate(45deg);
+            box-shadow: rgb(0 0 0 / 20%) 0px 7px 8px -4px, rgb(0 0 0 / 14%) 0px 12px 17px 2px,
+                rgb(0 0 0 / 12%) 0px 5px 22px 4px;
+        }
+        & .dials {
+            pointer-events: auto;
+        }
+        & .dials button {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    .dialer {
+        background-color: rgb(156, 39, 176);
+        vertical-align: middle;
+        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+            box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        box-shadow: rgb(0 0 0 / 20%) 0px 3px 5px -1px, rgb(0 0 0 / 14%) 0px 6px 10px 0px,
+            rgb(0 0 0 / 12%) 0px 1px 18px 0px;
+        color: rgb(255, 255, 255);
+        pointer-events: auto;
+        transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+        svg {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            fill: currentColor;
+            -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            font-size: 1.5rem;
+        }
+    }
+
+    .dials {
+        margin-bottom: -2.5rem;
+        padding-bottom: 48px;
+        pointer-events: none;
+        transition: top 0s linear 0.2s;
+        button {
+            user-select: none;
+            vertical-align: middle;
+            border-radius: 50%;
+            padding: 0px;
+            min-width: 0px;
+            width: 40px;
+            height: 40px;
+            box-shadow: rgb(0 0 0 / 20%) 0px 3px 5px -1px, rgb(0 0 0 / 14%) 0px 6px 10px 0px,
+                rgb(0 0 0 / 12%) 0px 1px 18px 0px;
+            margin: 8px;
+            color: rgba(0, 0, 0, 0.6);
+            background-color: rgb(255, 255, 255);
+            transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, opacity 0.8s ease 0s;
+            opacity: 0;
+            transform: scale(0);
+            overflow: hidden;
+
+            // apply trabsition delay for each button
+            &:nth-child(1) {
+                transition-delay: 30ms;
+            }
+            &:nth-child(2) {
+                transition-delay: 60ms;
+            }
+            &:nth-child(3) {
+                transition-delay: 90ms;
+            }
+
+            svg {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                width: 0.8em;
+                height: 0.8em;
+                display: inline-block;
+                fill: currentColor;
+                -webkit-flex-shrink: 0;
+                -ms-flex-negative: 0;
+                flex-shrink: 0;
+                -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                font-size: 1.5rem;
+            }
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+                box-shadow: rgb(0 0 0 / 20%) 0px 7px 8px -4px, rgb(0 0 0 / 14%) 0px 12px 17px 2px,
+                    rgb(0 0 0 / 12%) 0px 5px 22px 4px;
+                & + .tooltip {
+                    opacity: 1;
+                }
+            }
+        }
+        .tooltip {
+            position: absolute;
+            top: 0.8rem;
+            right: 3.5rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 0.2rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            width: max-content;
+        }
+    }
+}
+// speed dial button
