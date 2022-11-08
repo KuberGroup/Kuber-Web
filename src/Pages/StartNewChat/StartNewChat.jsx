@@ -114,7 +114,7 @@ const StartNewChat = () => {
           }}
         >
           <div className="text-center pb-1">
-            <h1 style={{ color: "#111", fontWeight: "600" }}>Search Kuber</h1>
+            <h1 style={{ color: "#111", fontWeight: "600" }}>Start New Chat</h1>
             <p className="pt-1">
               Search your freind or contact to start chat with.
             </p>
