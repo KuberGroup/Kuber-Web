@@ -28,11 +28,11 @@ export const FormInput = forwardRef((props, ref) => {
 });
 
 export const MessageInput = forwardRef((props, ref) => {
-  const { className, ...rest } = props;
+  const { className, image, ...rest } = props;
 
   return (
     <>
-      <ImageInput onChange={props.onImageChange} />
+      <ImageInput onChange={image} />
       <textarea
         type="text"
         value={props.value}

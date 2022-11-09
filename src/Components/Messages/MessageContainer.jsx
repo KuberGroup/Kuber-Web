@@ -11,11 +11,18 @@ import {
   updateDoc,
   writeBatch,
 } from "firebase/firestore";
-import React, { createRef, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  createRef,
+  Fragment,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { useChat } from "../../Context/ChatContext";
 import { db } from "../../firebase";
-import { MessageInput, Button, BackButton } from "../";
+import { MessageInput, Button, BackButton, Chip } from "../";
 import { LeftMessage, RightMessage } from "./Messages";
 import { BiSend, BiChevronsDown } from "react-icons/bi";
 import { GrFormClose } from "react-icons/gr";
@@ -298,47 +305,43 @@ export const MessageContainer = ({ chatId }) => {
           style={{ overflow: "scroll" }}
           onScroll={HandleScroll}
         >
-          {loading
-            ? "Loading..."
-            : [...messages].reverse().map((message) => {
-                return message.uid === currentUser.uid ? (
-                  <RightMessage
-                    key={message.chatId}
-                    message={{ ...message, freindId: freindId }}
-                  />
-                ) : (
-                  <>
-                    {lastUnreadMessage.current?.chatId === message.chatId && (
-                      <div
-                        className="message w-100 fl fl-c"
-                        id={`unreadBadge_${message.chatId}`}
-                        ref={lastUnreadMessageRef}
-                      >
-                        <span
-                          style={{
-                            background: "#999",
-                            color: "#fff",
-                            textAlign: "center",
-                            padding: ".2rem 1rem",
-                            fontSize: "12px",
-                            fontWeight: "bold",
-                            borderRadius: "20px",
-                          }}
-                        >
-                          Unread Messages
-                        </span>
-                      </div>
-                    )}
+          {loading ? (
+            <div className="message w-100 fl fl-c">
+              <Chip label="Loading Messages..." />
+            </div>
+          ) : messages.length === 0 ? (
+            <div className="message w-100 fl fl-c">
+              <Chip label="No Messages Found" />
+            </div>
+          ) : (
+            [...messages].reverse().map((message) => {
+              return message.uid === currentUser.uid ? (
+                <RightMessage
+                  key={message.chatId}
+                  message={{ ...message, freindId: freindId }}
+                />
+              ) : (
+                <Fragment key={message.chatId}>
+                  {lastUnreadMessage.current?.chatId === message.chatId && (
+                    <div
+                      className="message w-100 fl fl-c"
+                      id={`unreadBadge_${message.chatId}`}
+                      ref={lastUnreadMessageRef}
+                    >
+                      <Chip label="Unread Messages" />
+                    </div>
+                  )}
 
-                    <LeftMessage
-                      key={message.chatId}
-                      message={message}
-                      group={chat.group}
-                      users={chat.users}
-                    />
-                  </>
-                );
-              })}
+                  <LeftMessage
+                    key={message.chatId}
+                    message={message}
+                    group={chat.group}
+                    users={chat.users}
+                  />
+                </Fragment>
+              );
+            })
+          )}
           <div ref={messageEndRef} />
         </div>
       </div>
@@ -354,7 +357,7 @@ export const MessageContainer = ({ chatId }) => {
               className="w-100"
               ref={messageRef}
               onFocus={messageEndRef.current?.scrollIntoView()}
-              onImageChange={(e) =>
+              image={(e) =>
                 setImageSelected(URL.createObjectURL(e.target.files[0]))
               }
             />
