@@ -1,7 +1,6 @@
 import React from "react";
 import Ripple from "../Ripple/Ripple";
 import "./Button.scss";
-import { BiMessageSquareAdd } from "react-icons/bi";
 import { IoArrowBackSharp, IoPeople, IoPersonAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
