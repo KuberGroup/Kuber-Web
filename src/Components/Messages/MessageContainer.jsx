@@ -354,7 +354,7 @@ export const MessageContainer = ({ chatId }) => {
               className="w-100"
               ref={messageRef}
               onFocus={messageEndRef.current?.scrollIntoView()}
-              onImageChange={(e) =>
+              image={(e) =>
                 setImageSelected(URL.createObjectURL(e.target.files[0]))
               }
             />
