@@ -24,17 +24,6 @@ export const FormButton = (props) => {
   );
 };
 
-export const StartNewChatButton = (props) => {
-  return (
-    <Button
-      className="p-abs b-0 r-0 fl fl-c m-1 c-p StartNewChatButton"
-      {...props}
-    >
-      <BiMessageSquareAdd color="#fff" size={24} className="icon" />
-    </Button>
-  );
-};
-
 export const BackButton = (props) => {
   const { className, ...rest } = props;
   const navigate = useNavigate();

@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Copyright, MainContainer, MessageContainer, SearchInput, UserCard, SpeedDial } from '../../Components'
-import { StartNewChatButton } from '../../Components/Button/Button'
 import './Home.scss'
 import { BiMessageSquareAdd } from 'react-icons/bi'
 import { useChat } from '../../Context/ChatContext'
@@ -10,11 +9,6 @@ const Home = () => {
     const { chats, isEmpty, loading } = useChat()
     const navigate = useNavigate()
     const [query, setQuery] = useState('')
-
-    const handleStartNewChat = () => {
-        navigate('/start-new-chat')
-    }
-
     const { id } = useParams()
 
     const filteredUsers = useMemo(() => {
@@ -71,7 +65,6 @@ const Home = () => {
                                     <Copyright />
                                 </div>
                             </div>
-                            {/* <StartNewChatButton onClick={handleStartNewChat} /> */}
                             <SpeedDial />
                         </div>
 
