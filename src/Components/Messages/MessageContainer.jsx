@@ -11,7 +11,14 @@ import {
   updateDoc,
   writeBatch,
 } from "firebase/firestore";
-import React, { createRef, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  createRef,
+  Fragment,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { useChat } from "../../Context/ChatContext";
 import { db } from "../../firebase";
@@ -307,7 +314,7 @@ export const MessageContainer = ({ chatId }) => {
                     message={{ ...message, freindId: freindId }}
                   />
                 ) : (
-                  <>
+                  <Fragment key={message.chatId}>
                     {lastUnreadMessage.current?.chatId === message.chatId && (
                       <div
                         className="message w-100 fl fl-c"
@@ -336,7 +343,7 @@ export const MessageContainer = ({ chatId }) => {
                       group={chat.group}
                       users={chat.users}
                     />
-                  </>
+                  </Fragment>
                 );
               })}
           <div ref={messageEndRef} />
