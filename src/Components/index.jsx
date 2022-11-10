@@ -1,6 +1,7 @@
 export { AlertMsg } from "./Alert/Alert";
 export { Button, FormButton, BackButton, SpeedDial } from "./Button/Button";
 export { UserCard } from "./Cards/Cards";
+export { default as Chip } from "./Chip/Chip";
 export {
   CenterContainer,
   LoginContainer,
