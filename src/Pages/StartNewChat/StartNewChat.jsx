@@ -18,6 +18,7 @@ import { db } from "../../firebase";
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useChat } from "../../Context/ChatContext";
+import { BiCopy } from "react-icons/bi";
 
 const StartNewChat = () => {
   const searchRef = useRef();
@@ -27,6 +28,7 @@ const StartNewChat = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const { chats } = useChat();
+  const copyUrlRef = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,9 +105,23 @@ const StartNewChat = () => {
     setLoading(false);
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(currentUser.uid);
+    copyUrlRef.current.classList.remove("error");
+    copyUrlRef.current.classList.add("success");
+    copyUrlRef.current.lastElementChild.innerText = "Copied Successfully!";
+    setTimeout(() => {
+      copyUrlRef.current.classList.remove("success");
+      copyUrlRef.current.classList.add("error");
+      copyUrlRef.current.lastElementChild.innerText = "Copy joining URL";
+    }, 3000);
+  };
   return (
     <MainContainer back>
-      <div className="p-rel fl fl-c w-100 h-100" style={{ maxWidth: 480 }}>
+      <div
+        className="p-rel fl fl-c fl-d-col w-100 h-100"
+        style={{ maxWidth: 480 }}
+      >
         <div
           className=" p-rel fl fl-c fl-d-col w-100 h-100 m-0"
           style={{
@@ -161,6 +177,14 @@ const StartNewChat = () => {
               </div>
             </div>
           )}
+        </div>
+        <div
+          className="p-abs b-0 Alert fl fl-c mb-4 c-p error"
+          onClick={() => copyToClipboard()}
+          ref={copyUrlRef}
+        >
+          <BiCopy style={{ marginRight: 10 }} size={18} />
+          <div>Copy Joining URL</div>
         </div>
       </div>
     </MainContainer>
