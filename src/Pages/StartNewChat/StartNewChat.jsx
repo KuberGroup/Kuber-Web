@@ -157,10 +157,10 @@ const StartNewChat = () => {
               </FormButton>
             </form>
           ) : (
-            <div className="w-100 pt-1">
-              <UserCard
-                user={user}
-                newChat={true}
+            <div className="w-100 pt-1 fl fl-c fl-d-col w-100">
+              <UserCard user={user} newChat={true} style={{ flexGrow: "0" }} />
+              <FormButton
+                className="mt-1"
                 onClick={() =>
                   user.uid === currentUser.uid
                     ? setError({
@@ -169,7 +169,10 @@ const StartNewChat = () => {
                       })
                     : createNewChatroom()
                 }
-              />
+                style={{ width: "fit-content" }}
+              >
+                Start Chat
+              </FormButton>
               <div className="w-100 fl fl-c">
                 <div onClick={() => setUser(null)} className="p-1 m-1 c-p">
                   Wrong User, Search Again?
