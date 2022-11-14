@@ -19,7 +19,9 @@ function App() {
                 <Route exact path=':id' element={<RequireAuth><Home /></RequireAuth>} />
               </Route>
               <Route exact path='/create-profile' element={<RequireAuth><CreateProfile /></RequireAuth>} />
-              <Route exact path='/start-new-chat' element={<RequireAuth><StartNewChat /></RequireAuth>} />
+              <Route exact path='/start-new-chat' element={<RequireAuth><StartNewChat /></RequireAuth>} >
+                <Route exact path=':id' element={<RequireAuth><StartNewChat /></RequireAuth>} />
+              </Route>
               <Route exact path='/create-group' element={<RequireAuth><CreateGroup /></RequireAuth>} />
               {/* Routes which require Login */}
 

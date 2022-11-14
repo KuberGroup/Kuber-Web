@@ -16,7 +16,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useChat } from "../../Context/ChatContext";
 import { BiCopy } from "react-icons/bi";
 
@@ -29,6 +29,7 @@ const StartNewChat = () => {
   const navigate = useNavigate();
   const { chats } = useChat();
   const copyUrlRef = useRef();
+  const { id } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -116,6 +117,13 @@ const StartNewChat = () => {
       copyUrlRef.current.lastElementChild.innerText = "Copy joining URL";
     }, 3000);
   };
+
+  //when params id is present, automatically search for that user
+  if (id && !user) {
+    // searchRef.current.value = id;
+    SearchUserInFirebase(id);
+  }
+
   return (
     <MainContainer back>
       <div
