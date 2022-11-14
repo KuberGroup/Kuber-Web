@@ -107,7 +107,9 @@ const StartNewChat = () => {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(currentUser.uid);
+    navigator.clipboard.writeText(
+      `https://kuberGroup.netlify.app/start-new-chat/${currentUser.email}`
+    );
     copyUrlRef.current.classList.remove("error");
     copyUrlRef.current.classList.add("success");
     copyUrlRef.current.lastElementChild.innerText = "Copied Successfully!";
