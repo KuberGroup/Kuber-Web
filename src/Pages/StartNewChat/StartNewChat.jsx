@@ -46,8 +46,11 @@ const StartNewChat = () => {
     setLoading(false);
   };
 
-  const SearchUserInFirebase = async (email) => {
-    const q = query(collection(db, "users"), where("email", "==", email));
+  const SearchUserInFirebase = async ({ email = null, uid = null }) => {
+    const q = email
+      ? query(collection(db, "users"), where("email", "==", email))
+      : query(collection(db, "users"), where("uid", "==", uid));
+
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty)
@@ -121,7 +124,7 @@ const StartNewChat = () => {
   //when params id is present, automatically search for that user
   if (id && !user) {
     // searchRef.current.value = id;
-    SearchUserInFirebase(id);
+    SearchUserInFirebase({ uid: id });
   }
 
   return (
