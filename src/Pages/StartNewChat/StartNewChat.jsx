@@ -56,12 +56,10 @@ const StartNewChat = () => {
         message: "No user found with this email",
       });
 
-    querySnapshot.forEach((doc) => {
-      setUser(doc.data());
-      setError({
-        variant: "success",
-        message: "User found",
-      });
+    setUser(querySnapshot.docs[0].data());
+    setError({
+      variant: "success",
+      message: "User found",
     });
   };
 
