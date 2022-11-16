@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AlertMsg,
   FormButton,
@@ -122,10 +122,13 @@ const StartNewChat = () => {
   };
 
   //when params id is present, automatically search for that user
-  if (id && !user) {
-    // searchRef.current.value = id;
-    SearchUserInFirebase({ uid: id });
-  }
+  useEffect(() => {
+    if (id && !user) {
+      // searchRef.current.value = id;
+      SearchUserInFirebase({ uid: id });
+      console.log("id", id);
+    }
+  }, [id, user]);
 
   return (
     <MainContainer back>
@@ -185,7 +188,14 @@ const StartNewChat = () => {
                 Start Chat
               </FormButton>
               <div className="w-100 fl fl-c">
-                <div onClick={() => setUser(null)} className="p-1 m-1 c-p">
+                <div
+                  onClick={() => {
+                    setUser(null);
+                    // if url is present in params, navigate to chat page
+                    if (id) navigate(`/start-new-chat/`);
+                  }}
+                  className="p-1 m-1 c-p"
+                >
                   Wrong User, Search Again?
                 </div>
               </div>
