@@ -52,8 +52,13 @@ export const ChatProvider = ({ children }) => {
                                 })
                             } else {
                                 getDoc(doc(db, 'users', freindId[0])).then((snapshot) => {
-                                    temp.push(snapshot.data().displayName);
-                                    temp.push(snapshot.data().photoURL);
+                                    if (!!snapshot.data()) {
+                                        temp.push(snapshot.data().displayName);
+                                        temp.push(snapshot.data().photoURL);
+                                    } else {
+                                        temp.push('Deleted User');
+                                        temp.push(null);
+                                    }
                                     resolve({
                                         ...item.data(), id: item.id, displayName: temp[0], photoURL: temp[1],
                                     })
