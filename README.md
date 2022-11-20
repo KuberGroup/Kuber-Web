@@ -13,6 +13,7 @@ Live: https://kubergroup.netlify.app
 
 ### Bug Fixes/improvements
 
+- Improved UI
 - Optimised Dtabase queries
 - Removed unnecessary codes/imports
 - Fixed Routes/keys
