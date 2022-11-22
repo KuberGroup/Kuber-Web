@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AlertMsg,
   FormButton,
@@ -46,8 +46,11 @@ const StartNewChat = () => {
     setLoading(false);
   };
 
-  const SearchUserInFirebase = async (email) => {
-    const q = query(collection(db, "users"), where("email", "==", email));
+  const SearchUserInFirebase = async ({ email = null, uid = null }) => {
+    const q = email
+      ? query(collection(db, "users"), where("email", "==", email))
+      : query(collection(db, "users"), where("uid", "==", uid));
+
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty)
@@ -56,12 +59,10 @@ const StartNewChat = () => {
         message: "No user found with this email",
       });
 
-    querySnapshot.forEach((doc) => {
-      setUser(doc.data());
-      setError({
-        variant: "success",
-        message: "User found",
-      });
+    setUser(querySnapshot.docs[0].data());
+    setError({
+      variant: "success",
+      message: "User found",
     });
   };
 
@@ -108,7 +109,7 @@ const StartNewChat = () => {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(
-      `https://kuberGroup.netlify.app/start-new-chat/${currentUser.email}`
+      `https://kuberGroup.netlify.app/start-new-chat/${currentUser.uid}`
     );
     copyUrlRef.current.classList.remove("error");
     copyUrlRef.current.classList.add("success");
@@ -121,10 +122,13 @@ const StartNewChat = () => {
   };
 
   //when params id is present, automatically search for that user
-  if (id && !user) {
-    // searchRef.current.value = id;
-    SearchUserInFirebase(id);
-  }
+  useEffect(() => {
+    if (id && !user) {
+      // searchRef.current.value = id;
+      SearchUserInFirebase({ uid: id });
+      console.log("id", id);
+    }
+  }, [id, user]);
 
   return (
     <MainContainer back>
@@ -184,7 +188,14 @@ const StartNewChat = () => {
                 Start Chat
               </FormButton>
               <div className="w-100 fl fl-c">
-                <div onClick={() => setUser(null)} className="p-1 m-1 c-p">
+                <div
+                  onClick={() => {
+                    setUser(null);
+                    // if url is present in params, navigate to chat page
+                    if (id) navigate(`/start-new-chat/`);
+                  }}
+                  className="p-1 m-1 c-p"
+                >
                   Wrong User, Search Again?
                 </div>
               </div>
