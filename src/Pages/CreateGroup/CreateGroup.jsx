@@ -160,7 +160,7 @@ const CreateGroup = () => {
                   )}
                   <FormButton
                     disabled={loading}
-                    className="w-100"
+                    className="w-100 mt-1"
                     type="submit"
                   >
                     {loading ? "Loading..." : "Create Group"}

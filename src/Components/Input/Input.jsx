@@ -89,17 +89,19 @@ export const SearchInput = forwardRef((props, ref) => {
 });
 
 export const Checkbox = forwardRef((props, ref) => {
-  const { className, ...rest } = props;
+  const { className = "", ...rest } = props;
 
   return (
-    <div id="checkbox">
-      <label className="container">{props.label ? props.label : "Label"}</label>
+    <div id="checkbox" className="p-rel fl fl-c">
+      <label className="container w-100">
+        {props.label ? props.label : "Label"}
+      </label>
       <input
         type="checkbox"
         value={props.value}
         required={false}
         ref={ref}
-        className={`w-100 p-abs ${className}`}
+        className={`p-abs ${className}`}
         {...rest}
       />
     </div>
