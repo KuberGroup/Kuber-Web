@@ -95,15 +95,15 @@ export const Checkbox = forwardRef((props, ref) => {
     <div id="checkbox" className="p-rel fl fl-c">
       <label className="container w-100">
         {props.label ? props.label : "Label"}
+        <input
+          type="checkbox"
+          value={props.value}
+          required={false}
+          ref={ref}
+          className={`p-abs ${className}`}
+          {...rest}
+        />
       </label>
-      <input
-        type="checkbox"
-        value={props.value}
-        required={false}
-        ref={ref}
-        className={`p-abs ${className}`}
-        {...rest}
-      />
     </div>
   );
 });
