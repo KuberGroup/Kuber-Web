@@ -17,3 +17,4 @@ Live: https://kubergroup.netlify.app
 - Removed unnecessary codes/imports
 - Fixed Routes/keys
 - Improved CSS
+- If malicious user in DB or user deleted but not completely, show DELETED USER
