@@ -39,9 +39,16 @@ export const ChatProvider = ({ children }) => {
                                 const users = {}
                                 freindId.forEach(id => {
                                     getDoc(doc(db, 'users', id)).then((doc) => {
-                                        users[doc.data().uid] = {
-                                            displayName: doc.data().displayName,
-                                            photoURL: doc.data().photoURL
+                                        if (!!doc.data()) {
+                                            users[doc.data().uid] = {
+                                                displayName: doc.data().displayName,
+                                                photoURL: doc.data().photoURL
+                                            }
+                                        } else {
+                                            users[doc.id] = {
+                                                displayName: 'Deleted User',
+                                                photoURL: null,
+                                            }
                                         }
                                     })
                                 })

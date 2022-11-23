@@ -36,7 +36,7 @@ const StartNewChat = () => {
     try {
       setError("");
       setLoading(true);
-      await SearchUserInFirebase(searchRef.current.value);
+      await SearchUserInFirebase({ email: searchRef.current.value });
     } catch (e) {
       setError({
         variant: "error",
