@@ -30,6 +30,12 @@ const SignUp = () => {
         message: FORM.error.passwordNotMatch,
       });
 
+    if (passwordRef.current.value.length < 6)
+      return setError({
+        variant: "error",
+        message: "Password must be at least 6 characters long",
+      });
+
     try {
       setError("");
       setLoading(true);
